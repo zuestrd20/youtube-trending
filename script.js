@@ -80,6 +80,7 @@ async function loadData() {
     hideError();
     
     try {
+        console.log('🔍 Loading data from:', CONFIG.DATA_URL);
         const response = await fetch(CONFIG.DATA_URL);
         
         if (!response.ok) {
@@ -87,9 +88,17 @@ async function loadData() {
         }
         
         trendingData = await response.json();
+        console.log('✅ Data loaded successfully');
+        console.log('📊 Data structure:', {
+            hasRegions: !!trendingData.regions,
+            regionKeys: trendingData.regions ? Object.keys(trendingData.regions) : [],
+            lastUpdated: trendingData.lastUpdated
+        });
+        
         renderVideos();
         updateTimestamp(trendingData.lastUpdated);
     } catch (error) {
+        console.error('❌ Error loading data:', error);
         showError(error.message);
     } finally {
         hideLoading();
@@ -98,11 +107,15 @@ async function loadData() {
 
 // Render Videos
 function renderVideos() {
-    if (!trendingData) return;
+    if (!trendingData) {
+        console.warn('⚠️ No trending data available');
+        return;
+    }
     
     elements.cardsContainer.innerHTML = '';
     
     const videos = trendingData.regions[currentRegion] || [];
+    console.log(`🎬 Rendering ${videos.length} videos for region: ${currentRegion}`);
     
     if (videos.length === 0) {
         elements.cardsContainer.innerHTML = `
@@ -111,6 +124,16 @@ function renderVideos() {
             </div>
         `;
         return;
+    }
+    
+    // Debug first video
+    if (videos[0]) {
+        console.log('📹 First video data:', {
+            id: videos[0].id,
+            title: videos[0].title?.substring(0, 50),
+            thumbnail: videos[0].thumbnail,
+            hasAllFields: !!(videos[0].id && videos[0].title && videos[0].thumbnail)
+        });
     }
     
     videos.forEach((video, index) => {
@@ -138,7 +161,8 @@ function createVideoCard(video, rank) {
                  src="${thumbnail}" 
                  alt="${title}"
                  loading="lazy"
-                 onerror="this.src='https://via.placeholder.com/480x360?text=No+Image'">
+                 onload="console.log('✅ Image loaded:', '${video.id}')"
+                 onerror="console.error('❌ Image failed to load:', '${thumbnail}'); this.src='https://via.placeholder.com/480x360?text=No+Image'">
             <div class="rank-badge">#${rank}</div>
         </div>
         <div class="card-content">
@@ -169,10 +193,12 @@ function createVideoCard(video, rank) {
 
 // Get Thumbnail URL (with WebP support)
 function getThumbnailUrl(url) {
-    // YouTube CDN supports WebP via URL modification
-    if (supportsWebP && url.includes('ytimg.com')) {
-        url = url.replace(/\.(jpg|jpeg)$/i, '.webp');
-    }
+    console.log('🖼️ Original thumbnail URL:', url);
+    
+    // YouTube 的縮圖 URL 直接使用即可，不需要特別轉換
+    // YouTube CDN 會根據瀏覽器的 Accept header 自動提供 WebP
+    // 如果要強制使用 WebP，可以用 vi_webp 參數，但通常不需要
+    
     return url;
 }
 
