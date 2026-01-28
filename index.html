@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="探索 YouTube 每日熱門影片 - 台灣與美國最受歡迎的影片內容">
+    <meta name="theme-color" content="#7c5cff">
+    <title>YouTube 熱門影片 | Trending Videos</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">YouTube 熱門影片</h1>
+                <p class="subtitle">探索每日最受歡迎的影片內容</p>
+            </div>
+            
+            <!-- Date Selector -->
+            <div class="date-selector">
+                <label for="date-input">選擇日期：</label>
+                <input type="date" id="date-input" class="date-input">
+            </div>
+        </header>
+
+        <!-- Region Tabs -->
+        <div class="tabs">
+            <button class="tab-button active" data-region="TW">
+                <span class="tab-icon">🇹🇼</span>
+                <span class="tab-label">台灣</span>
+            </button>
+            <button class="tab-button" data-region="US">
+                <span class="tab-icon">🇺🇸</span>
+                <span class="tab-label">美國</span>
+            </button>
+        </div>
+
+        <!-- Loading State -->
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>載入中...</p>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error" id="error" style="display: none;">
+            <p id="error-message"></p>
+        </div>
+
+        <!-- Video Cards Container -->
+        <main class="cards-container" id="cards-container">
+            <!-- Video cards will be dynamically inserted here -->
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>資料來源：YouTube Data API</p>
+            <p>更新時間：<span id="update-time"></span></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
