@@ -1,0 +1,22 @@
+{
+  "name": "YouTube 熱門影片",
+  "short_name": "YouTube Trending",
+  "description": "探索 YouTube 每日熱門影片 - 台灣與美國最受歡迎的影片內容",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme_color": "#7c5cff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
