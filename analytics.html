@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube 趨勢分析儀表板</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --bg-primary: #0f0f23;
+            --bg-secondary: #1a1a2e;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --border: rgba(255, 255, 255, 0.1);
+            --success: #4ade80;
+            --warning: #fbbf24;
+            --danger: #f87171;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .update-time {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-card);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Navigation Tabs */
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        .tab:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-color: transparent;
+        }
+
+        /* Cards Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            border-color: var(--primary);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .card-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .chart-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Table */
+        .table-container {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 2rem;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 2px solid var(--border);
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .rank {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .badge-success {
+            background: rgba(74, 222, 128, 0.2);
+            color: var(--success);
+        }
+
+        .badge-warning {
+            background: rgba(251, 191, 36, 0.2);
+            color: var(--warning);
+        }
+
+        .badge-danger {
+            background: rgba(248, 113, 113, 0.2);
+            color: var(--danger);
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📊 YouTube 趨勢分析儀表板</h1>
+            <p>即時追蹤台灣 YouTube 熱門影片與趨勢</p>
+            <div class="update-time" id="updateTime">載入中...</div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('overview')">📈 總覽</div>
+            <div class="tab" onclick="switchTab('trending')">🔥 熱門影片</div>
+            <div class="tab" onclick="switchTab('channels')">📺 爆紅頻道</div>
+            <div class="tab" onclick="switchTab('categories')">🎭 分類分析</div>
+        </div>
+
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-content active">
+            <div class="grid">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">🎬</span>
+                        <span class="card-title">熱門影片總數</span>
+                    </div>
+                    <div class="card-value" id="totalVideos">-</div>
+                    <div class="card-label">本週追蹤影片</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">👁️</span>
+                        <span class="card-title">總觀看數</span>
+                    </div>
+                    <div class="card-value" id="totalViews">-</div>
+                    <div class="card-label">累計觀看次數</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">💬</span>
+                        <span class="card-title">平均互動率</span>
+                    </div>
+                    <div class="card-value" id="avgEngagement">-</div>
+                    <div class="card-label">按讚 + 留言比例</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-icon">📺</span>
+                        <span class="card-title">追蹤頻道數</span>
+                    </div>
+                    <div class="card-value" id="totalChannels">-</div>
+                    <div class="card-label">不重複頻道</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">📊 影片分類分布</div>
+                <div id="categoryChart"></div>
+            </div>
+        </div>
+
+        <!-- Trending Tab -->
+        <div id="trending" class="tab-content">
+            <div class="table-container">
+                <div class="chart-title">🏆 TOP 20 熱門影片</div>
+                <table id="trendingTable">
+                    <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>影片標題</th>
+                            <th>頻道</th>
+                            <th>觀看數</th>
+                            <th>按讚數</th>
+                            <th>互動率</th>
+                        </tr>
+                    </thead>
+                    <tbody id="trendingTableBody">
+                        <tr><td colspan="6" class="loading"><div class="spinner"></div></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Channels Tab -->
+        <div id="channels" class="tab-content">
+            <div class="table-container">
+                <div class="chart-title">🚀 快速成長頻道</div>
+                <table id="channelsTable">
+                    <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>頻道名稱</th>
+                            <th>訂閱數</th>
+                            <th>影片數</th>
+                            <th>每日成長</th>
+                            <th>狀態</th>
+                        </tr>
+                    </thead>
+                    <tbody id="channelsTableBody">
+                        <tr><td colspan="6" class="loading"><div class="spinner"></div></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Categories Tab -->
+        <div id="categories" class="tab-content">
+            <div class="chart-container">
+                <div class="chart-title">🎭 內容分類詳細分析</div>
+                <div id="categoriesDetail"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Load data
+        async function loadData() {
+            try {
+                const response = await fetch('data/trending.json');
+                const data = await response.json();
+                
+                // Update time
+                const updateTime = new Date(data.lastUpdated);
+                document.getElementById('updateTime').textContent = 
+                    `最後更新：${updateTime.toLocaleString('zh-TW')}`;
+                
+                // Get TW videos
+                const videos = data.regions.TW || [];
+                
+                // Calculate statistics
+                const totalViews = videos.reduce((sum, v) => sum + (v.views || 0), 0);
+                const totalLikes = videos.reduce((sum, v) => sum + (v.likes || 0), 0);
+                const totalComments = videos.reduce((sum, v) => sum + (v.comments || 0), 0);
+                const avgEngagement = totalViews > 0 ? ((totalLikes + totalComments) / totalViews * 100).toFixed(2) : 0;
+                
+                const uniqueChannels = new Set(videos.map(v => v.channelTitle)).size;
+                
+                // Update overview cards
+                document.getElementById('totalVideos').textContent = videos.length;
+                document.getElementById('totalViews').textContent = formatNumber(totalViews);
+                document.getElementById('avgEngagement').textContent = avgEngagement + '%';
+                document.getElementById('totalChannels').textContent = uniqueChannels;
+                
+                // Populate trending table
+                populateTrendingTable(videos.slice(0, 20));
+                
+                console.log('✅ Data loaded successfully');
+            } catch (error) {
+                console.error('❌ Failed to load data:', error);
+                document.getElementById('updateTime').textContent = '載入失敗';
+            }
+        }
+
+        function populateTrendingTable(videos) {
+            const tbody = document.getElementById('trendingTableBody');
+            tbody.innerHTML = '';
+            
+            videos.forEach((video, index) => {
+                const views = video.views || 0;
+                const likes = video.likes || 0;
+                const comments = video.comments || 0;
+                const engagement = views > 0 ? ((likes + comments) / views * 100).toFixed(2) : 0;
+                
+                const row = `
+                    <tr>
+                        <td><span class="rank">${index + 1}</span></td>
+                        <td>${video.title || 'N/A'}</td>
+                        <td>${video.channelTitle || 'N/A'}</td>
+                        <td>${formatNumber(views)}</td>
+                        <td>${formatNumber(likes)}</td>
+                        <td><span class="badge ${engagement > 5 ? 'badge-success' : engagement > 2 ? 'badge-warning' : 'badge-danger'}">${engagement}%</span></td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+        }
+
+        function formatNumber(num) {
+            if (num >= 1000000) {
+                return (num / 1000000).toFixed(1) + 'M';
+            } else if (num >= 1000) {
+                return (num / 1000).toFixed(1) + 'K';
+            }
+            return num.toString();
+        }
+
+        // Initialize
+        loadData();
+    </script>
+</body>
+</html>
