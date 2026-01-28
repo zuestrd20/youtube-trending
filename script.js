@@ -1,9 +1,6 @@
 // Configuration
 const CONFIG = {
-    // 使用者需要在這裡填入自己的 YouTube Data API Key
-    API_KEY: 'YOUR_YOUTUBE_API_KEY_HERE',
-    API_BASE_URL: 'https://www.googleapis.com/youtube/v3/videos',
-    MAX_RESULTS: 5,
+    DATA_URL: 'data/trending.json',
     REGIONS: {
         TW: { code: 'TW', name: '台灣' },
         US: { code: 'US', name: '美國' }
@@ -12,13 +9,11 @@ const CONFIG = {
 
 // State Management
 let currentRegion = 'TW';
-let currentDate = new Date();
-let videosCache = {};
+let trendingData = null;
 let supportsWebP = false;
 
 // DOM Elements
 const elements = {
-    dateInput: document.getElementById('date-input'),
     loading: document.getElementById('loading'),
     error: document.getElementById('error'),
     errorMessage: document.getElementById('error-message'),
@@ -30,9 +25,8 @@ const elements = {
 // Initialize Application
 function init() {
     checkWebPSupport();
-    setupDateInput();
     setupTabListeners();
-    loadVideos();
+    loadData();
 }
 
 // Check WebP Support
@@ -55,20 +49,6 @@ function checkWebPSupport() {
     img.src = "data:image/webp;base64," + webpTestImages.lossy;
 }
 
-// Setup Date Input
-function setupDateInput() {
-    // Set max date to today
-    const today = new Date().toISOString().split('T')[0];
-    elements.dateInput.max = today;
-    elements.dateInput.value = today;
-    
-    // Add change listener
-    elements.dateInput.addEventListener('change', (e) => {
-        currentDate = new Date(e.target.value);
-        loadVideos();
-    });
-}
-
 // Setup Tab Listeners
 function setupTabListeners() {
     elements.tabButtons.forEach(button => {
@@ -77,7 +57,7 @@ function setupTabListeners() {
             if (region !== currentRegion) {
                 currentRegion = region;
                 updateActiveTab();
-                loadVideos();
+                renderVideos();
             }
         });
     });
@@ -94,25 +74,21 @@ function updateActiveTab() {
     });
 }
 
-// Load Videos
-async function loadVideos() {
+// Load Data from JSON
+async function loadData() {
     showLoading();
     hideError();
     
-    const cacheKey = `${currentRegion}_${elements.dateInput.value}`;
-    
-    // Check cache
-    if (videosCache[cacheKey]) {
-        renderVideos(videosCache[cacheKey]);
-        hideLoading();
-        return;
-    }
-    
     try {
-        const videos = await fetchYouTubeVideos(currentRegion);
-        videosCache[cacheKey] = videos;
-        renderVideos(videos);
-        updateTimestamp();
+        const response = await fetch(CONFIG.DATA_URL);
+        
+        if (!response.ok) {
+            throw new Error('無法載入影片資料');
+        }
+        
+        trendingData = await response.json();
+        renderVideos();
+        updateTimestamp(trendingData.lastUpdated);
     } catch (error) {
         showError(error.message);
     } finally {
@@ -120,36 +96,13 @@ async function loadVideos() {
     }
 }
 
-// Fetch YouTube Videos
-async function fetchYouTubeVideos(regionCode) {
-    if (CONFIG.API_KEY === 'YOUR_YOUTUBE_API_KEY_HERE') {
-        throw new Error('請在 script.js 中設定您的 YouTube Data API Key');
-    }
-    
-    const params = new URLSearchParams({
-        part: 'snippet,statistics,contentDetails',
-        chart: 'mostPopular',
-        regionCode: regionCode,
-        maxResults: CONFIG.MAX_RESULTS,
-        key: CONFIG.API_KEY
-    });
-    
-    const response = await fetch(`${CONFIG.API_BASE_URL}?${params}`);
-    
-    if (!response.ok) {
-        if (response.status === 403) {
-            throw new Error('API Key 無效或已超過配額限制');
-        }
-        throw new Error(`API 請求失敗: ${response.status}`);
-    }
-    
-    const data = await response.json();
-    return data.items || [];
-}
-
 // Render Videos
-function renderVideos(videos) {
+function renderVideos() {
+    if (!trendingData) return;
+    
     elements.cardsContainer.innerHTML = '';
+    
+    const videos = trendingData.regions[currentRegion] || [];
     
     if (videos.length === 0) {
         elements.cardsContainer.innerHTML = `
@@ -172,13 +125,12 @@ function createVideoCard(video, rank) {
     card.className = 'video-card';
     card.onclick = () => openVideo(video.id);
     
-    const thumbnail = getThumbnailUrl(video.snippet.thumbnails);
-    const duration = formatDuration(video.contentDetails.duration);
-    const views = formatNumber(video.statistics.viewCount);
-    const likes = formatNumber(video.statistics.likeCount);
-    const title = escapeHtml(video.snippet.title);
-    const channelTitle = escapeHtml(video.snippet.channelTitle);
-    const description = escapeHtml(video.snippet.description);
+    const thumbnail = getThumbnailUrl(video.thumbnail);
+    const views = formatNumber(video.viewCount);
+    const likes = formatNumber(video.likeCount);
+    const comments = formatNumber(video.commentCount);
+    const title = escapeHtml(video.title);
+    const channelTitle = escapeHtml(video.channelTitle);
     
     card.innerHTML = `
         <div class="thumbnail-container">
@@ -187,8 +139,7 @@ function createVideoCard(video, rank) {
                  alt="${title}"
                  loading="lazy"
                  onerror="this.src='https://via.placeholder.com/480x360?text=No+Image'">
-            <div class="rank-badge">${rank}</div>
-            <div class="duration-badge">${duration}</div>
+            <div class="rank-badge">#${rank}</div>
         </div>
         <div class="card-content">
             <h3 class="video-title">${title}</h3>
@@ -199,58 +150,30 @@ function createVideoCard(video, rank) {
             <div class="video-stats">
                 <div class="stat-item">
                     <span class="stat-icon">👁️</span>
-                    <span>${views}</span>
+                    <span>${views} 次觀看</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-icon">👍</span>
                     <span>${likes}</span>
                 </div>
+                <div class="stat-item">
+                    <span class="stat-icon">💬</span>
+                    <span>${comments}</span>
+                </div>
             </div>
-            <p class="video-description">${description}</p>
         </div>
     `;
     
     return card;
 }
 
-// Get Best Thumbnail URL (prefer WebP if available, else highest quality)
-function getThumbnailUrl(thumbnails) {
-    let url;
-    
-    // Get highest quality available
-    if (thumbnails.maxres) {
-        url = thumbnails.maxres.url;
-    } else if (thumbnails.high) {
-        url = thumbnails.high.url;
-    } else if (thumbnails.medium) {
-        url = thumbnails.medium.url;
-    } else {
-        url = thumbnails.default.url;
-    }
-    
+// Get Thumbnail URL (with WebP support)
+function getThumbnailUrl(url) {
     // YouTube CDN supports WebP via URL modification
-    // Convert to WebP format if browser supports it
     if (supportsWebP && url.includes('ytimg.com')) {
-        // Replace jpg/jpeg with webp in the URL
         url = url.replace(/\.(jpg|jpeg)$/i, '.webp');
     }
-    
     return url;
-}
-
-// Format Duration (PT1H2M10S -> 1:02:10)
-function formatDuration(duration) {
-    const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
-    const hours = (match[1] || '').replace('H', '');
-    const minutes = (match[2] || '').replace('M', '');
-    const seconds = (match[3] || '').replace('S', '');
-    
-    const parts = [];
-    if (hours) parts.push(hours);
-    parts.push(minutes.padStart(hours ? 2 : 1, '0') || '0');
-    parts.push(seconds.padStart(2, '0') || '00');
-    
-    return parts.join(':');
 }
 
 // Format Number (1234567 -> 1.2M)
@@ -281,9 +204,9 @@ function openVideo(videoId) {
 }
 
 // Update Timestamp
-function updateTimestamp() {
-    const now = new Date();
-    const timeString = now.toLocaleString('zh-TW', {
+function updateTimestamp(isoString) {
+    const date = new Date(isoString);
+    const timeString = date.toLocaleString('zh-TW', {
         year: 'numeric',
         month: '2-digit',
         day: '2-digit',
