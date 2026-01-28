@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube 趨勢分析儀表板</title>
+    <title>YouTube 深度分析儀表板</title>
     <style>
         * {
             margin: 0;
@@ -17,237 +17,345 @@
             --accent: #f093fb;
             --bg-primary: #0f0f23;
             --bg-secondary: #1a1a2e;
-            --bg-card: rgba(255, 255, 255, 0.05);
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.7);
+            --bg-card: rgba(26, 26, 46, 0.8);
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
             --border: rgba(255, 255, 255, 0.1);
-            --success: #4ade80;
-            --warning: #fbbf24;
-            --danger: #f87171;
+            --shadow: rgba(0, 0, 0, 0.3);
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
             color: var(--text-primary);
-            min-height: 100vh;
             line-height: 1.6;
+            min-height: 100vh;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 20px;
         }
 
-        /* Header */
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem 0;
+        /* 導航列 */
+        nav {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+            box-shadow: 0 8px 32px var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        .header h1 {
-            font-size: 3rem;
-            font-weight: 700;
+        nav h1 {
+            font-size: 28px;
             background: linear-gradient(135deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
+            background-clip: text;
         }
 
-        .header p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-
-        .update-time {
-            display: inline-block;
-            margin-top: 1rem;
-            padding: 0.5rem 1rem;
-            background: var(--bg-card);
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        /* Navigation Tabs */
-        .tabs {
+        .nav-tabs {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            overflow-x: auto;
-            padding-bottom: 1rem;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
-        .tab {
-            padding: 0.75rem 1.5rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
+        .nav-tab {
+            padding: 10px 20px;
             border-radius: 10px;
-            cursor: pointer;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            text-decoration: none;
             transition: all 0.3s ease;
-            white-space: nowrap;
+            font-size: 14px;
             font-weight: 500;
         }
 
-        .tab:hover {
-            background: rgba(255, 255, 255, 0.1);
+        .nav-tab:hover {
+            background: rgba(102, 126, 234, 0.2);
+            border-color: var(--primary);
+            color: var(--text-primary);
             transform: translateY(-2px);
         }
 
-        .tab.active {
+        .nav-tab.active {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-color: transparent;
-        }
-
-        /* Cards Grid */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: var(--bg-card);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            border-radius: 15px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
             border-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
         }
 
-        .card-header {
+        /* 標題區 */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        /* 分析分頁 */
+        .analysis-tabs {
             display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-        }
-
-        .card-icon {
-            font-size: 1.5rem;
-        }
-
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .card-value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        /* Chart Container */
-        .chart-container {
-            background: var(--bg-card);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .chart-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-
-        /* Table */
-        .table-container {
-            background: var(--bg-card);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            border-radius: 15px;
-            padding: 2rem;
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th {
-            text-align: left;
-            padding: 1rem;
-            border-bottom: 2px solid var(--border);
-            color: var(--text-secondary);
-            font-weight: 600;
-        }
-
-        td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        tr:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .rank {
-            display: inline-flex;
-            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
             justify-content: center;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            font-weight: 700;
-            font-size: 0.9rem;
+            flex-wrap: wrap;
         }
 
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
+        .analysis-tab {
+            padding: 12px 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 15px;
             font-weight: 500;
         }
 
-        .badge-success {
-            background: rgba(74, 222, 128, 0.2);
-            color: var(--success);
+        .analysis-tab:hover {
+            background: rgba(102, 126, 234, 0.2);
+            border-color: var(--primary);
+            color: var(--text-primary);
         }
 
-        .badge-warning {
-            background: rgba(251, 191, 36, 0.2);
-            color: var(--warning);
+        .analysis-tab.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
         }
 
-        .badge-danger {
-            background: rgba(248, 113, 113, 0.2);
-            color: var(--danger);
+        .tab-content {
+            display: none;
         }
 
-        /* Loading State */
+        .tab-content.active {
+            display: block;
+        }
+
+        /* 統計卡片 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .stat-card h3 {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .stat-card .value {
+            font-size: 36px;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card .label {
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        /* 榜單 */
+        .ranking-list {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .ranking-list h3 {
+            font-size: 24px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 15px;
+            margin-bottom: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .ranking-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .ranking-number {
+            font-size: 24px;
+            font-weight: bold;
+            min-width: 40px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .ranking-thumbnail {
+            width: 120px;
+            height: 68px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .ranking-info {
+            flex: 1;
+        }
+
+        .ranking-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .ranking-channel {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .ranking-stats {
+            display: flex;
+            gap: 15px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* 分類分析 */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .category-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .category-name {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .category-count {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .category-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .category-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .category-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 10px;
+        }
+
+        /* 載入動畫 */
         .loading {
             text-align: center;
-            padding: 3rem;
+            padding: 60px 20px;
         }
 
         .spinner {
-            display: inline-block;
             width: 50px;
             height: 50px;
-            border: 4px solid var(--border);
+            margin: 0 auto 20px;
+            border: 4px solid rgba(102, 126, 234, 0.2);
             border-top-color: var(--primary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
@@ -257,235 +365,345 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Tab Content */
-        .tab-content {
-            display: none;
+        /* 頁尾 */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-top: 50px;
+            border-top: 1px solid var(--border);
         }
 
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Responsive */
+        /* 響應式設計 */
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2rem;
+            .ranking-thumbnail {
+                width: 80px;
+                height: 45px;
             }
-
-            .container {
-                padding: 1rem;
+            
+            .ranking-stats {
+                flex-direction: column;
+                gap: 5px;
             }
-
-            .grid {
-                grid-template-columns: 1fr;
+            
+            nav h1 {
+                font-size: 22px;
+            }
+            
+            header h2 {
+                font-size: 28px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>📊 YouTube 趨勢分析儀表板</h1>
-            <p>即時追蹤台灣 YouTube 熱門影片與趨勢</p>
-            <div class="update-time" id="updateTime">載入中...</div>
+        <!-- 導航列 -->
+        <nav>
+            <h1>📊 YouTube 深度分析</h1>
+            <div class="nav-tabs">
+                <a href="index.html" class="nav-tab">熱門影片</a>
+                <a href="analytics.html" class="nav-tab active">深度分析</a>
+            </div>
+        </nav>
+
+        <!-- 標題區 -->
+        <header>
+            <h2>🔬 深度數據分析</h2>
+            <p>探索趨勢、頻道表現與內容洞察</p>
+        </header>
+
+        <!-- 分析分頁 -->
+        <div class="analysis-tabs">
+            <button class="analysis-tab active" onclick="switchAnalysisTab('overview')">📈 總覽</button>
+            <button class="analysis-tab" onclick="switchAnalysisTab('trending')">🔥 TOP 20</button>
+            <button class="analysis-tab" onclick="switchAnalysisTab('channels')">🚀 爆紅頻道</button>
+            <button class="analysis-tab" onclick="switchAnalysisTab('categories')">🎭 分類分析</button>
         </div>
 
-        <!-- Navigation Tabs -->
-        <div class="tabs">
-            <div class="tab active" onclick="switchTab('overview')">📈 總覽</div>
-            <div class="tab" onclick="switchTab('trending')">🔥 熱門影片</div>
-            <div class="tab" onclick="switchTab('channels')">📺 爆紅頻道</div>
-            <div class="tab" onclick="switchTab('categories')">🎭 分類分析</div>
-        </div>
-
-        <!-- Overview Tab -->
-        <div id="overview" class="tab-content active">
-            <div class="grid">
-                <div class="card">
-                    <div class="card-header">
-                        <span class="card-icon">🎬</span>
-                        <span class="card-title">熱門影片總數</span>
-                    </div>
-                    <div class="card-value" id="totalVideos">-</div>
-                    <div class="card-label">本週追蹤影片</div>
+        <!-- 總覽分頁 -->
+        <div id="overview-content" class="tab-content active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>總影片數</h3>
+                    <div class="value" id="overview-total-videos">-</div>
+                    <div class="label">追蹤中的熱門影片</div>
                 </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <span class="card-icon">👁️</span>
-                        <span class="card-title">總觀看數</span>
-                    </div>
-                    <div class="card-value" id="totalViews">-</div>
-                    <div class="card-label">累計觀看次數</div>
+                <div class="stat-card">
+                    <h3>總觀看次數</h3>
+                    <div class="value" id="overview-total-views">-</div>
+                    <div class="label">累積觀看數</div>
                 </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <span class="card-icon">💬</span>
-                        <span class="card-title">平均互動率</span>
-                    </div>
-                    <div class="card-value" id="avgEngagement">-</div>
-                    <div class="card-label">按讚 + 留言比例</div>
+                <div class="stat-card">
+                    <h3>平均互動率</h3>
+                    <div class="value" id="overview-engagement">-</div>
+                    <div class="label">點讚+留言/觀看數</div>
                 </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        <span class="card-icon">📺</span>
-                        <span class="card-title">追蹤頻道數</span>
-                    </div>
-                    <div class="card-value" id="totalChannels">-</div>
-                    <div class="card-label">不重複頻道</div>
+                <div class="stat-card">
+                    <h3>不同頻道數</h3>
+                    <div class="value" id="overview-channels">-</div>
+                    <div class="label">獨特創作者</div>
                 </div>
             </div>
 
-            <div class="chart-container">
-                <div class="chart-title">📊 影片分類分布</div>
-                <div id="categoryChart"></div>
+            <div class="ranking-list">
+                <h3>🏆 本週表現最佳影片</h3>
+                <div id="top-performers"></div>
             </div>
         </div>
 
-        <!-- Trending Tab -->
-        <div id="trending" class="tab-content">
-            <div class="table-container">
-                <div class="chart-title">🏆 TOP 20 熱門影片</div>
-                <table id="trendingTable">
-                    <thead>
-                        <tr>
-                            <th>排名</th>
-                            <th>影片標題</th>
-                            <th>頻道</th>
-                            <th>觀看數</th>
-                            <th>按讚數</th>
-                            <th>互動率</th>
-                        </tr>
-                    </thead>
-                    <tbody id="trendingTableBody">
-                        <tr><td colspan="6" class="loading"><div class="spinner"></div></td></tr>
-                    </tbody>
-                </table>
+        <!-- TOP 20 分頁 -->
+        <div id="trending-content" class="tab-content">
+            <div class="ranking-list">
+                <h3>🔥 TOP 20 熱門影片</h3>
+                <div id="top-20-list">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>載入中...</p>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Channels Tab -->
-        <div id="channels" class="tab-content">
-            <div class="table-container">
-                <div class="chart-title">🚀 快速成長頻道</div>
-                <table id="channelsTable">
-                    <thead>
-                        <tr>
-                            <th>排名</th>
-                            <th>頻道名稱</th>
-                            <th>訂閱數</th>
-                            <th>影片數</th>
-                            <th>每日成長</th>
-                            <th>狀態</th>
-                        </tr>
-                    </thead>
-                    <tbody id="channelsTableBody">
-                        <tr><td colspan="6" class="loading"><div class="spinner"></div></td></tr>
-                    </tbody>
-                </table>
+        <!-- 爆紅頻道分頁 -->
+        <div id="channels-content" class="tab-content">
+            <div class="ranking-list">
+                <h3>🚀 快速成長頻道</h3>
+                <div id="rising-channels">
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>載入中...</p>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Categories Tab -->
-        <div id="categories" class="tab-content">
-            <div class="chart-container">
-                <div class="chart-title">🎭 內容分類詳細分析</div>
-                <div id="categoriesDetail"></div>
+        <!-- 分類分析分頁 -->
+        <div id="categories-content" class="tab-content">
+            <div class="category-grid" id="categories-grid">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>載入分類數據中...</p>
+                </div>
             </div>
         </div>
+
+        <!-- 頁尾 -->
+        <footer>
+            <p>深度分析數據 | 每日自動更新</p>
+            <p style="margin-top: 10px;">由 Nebula AI 自動化系統驅動</p>
+        </footer>
     </div>
 
     <script>
-        // Tab switching
-        function switchTab(tabName) {
-            // Hide all tabs
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
+        let trendingData = null;
+        const categoryNames = {
+            '1': '電影與動畫',
+            '2': '汽車與車輛',
+            '10': '音樂',
+            '15': '寵物與動物',
+            '17': '運動',
+            '19': '旅遊與活動',
+            '20': '遊戲',
+            '22': '人物與部落格',
+            '23': '喜劇',
+            '24': '娛樂',
+            '25': '新聞與政治',
+            '26': '生活妙招與風格',
+            '27': '教育',
+            '28': '科學與技術'
+        };
 
-            // Show selected tab
-            document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
-        }
-
-        // Load data
-        async function loadData() {
-            try {
-                const response = await fetch('data/trending.json');
-                const data = await response.json();
-                
-                // Update time
-                const updateTime = new Date(data.lastUpdated);
-                document.getElementById('updateTime').textContent = 
-                    `最後更新：${updateTime.toLocaleString('zh-TW')}`;
-                
-                // Get TW videos
-                const videos = data.regions.TW || [];
-                
-                // Calculate statistics
-                const totalViews = videos.reduce((sum, v) => sum + (v.views || 0), 0);
-                const totalLikes = videos.reduce((sum, v) => sum + (v.likes || 0), 0);
-                const totalComments = videos.reduce((sum, v) => sum + (v.comments || 0), 0);
-                const avgEngagement = totalViews > 0 ? ((totalLikes + totalComments) / totalViews * 100).toFixed(2) : 0;
-                
-                const uniqueChannels = new Set(videos.map(v => v.channelTitle)).size;
-                
-                // Update overview cards
-                document.getElementById('totalVideos').textContent = videos.length;
-                document.getElementById('totalViews').textContent = formatNumber(totalViews);
-                document.getElementById('avgEngagement').textContent = avgEngagement + '%';
-                document.getElementById('totalChannels').textContent = uniqueChannels;
-                
-                // Populate trending table
-                populateTrendingTable(videos.slice(0, 20));
-                
-                console.log('✅ Data loaded successfully');
-            } catch (error) {
-                console.error('❌ Failed to load data:', error);
-                document.getElementById('updateTime').textContent = '載入失敗';
-            }
-        }
-
-        function populateTrendingTable(videos) {
-            const tbody = document.getElementById('trendingTableBody');
-            tbody.innerHTML = '';
-            
-            videos.forEach((video, index) => {
-                const views = video.views || 0;
-                const likes = video.likes || 0;
-                const comments = video.comments || 0;
-                const engagement = views > 0 ? ((likes + comments) / views * 100).toFixed(2) : 0;
-                
-                const row = `
-                    <tr>
-                        <td><span class="rank">${index + 1}</span></td>
-                        <td>${video.title || 'N/A'}</td>
-                        <td>${video.channelTitle || 'N/A'}</td>
-                        <td>${formatNumber(views)}</td>
-                        <td>${formatNumber(likes)}</td>
-                        <td><span class="badge ${engagement > 5 ? 'badge-success' : engagement > 2 ? 'badge-warning' : 'badge-danger'}">${engagement}%</span></td>
-                    </tr>
-                `;
-                tbody.innerHTML += row;
-            });
-        }
-
+        // 格式化數字
         function formatNumber(num) {
-            if (num >= 1000000) {
-                return (num / 1000000).toFixed(1) + 'M';
-            } else if (num >= 1000) {
-                return (num / 1000).toFixed(1) + 'K';
-            }
+            if (num >= 1000000000) return (num / 1000000000).toFixed(1) + 'B';
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
             return num.toString();
         }
 
-        // Initialize
+        // 計算互動率
+        function calculateEngagement(video) {
+            return ((video.like_count + video.comment_count) / video.view_count * 100).toFixed(2);
+        }
+
+        // 切換分析分頁
+        function switchAnalysisTab(tabName) {
+            document.querySelectorAll('.analysis-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(`${tabName}-content`).classList.add('active');
+        }
+
+        // 渲染 TOP 20 影片
+        function renderTop20(videos) {
+            const html = videos.slice(0, 20).map((video, index) => `
+                <div class="ranking-item">
+                    <div class="ranking-number">#${index + 1}</div>
+                    <img src="${video.thumbnail}" alt="${video.title}" class="ranking-thumbnail">
+                    <div class="ranking-info">
+                        <div class="ranking-title">${video.title}</div>
+                        <div class="ranking-channel">📺 ${video.channel_title}</div>
+                        <div class="ranking-stats">
+                            <span>👁️ ${formatNumber(video.view_count)}</span>
+                            <span>👍 ${formatNumber(video.like_count)}</span>
+                            <span>💬 ${formatNumber(video.comment_count)}</span>
+                            <span>📊 ${calculateEngagement(video)}% 互動率</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('top-20-list').innerHTML = html;
+        }
+
+        // 渲染爆紅頻道
+        function renderRisingChannels(videos) {
+            // 按頻道分組
+            const channelMap = new Map();
+            videos.forEach(video => {
+                if (!channelMap.has(video.channel_id)) {
+                    channelMap.set(video.channel_id, {
+                        title: video.channel_title,
+                        videos: [],
+                        totalViews: 0,
+                        totalEngagement: 0
+                    });
+                }
+                const channel = channelMap.get(video.channel_id);
+                channel.videos.push(video);
+                channel.totalViews += video.view_count;
+                channel.totalEngagement += video.like_count + video.comment_count;
+            });
+
+            // 計算頻道分數並排序
+            const channels = Array.from(channelMap.entries()).map(([id, data]) => ({
+                id,
+                ...data,
+                avgViews: data.totalViews / data.videos.length,
+                engagementRate: (data.totalEngagement / data.totalViews * 100).toFixed(2)
+            })).sort((a, b) => b.avgViews - a.avgViews).slice(0, 10);
+
+            const html = channels.map((channel, index) => `
+                <div class="ranking-item">
+                    <div class="ranking-number">#${index + 1}</div>
+                    <div class="ranking-info">
+                        <div class="ranking-title">📺 ${channel.title}</div>
+                        <div class="ranking-stats">
+                            <span>🎬 ${channel.videos.length} 部熱門影片</span>
+                            <span>👁️ ${formatNumber(channel.avgViews)} 平均觀看</span>
+                            <span>📊 ${channel.engagementRate}% 互動率</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('rising-channels').innerHTML = html;
+        }
+
+        // 渲染分類分析
+        function renderCategories(videos) {
+            const categories = {};
+            videos.forEach(video => {
+                const catId = video.category_id;
+                if (!categories[catId]) {
+                    categories[catId] = {
+                        name: categoryNames[catId] || `分類 ${catId}`,
+                        count: 0,
+                        totalViews: 0,
+                        totalEngagement: 0
+                    };
+                }
+                categories[catId].count++;
+                categories[catId].totalViews += video.view_count;
+                categories[catId].totalEngagement += video.like_count + video.comment_count;
+            });
+
+            const maxCount = Math.max(...Object.values(categories).map(c => c.count));
+            
+            const html = Object.entries(categories)
+                .sort((a, b) => b[1].count - a[1].count)
+                .map(([id, cat]) => {
+                    const avgViews = cat.totalViews / cat.count;
+                    const engagementRate = (cat.totalEngagement / cat.totalViews * 100).toFixed(2);
+                    const percentage = (cat.count / maxCount * 100).toFixed(0);
+                    
+                    return `
+                        <div class="category-card">
+                            <div class="category-header">
+                                <div class="category-name">${cat.name}</div>
+                                <div class="category-count">${cat.count}</div>
+                            </div>
+                            <div class="category-bar">
+                                <div class="category-bar-fill" style="width: ${percentage}%"></div>
+                            </div>
+                            <div class="category-stats">
+                                <span>平均 ${formatNumber(avgViews)} 觀看</span>
+                                <span>${engagementRate}% 互動率</span>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            
+            document.getElementById('categories-grid').innerHTML = html;
+        }
+
+        // 更新總覽統計
+        function updateOverview(videos) {
+            const totalViews = videos.reduce((sum, v) => sum + v.view_count, 0);
+            const totalEngagement = videos.reduce((sum, v) => sum + v.like_count + v.comment_count, 0);
+            const channels = new Set(videos.map(v => v.channel_id));
+            
+            document.getElementById('overview-total-videos').textContent = videos.length;
+            document.getElementById('overview-total-views').textContent = formatNumber(totalViews);
+            document.getElementById('overview-engagement').textContent = (totalEngagement / totalViews * 100).toFixed(2) + '%';
+            document.getElementById('overview-channels').textContent = channels.size;
+
+            // 顯示表現最佳影片（按互動率排序）
+            const topPerformers = videos
+                .map(v => ({ ...v, engagement: calculateEngagement(v) }))
+                .sort((a, b) => parseFloat(b.engagement) - parseFloat(a.engagement))
+                .slice(0, 5);
+
+            const html = topPerformers.map((video, index) => `
+                <div class="ranking-item">
+                    <div class="ranking-number">#${index + 1}</div>
+                    <img src="${video.thumbnail}" alt="${video.title}" class="ranking-thumbnail">
+                    <div class="ranking-info">
+                        <div class="ranking-title">${video.title}</div>
+                        <div class="ranking-channel">📺 ${video.channel_title}</div>
+                        <div class="ranking-stats">
+                            <span>👁️ ${formatNumber(video.view_count)}</span>
+                            <span>📊 ${video.engagement}% 互動率</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.getElementById('top-performers').innerHTML = html;
+        }
+
+        // 載入資料
+        async function loadData() {
+            try {
+                const response = await fetch('data/trending.json');
+                trendingData = await response.json();
+                
+                const allVideos = [...trendingData.tw_trending, ...trendingData.us_trending];
+                
+                // 渲染各個分頁
+                updateOverview(allVideos);
+                renderTop20(allVideos);
+                renderRisingChannels(allVideos);
+                renderCategories(allVideos);
+            } catch (error) {
+                console.error('載入資料失敗:', error);
+            }
+        }
+
+        // 頁面載入時執行
         loadData();
     </script>
 </body>
