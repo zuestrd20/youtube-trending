@@ -1,31 +1,31 @@
 {
-  "lastUpdated": "2026-02-06T10:06:06.072398Z",
-  "executionNumber": 9,
+  "lastUpdated": "2026-02-07T10:06:34.893764Z",
+  "executionNumber": 10,
   "regions": {
     "TW": [
       {
         "id": "example_tw_1",
-        "title": "台灣熱門影片範例 1",
-        "channelTitle": "範例頻道",
+        "title": "台灣熱門影片範例 1 - 執行 #10",
+        "channelTitle": "範例頻道 TW",
         "thumbnail": "https://i.ytimg.com/vi/example/hqdefault.jpg",
-        "publishedAt": "2026-02-06T00:00:00Z",
-        "viewCount": 1000000,
-        "likeCount": 50000,
-        "commentCount": 5000
+        "publishedAt": "2026-02-07T00:00:00Z",
+        "viewCount": 1050000,
+        "likeCount": 52500,
+        "commentCount": 5250
       }
     ],
     "US": [
       {
         "id": "example_us_1",
-        "title": "US Trending Video Example 1",
-        "channelTitle": "Example Channel",
+        "title": "US Trending Video Example 1 - Execution #10",
+        "channelTitle": "Example Channel US",
         "thumbnail": "https://i.ytimg.com/vi/example/hqdefault.jpg",
-        "publishedAt": "2026-02-06T00:00:00Z",
-        "viewCount": 5000000,
-        "likeCount": 250000,
-        "commentCount": 25000
+        "publishedAt": "2026-02-07T00:00:00Z",
+        "viewCount": 5250000,
+        "likeCount": 262500,
+        "commentCount": 26250
       }
     ]
   },
-  "note": "這是第 9 次執行的測試資料，等待 YouTube API 修復後會包含真實資料"
+  "note": "這是第 10 次執行的測試資料。由於 YouTube Data API list-videos action 持續回報參數錯誤，暫時使用範例資料維持系統運作。"
 }
