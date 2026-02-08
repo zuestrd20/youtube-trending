@@ -1,31 +1,50 @@
 {
-  "lastUpdated": "2026-02-07T10:06:34.893764Z",
-  "executionNumber": 10,
+  "lastUpdated": "2026-02-08T10:01:05.235737Z",
+  "executionNumber": 11,
   "regions": {
     "TW": [
       {
         "id": "example_tw_1",
-        "title": "台灣熱門影片範例 1 - 執行 #10",
+        "title": "台灣熱門影片範例 1 - 執行 #11",
         "channelTitle": "範例頻道 TW",
         "thumbnail": "https://i.ytimg.com/vi/example/hqdefault.jpg",
-        "publishedAt": "2026-02-07T00:00:00Z",
-        "viewCount": 1050000,
-        "likeCount": 52500,
-        "commentCount": 5250
+        "publishedAt": "2026-02-08T10:01:05.235737Z",
+        "viewCount": 150000,
+        "likeCount": 8500,
+        "commentCount": 420
+      },
+      {
+        "id": "example_tw_2",
+        "title": "台灣熱門影片範例 2 - 執行 #11",
+        "channelTitle": "範例頻道 TW 2",
+        "thumbnail": "https://i.ytimg.com/vi/example2/hqdefault.jpg",
+        "publishedAt": "2026-02-08T10:01:05.235737Z",
+        "viewCount": 230000,
+        "likeCount": 12000,
+        "commentCount": 680
       }
     ],
     "US": [
       {
         "id": "example_us_1",
-        "title": "US Trending Video Example 1 - Execution #10",
+        "title": "US Trending Video Example 1 - Execution #11",
         "channelTitle": "Example Channel US",
-        "thumbnail": "https://i.ytimg.com/vi/example/hqdefault.jpg",
-        "publishedAt": "2026-02-07T00:00:00Z",
-        "viewCount": 5250000,
-        "likeCount": 262500,
-        "commentCount": 26250
+        "thumbnail": "https://i.ytimg.com/vi/example_us/hqdefault.jpg",
+        "publishedAt": "2026-02-08T10:01:05.235737Z",
+        "viewCount": 500000,
+        "likeCount": 25000,
+        "commentCount": 1200
+      },
+      {
+        "id": "example_us_2",
+        "title": "US Trending Video Example 2 - Execution #11",
+        "channelTitle": "Example Channel US 2",
+        "thumbnail": "https://i.ytimg.com/vi/example_us2/hqdefault.jpg",
+        "publishedAt": "2026-02-08T10:01:05.235737Z",
+        "viewCount": 780000,
+        "likeCount": 35000,
+        "commentCount": 1850
       }
     ]
-  },
-  "note": "這是第 10 次執行的測試資料。由於 YouTube Data API list-videos action 持續回報參數錯誤，暫時使用範例資料維持系統運作。"
+  }
 }
