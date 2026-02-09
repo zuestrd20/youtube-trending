@@ -1,49 +1,49 @@
 {
-  "lastUpdated": "2026-02-08T10:01:05.235737Z",
-  "executionNumber": 11,
+  "lastUpdated": "2026-02-09T10:01:28.798115Z",
+  "executionNumber": 12,
   "regions": {
     "TW": [
       {
         "id": "example_tw_1",
-        "title": "台灣熱門影片範例 1 - 執行 #11",
+        "title": "台灣熱門影片範例 1 - 執行 #12",
         "channelTitle": "範例頻道 TW",
         "thumbnail": "https://i.ytimg.com/vi/example/hqdefault.jpg",
-        "publishedAt": "2026-02-08T10:01:05.235737Z",
-        "viewCount": 150000,
-        "likeCount": 8500,
-        "commentCount": 420
+        "publishedAt": "2026-02-09T10:01:28.798115Z",
+        "viewCount": 100000,
+        "likeCount": 5000,
+        "commentCount": 500
       },
       {
         "id": "example_tw_2",
-        "title": "台灣熱門影片範例 2 - 執行 #11",
+        "title": "台灣熱門影片範例 2 - 執行 #12",
         "channelTitle": "範例頻道 TW 2",
         "thumbnail": "https://i.ytimg.com/vi/example2/hqdefault.jpg",
-        "publishedAt": "2026-02-08T10:01:05.235737Z",
-        "viewCount": 230000,
-        "likeCount": 12000,
-        "commentCount": 680
+        "publishedAt": "2026-02-09T10:01:28.798115Z",
+        "viewCount": 80000,
+        "likeCount": 4000,
+        "commentCount": 300
       }
     ],
     "US": [
       {
         "id": "example_us_1",
-        "title": "US Trending Video Example 1 - Execution #11",
+        "title": "US Trending Video Example 1 - Execution #12",
         "channelTitle": "Example Channel US",
         "thumbnail": "https://i.ytimg.com/vi/example_us/hqdefault.jpg",
-        "publishedAt": "2026-02-08T10:01:05.235737Z",
-        "viewCount": 500000,
-        "likeCount": 25000,
-        "commentCount": 1200
+        "publishedAt": "2026-02-09T10:01:28.798115Z",
+        "viewCount": 200000,
+        "likeCount": 10000,
+        "commentCount": 1000
       },
       {
         "id": "example_us_2",
-        "title": "US Trending Video Example 2 - Execution #11",
+        "title": "US Trending Video Example 2 - Execution #12",
         "channelTitle": "Example Channel US 2",
         "thumbnail": "https://i.ytimg.com/vi/example_us2/hqdefault.jpg",
-        "publishedAt": "2026-02-08T10:01:05.235737Z",
-        "viewCount": 780000,
-        "likeCount": 35000,
-        "commentCount": 1850
+        "publishedAt": "2026-02-09T10:01:28.798115Z",
+        "viewCount": 150000,
+        "likeCount": 7500,
+        "commentCount": 750
       }
     ]
   }
