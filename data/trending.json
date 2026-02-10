@@ -1,49 +1,45 @@
 {
-  "lastUpdated": "2026-02-09T10:01:28.798115Z",
-  "executionNumber": 12,
+  "lastUpdated": "2026-02-10T10:00:17.439167Z",
+  "executionNumber": 13,
   "regions": {
     "TW": [
       {
         "id": "example_tw_1",
-        "title": "台灣熱門影片範例 1 - 執行 #12",
+        "title": "台灣熱門影片範例 1 - 執行 #13",
         "channelTitle": "範例頻道 TW",
         "thumbnail": "https://i.ytimg.com/vi/example/hqdefault.jpg",
-        "publishedAt": "2026-02-09T10:01:28.798115Z",
-        "viewCount": 100000,
-        "likeCount": 5000,
-        "commentCount": 500
+        "publishedAt": "2026-02-10T00:00:00Z",
+        "viewCount": 150000,
+        "url": "https://www.youtube.com/watch?v=example_tw_1"
       },
       {
         "id": "example_tw_2",
-        "title": "台灣熱門影片範例 2 - 執行 #12",
+        "title": "台灣熱門影片範例 2 - 執行 #13",
         "channelTitle": "範例頻道 TW 2",
         "thumbnail": "https://i.ytimg.com/vi/example2/hqdefault.jpg",
-        "publishedAt": "2026-02-09T10:01:28.798115Z",
-        "viewCount": 80000,
-        "likeCount": 4000,
-        "commentCount": 300
+        "publishedAt": "2026-02-10T02:00:00Z",
+        "viewCount": 120000,
+        "url": "https://www.youtube.com/watch?v=example_tw_2"
       }
     ],
     "US": [
       {
         "id": "example_us_1",
-        "title": "US Trending Video Example 1 - Execution #12",
+        "title": "US Trending Video Example 1 - Execution #13",
         "channelTitle": "Example Channel US",
         "thumbnail": "https://i.ytimg.com/vi/example_us/hqdefault.jpg",
-        "publishedAt": "2026-02-09T10:01:28.798115Z",
-        "viewCount": 200000,
-        "likeCount": 10000,
-        "commentCount": 1000
+        "publishedAt": "2026-02-10T00:00:00Z",
+        "viewCount": 500000,
+        "url": "https://www.youtube.com/watch?v=example_us_1"
       },
       {
         "id": "example_us_2",
-        "title": "US Trending Video Example 2 - Execution #12",
+        "title": "US Trending Video Example 2 - Execution #13",
         "channelTitle": "Example Channel US 2",
         "thumbnail": "https://i.ytimg.com/vi/example_us2/hqdefault.jpg",
-        "publishedAt": "2026-02-09T10:01:28.798115Z",
-        "viewCount": 150000,
-        "likeCount": 7500,
-        "commentCount": 750
+        "publishedAt": "2026-02-10T01:00:00Z",
+        "viewCount": 450000,
+        "url": "https://www.youtube.com/watch?v=example_us_2"
       }
     ]
   }
