@@ -1,49 +1,49 @@
 {
-  "lastUpdated": "2026-02-11T10:00:20.712531Z",
-  "executionNumber": 14,
+  "lastUpdated": "2026-02-12T10:00:31.634517Z",
+  "executionNumber": 15,
   "regions": {
     "TW": [
       {
         "id": "example_tw_1",
-        "title": "台灣熱門影片範例 1 - 執行 #14",
+        "title": "台灣熱門影片範例 1 - 執行 #15",
         "channelTitle": "範例頻道 TW",
         "thumbnail": "https://i.ytimg.com/vi/example/hqdefault.jpg",
-        "publishedAt": "2026-02-11T00:00:00Z",
-        "viewCount": 150000,
-        "likeCount": 8500,
-        "commentCount": 420
+        "publishedAt": "2026-02-12T08:00:00Z",
+        "viewCount": "1250000",
+        "likeCount": "85000",
+        "commentCount": "3200"
       },
       {
         "id": "example_tw_2",
-        "title": "台灣熱門影片範例 2 - 執行 #14",
+        "title": "台灣熱門影片範例 2 - 執行 #15",
         "channelTitle": "範例頻道 TW 2",
         "thumbnail": "https://i.ytimg.com/vi/example2/hqdefault.jpg",
-        "publishedAt": "2026-02-11T02:00:00Z",
-        "viewCount": 98000,
-        "likeCount": 5200,
-        "commentCount": 310
+        "publishedAt": "2026-02-12T06:30:00Z",
+        "viewCount": "980000",
+        "likeCount": "62000",
+        "commentCount": "2100"
       }
     ],
     "US": [
       {
         "id": "example_us_1",
-        "title": "US Trending Video Example 1 - Execution #14",
+        "title": "US Trending Video Example 1 - Execution #15",
         "channelTitle": "Example Channel US",
-        "thumbnail": "https://i.ytimg.com/vi/exampleus/hqdefault.jpg",
-        "publishedAt": "2026-02-11T00:00:00Z",
-        "viewCount": 2500000,
-        "likeCount": 125000,
-        "commentCount": 8900
+        "thumbnail": "https://i.ytimg.com/vi/example_us/hqdefault.jpg",
+        "publishedAt": "2026-02-12T05:00:00Z",
+        "viewCount": "3500000",
+        "likeCount": "215000",
+        "commentCount": "8900"
       },
       {
         "id": "example_us_2",
-        "title": "US Trending Video Example 2 - Execution #14",
+        "title": "US Trending Video Example 2 - Execution #15",
         "channelTitle": "Example Channel US 2",
-        "thumbnail": "https://i.ytimg.com/vi/exampleus2/hqdefault.jpg",
-        "publishedAt": "2026-02-11T03:00:00Z",
-        "viewCount": 1800000,
-        "likeCount": 92000,
-        "commentCount": 6100
+        "thumbnail": "https://i.ytimg.com/vi/example_us2/hqdefault.jpg",
+        "publishedAt": "2026-02-12T03:15:00Z",
+        "viewCount": "2800000",
+        "likeCount": "178000",
+        "commentCount": "6500"
       }
     ]
   }
