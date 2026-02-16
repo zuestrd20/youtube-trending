@@ -1,63 +1,62 @@
 {
-  "updated_at": "2026-02-15T10:00:00Z",
-  "execution_number": 18,
+  "updated_at": "2026-02-16T10:01:00Z",
+  "execution_number": 19,
   "regions": {
     "TW": [
       {
         "title": "單程票",
         "videoId": "jQbCnQ_JQx0",
         "channelTitle": "派偉俊 - Topic",
-        "viewCount": "360818",
-        "likeCount": "4971",
-        "thumbnail": "https://i.ytimg.com/vi/jQbCnQ_JQx0/hqdefault.jpg",
         "publishedAt": "2026-02-10T16:00:55Z",
+        "viewCount": "405775",
+        "likeCount": "5182",
+        "thumbnail": "https://i.ytimg.com/vi/jQbCnQ_JQx0/maxresdefault.jpg",
         "url": "https://www.youtube.com/watch?v=jQbCnQ_JQx0"
       },
       {
-        "title": "Resident Evil Requiem - 4th Trailer（繁中）",
-        "videoId": "HkMykatgbPI",
-        "channelTitle": "capcomasia",
-        "viewCount": "80923",
-        "likeCount": "2051",
-        "thumbnail": "https://i.ytimg.com/vi/HkMykatgbPI/hqdefault.jpg",
-        "publishedAt": "2026-02-12T22:17:34Z",
-        "url": "https://www.youtube.com/watch?v=HkMykatgbPI"
+        "title": "【預告解析】《暗影蜘蛛人》尼可拉斯凱吉主演? 第一部索尼蜘蛛人影集! ?  | 超粒方 | Spider-Noir",
+        "videoId": "UFDg34Ucu7g",
+        "channelTitle": "超粒方",
+        "publishedAt": "2026-02-15T12:00:06Z",
+        "viewCount": "57424",
+        "likeCount": "1447",
+        "thumbnail": "https://i.ytimg.com/vi/UFDg34Ucu7g/maxresdefault.jpg",
+        "url": "https://www.youtube.com/watch?v=UFDg34Ucu7g"
       }
     ],
     "US": [
       {
-        "title": "LA INSUPERABLE X MICHAEL FLORES X ALOFOKE MUSIC - EMOJI",
-        "videoId": "g9rhBE_RSOA",
-        "channelTitle": "AlofokeMusicSounds",
-        "viewCount": "402318",
-        "likeCount": "41743",
-        "thumbnail": "https://i.ytimg.com/vi/g9rhBE_RSOA/hqdefault.jpg",
-        "publishedAt": "2026-02-14T15:59:06Z",
-        "url": "https://www.youtube.com/watch?v=g9rhBE_RSOA"
+        "title": "ATEEZ(에이티즈) - 'NASA' Performance Video",
+        "videoId": "tVJBWoof09Q",
+        "channelTitle": "KQ ENTERTAINMENT",
+        "publishedAt": "2026-02-16T05:00:01Z",
+        "viewCount": "149269",
+        "likeCount": "47159",
+        "thumbnail": "https://i.ytimg.com/vi/tVJBWoof09Q/maxresdefault.jpg",
+        "url": "https://www.youtube.com/watch?v=tVJBWoof09Q"
       },
       {
-        "title": "Bridgerton Season 4 | Part 2 Official Trailer | Netflix",
-        "videoId": "P87Exm0VMrI",
-        "channelTitle": "Netflix",
-        "viewCount": "1891230",
-        "likeCount": "44215",
-        "thumbnail": "https://i.ytimg.com/vi/P87Exm0VMrI/hqdefault.jpg",
-        "publishedAt": "2026-02-13T15:00:00Z",
-        "url": "https://www.youtube.com/watch?v=P87Exm0VMrI"
+        "title": "THE SUPER MARIO GALAXY MOVIE \"Bowser Vs Yoshi\" Trailer (NEW 2026)",
+        "videoId": "9DORLMskzR0",
+        "channelTitle": "JoBlo Animated Videos",
+        "publishedAt": "2026-02-15T14:15:01Z",
+        "viewCount": "483333",
+        "likeCount": "9113",
+        "thumbnail": "https://i.ytimg.com/vi/9DORLMskzR0/maxresdefault.jpg",
+        "url": "https://www.youtube.com/watch?v=9DORLMskzR0"
       }
     ]
   },
-  "total_videos": 4,
-  "summary": {
+  "statistics": {
     "TW": {
-      "count": 2,
-      "total_views": 441741,
-      "total_likes": 7022
+      "total_videos": 2,
+      "total_views": 463199,
+      "total_likes": 6629
     },
     "US": {
-      "count": 2,
-      "total_views": 2293548,
-      "total_likes": 85958
+      "total_videos": 2,
+      "total_views": 632602,
+      "total_likes": 56272
     }
   }
 }
