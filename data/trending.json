@@ -1,62 +1,62 @@
 {
-  "updated_at": "2026-02-16T10:01:00Z",
-  "execution_number": 19,
+  "updated_at": "2026-02-17T10:00:30Z",
+  "execution_number": 20,
   "regions": {
     "TW": [
       {
-        "title": "單程票",
-        "videoId": "jQbCnQ_JQx0",
-        "channelTitle": "派偉俊 - Topic",
-        "publishedAt": "2026-02-10T16:00:55Z",
-        "viewCount": "405775",
-        "likeCount": "5182",
-        "thumbnail": "https://i.ytimg.com/vi/jQbCnQ_JQx0/maxresdefault.jpg",
-        "url": "https://www.youtube.com/watch?v=jQbCnQ_JQx0"
+        "title": "派偉俊 Patrick Brasca【單程票 Single Ticket】Official MV",
+        "videoId": "QVs13AMJAMY",
+        "channelTitle": "派偉俊 Patrick Brasca",
+        "publishedAt": "2026-02-13T12:00:00Z",
+        "viewCount": "468569",
+        "likeCount": "6684",
+        "thumbnail": "https://i.ytimg.com/vi/QVs13AMJAMY/maxresdefault.jpg",
+        "url": "https://www.youtube.com/watch?v=QVs13AMJAMY"
       },
       {
         "title": "【預告解析】《暗影蜘蛛人》尼可拉斯凱吉主演? 第一部索尼蜘蛛人影集! ?  | 超粒方 | Spider-Noir",
         "videoId": "UFDg34Ucu7g",
         "channelTitle": "超粒方",
         "publishedAt": "2026-02-15T12:00:06Z",
-        "viewCount": "57424",
-        "likeCount": "1447",
+        "viewCount": "68477",
+        "likeCount": "1620",
         "thumbnail": "https://i.ytimg.com/vi/UFDg34Ucu7g/maxresdefault.jpg",
         "url": "https://www.youtube.com/watch?v=UFDg34Ucu7g"
       }
     ],
     "US": [
       {
-        "title": "ATEEZ(에이티즈) - 'NASA' Performance Video",
-        "videoId": "tVJBWoof09Q",
-        "channelTitle": "KQ ENTERTAINMENT",
-        "publishedAt": "2026-02-16T05:00:01Z",
-        "viewCount": "149269",
-        "likeCount": "47159",
-        "thumbnail": "https://i.ytimg.com/vi/tVJBWoof09Q/maxresdefault.jpg",
-        "url": "https://www.youtube.com/watch?v=tVJBWoof09Q"
+        "title": "YoungBoy Never Broke Again - HeadTap [Official Video]",
+        "videoId": "RwlT3hESUBA",
+        "channelTitle": "YoungBoy Never Broke Again",
+        "publishedAt": "2026-02-17T02:01:10Z",
+        "viewCount": "268204",
+        "likeCount": "40292",
+        "thumbnail": "https://i.ytimg.com/vi/RwlT3hESUBA/maxresdefault.jpg",
+        "url": "https://www.youtube.com/watch?v=RwlT3hESUBA"
       },
       {
-        "title": "THE SUPER MARIO GALAXY MOVIE \"Bowser Vs Yoshi\" Trailer (NEW 2026)",
-        "videoId": "9DORLMskzR0",
-        "channelTitle": "JoBlo Animated Videos",
-        "publishedAt": "2026-02-15T14:15:01Z",
-        "viewCount": "483333",
-        "likeCount": "9113",
-        "thumbnail": "https://i.ytimg.com/vi/9DORLMskzR0/maxresdefault.jpg",
-        "url": "https://www.youtube.com/watch?v=9DORLMskzR0"
+        "title": "The Mandalorian and Grogu | Trailer Tomorrow",
+        "videoId": "dsPcVOUmNKs",
+        "channelTitle": "Star Wars",
+        "publishedAt": "2026-02-16T17:01:50Z",
+        "viewCount": "104815",
+        "likeCount": "7270",
+        "thumbnail": "https://i.ytimg.com/vi/dsPcVOUmNKs/maxresdefault.jpg",
+        "url": "https://www.youtube.com/watch?v=dsPcVOUmNKs"
       }
     ]
   },
   "statistics": {
     "TW": {
       "total_videos": 2,
-      "total_views": 463199,
-      "total_likes": 6629
+      "total_views": 537046,
+      "total_likes": 8304
     },
     "US": {
       "total_videos": 2,
-      "total_views": 632602,
-      "total_likes": 56272
+      "total_views": 373019,
+      "total_likes": 47562
     }
   }
 }
