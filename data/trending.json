@@ -1,62 +1,64 @@
 {
-  "updated_at": "2026-02-17T10:00:30Z",
-  "execution_number": 20,
+  "updated_at": "2026-02-18T10:12:00Z",
+  "execution_number": 21,
+  "data_source": "youtube_search_api",
+  "note": "Statistics (viewCount, likeCount) unavailable via search API - would require additional API calls per video",
   "regions": {
     "TW": [
       {
-        "title": "派偉俊 Patrick Brasca【單程票 Single Ticket】Official MV",
-        "videoId": "QVs13AMJAMY",
-        "channelTitle": "派偉俊 Patrick Brasca",
-        "publishedAt": "2026-02-13T12:00:00Z",
-        "viewCount": "468569",
-        "likeCount": "6684",
-        "thumbnail": "https://i.ytimg.com/vi/QVs13AMJAMY/maxresdefault.jpg",
-        "url": "https://www.youtube.com/watch?v=QVs13AMJAMY"
+        "title": "🔥🔥2026東亞大震盪 台灣成全球焦點❓帕克預言台海有重大軍事衝突 但台灣安全了❗2026最新預言曝光❗大快人心 中共終局來了...",
+        "videoId": "yLubKxr-jro",
+        "channelTitle": "第三隻眼睛",
+        "publishedAt": "2025-12-06T15:15:06Z",
+        "viewCount": "N/A",
+        "likeCount": "N/A",
+        "thumbnail": "https://i.ytimg.com/vi/yLubKxr-jro/hqdefault.jpg",
+        "url": "https://www.youtube.com/watch?v=yLubKxr-jro"
       },
       {
-        "title": "【預告解析】《暗影蜘蛛人》尼可拉斯凱吉主演? 第一部索尼蜘蛛人影集! ?  | 超粒方 | Spider-Noir",
-        "videoId": "UFDg34Ucu7g",
-        "channelTitle": "超粒方",
-        "publishedAt": "2026-02-15T12:00:06Z",
-        "viewCount": "68477",
-        "likeCount": "1620",
-        "thumbnail": "https://i.ytimg.com/vi/UFDg34Ucu7g/maxresdefault.jpg",
-        "url": "https://www.youtube.com/watch?v=UFDg34Ucu7g"
+        "title": "2026年新年歌 💖 Lagu Imlek 2026【最好聽的新年歌曲 2026】🎶 Gong Xi Fa Cai🧨Chinese New Year Song 2026",
+        "videoId": "w156_pcB95U",
+        "channelTitle": "台語經典老歌 - Taiwan TV",
+        "publishedAt": "2026-02-15T23:01:05Z",
+        "viewCount": "N/A",
+        "likeCount": "N/A",
+        "thumbnail": "https://i.ytimg.com/vi/w156_pcB95U/hqdefault.jpg",
+        "url": "https://www.youtube.com/watch?v=w156_pcB95U"
       }
     ],
     "US": [
       {
-        "title": "YoungBoy Never Broke Again - HeadTap [Official Video]",
-        "videoId": "RwlT3hESUBA",
-        "channelTitle": "YoungBoy Never Broke Again",
-        "publishedAt": "2026-02-17T02:01:10Z",
-        "viewCount": "268204",
-        "likeCount": "40292",
-        "thumbnail": "https://i.ytimg.com/vi/RwlT3hESUBA/maxresdefault.jpg",
-        "url": "https://www.youtube.com/watch?v=RwlT3hESUBA"
+        "title": "Spotify Hits 2026 - Trending Pop Hits 2026 🎧 🎶 New Songs 2026 🔥 TikTok Hits Collection",
+        "videoId": "uHALCsLicEM",
+        "channelTitle": "Dynamic Deep House",
+        "publishedAt": "2026-02-15T20:23:11Z",
+        "viewCount": "N/A",
+        "likeCount": "N/A",
+        "thumbnail": "https://i.ytimg.com/vi/uHALCsLicEM/hqdefault.jpg",
+        "url": "https://www.youtube.com/watch?v=uHALCsLicEM"
       },
       {
-        "title": "The Mandalorian and Grogu | Trailer Tomorrow",
-        "videoId": "dsPcVOUmNKs",
-        "channelTitle": "Star Wars",
-        "publishedAt": "2026-02-16T17:01:50Z",
-        "viewCount": "104815",
-        "likeCount": "7270",
-        "thumbnail": "https://i.ytimg.com/vi/dsPcVOUmNKs/maxresdefault.jpg",
-        "url": "https://www.youtube.com/watch?v=dsPcVOUmNKs"
+        "title": "Tiktok Mashup 2026 - If you know These Songs your a genius! 🧠❤️",
+        "videoId": "jIC6T7yYsJs",
+        "channelTitle": "TikTok Mashup ",
+        "publishedAt": "2026-01-17T14:30:40Z",
+        "viewCount": "N/A",
+        "likeCount": "N/A",
+        "thumbnail": "https://i.ytimg.com/vi/jIC6T7yYsJs/hqdefault.jpg",
+        "url": "https://www.youtube.com/watch?v=jIC6T7yYsJs"
       }
     ]
   },
   "statistics": {
     "TW": {
       "total_videos": 2,
-      "total_views": 537046,
-      "total_likes": 8304
+      "total_views": "N/A",
+      "total_likes": "N/A"
     },
     "US": {
       "total_videos": 2,
-      "total_views": 373019,
-      "total_likes": 47562
+      "total_views": "N/A",
+      "total_likes": "N/A"
     }
   }
 }
