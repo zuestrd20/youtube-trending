@@ -1,457 +1,224 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YouTube Trending - Execution #34</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:#0f0f0f;color:#f1f1f1}
-.header{background:#212121;padding:20px;text-align:center;border-bottom:3px solid #ff0000}
-.header h1{font-size:28px;margin-bottom:6px}
-.header p{color:#aaa;font-size:14px}
-.tabs{display:flex;justify-content:center;background:#181818;padding:10px;gap:10px}
-.tab{padding:10px 28px;cursor:pointer;background:#2a2a2a;border:none;color:#f1f1f1;font-size:15px;font-weight:500;border-radius:8px;transition:all 0.2s}
-.tab:hover{background:#3a3a3a}
-.tab.active{background:#ff0000;color:#fff}
-.container{max-width:1400px;margin:0 auto;padding:24px 16px}
-.tab-content{display:none}.tab-content.active{display:block}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin-top:16px}
-.video-card{background:#212121;border-radius:10px;overflow:hidden;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s}
-.video-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(255,0,0,0.25)}
-.thumbnail{position:relative;width:100%;padding-bottom:56.25%;background:#000}
-.thumbnail img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover}
-.rank{position:absolute;top:8px;left:8px;background:rgba(0,0,0,0.8);color:#ff0000;font-weight:700;font-size:16px;padding:4px 10px;border-radius:5px}
-.info{padding:14px}
-.title{font-size:14px;font-weight:600;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:6px}
-.channel{font-size:12px;color:#aaa}
-.footer{text-align:center;padding:32px;color:#555;font-size:13px;border-top:1px solid #222;margin-top:32px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube 熱門影片 - Execution #35</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Roboto", "Arial", sans-serif;
+            background-color: #0f0f0f;
+            color: #f1f1f1;
+            line-height: 1.6;
+        }
+
+        .header {
+            background-color: #212121;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .header .info {
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            padding: 20px;
+            background-color: #0f0f0f;
+        }
+
+        .tab-button {
+            background-color: #272727;
+            color: #f1f1f1;
+            border: none;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .tab-button:hover {
+            background-color: #3f3f3f;
+        }
+
+        .tab-button.active {
+            background-color: #ff0000;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        .video-card {
+            background-color: #212121;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .video-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        .thumbnail-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .thumbnail-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .rank-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #ff0000;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            padding: 6px 12px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .video-info {
+            padding: 12px;
+        }
+
+        .video-title {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .video-channel {
+            font-size: 12px;
+            color: #aaa;
+            margin-bottom: 8px;
+        }
+
+        .video-stats {
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 60px 20px;
+            color: #aaa;
+            font-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 16px;
+            }
+
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .tabs {
+                padding: 16px;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="header">
-  <h1>&#x1F4FA; YouTube Trending Videos</h1>
-  <p>Updated: 2026-03-03 10:09 UTC | Execution #34</p>
-</div>
-<div class="tabs">
-  <button class="tab active" onclick="showTab('tw',event)">&#x1F1F9;&#x1F1FC; Taiwan (TW)</button>
-  <button class="tab" onclick="showTab('us',event)">&#x1F1FA;&#x1F1F8; United States (US)</button>
-</div>
-<div class="container">
-  <div id="tw" class="tab-content active"><div class="grid">
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=nqzIQh2D_Es','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/nqzIQh2D_Es/hqdefault.jpg" alt="Trending Nakhra (Official Video) : Amrit Maan ft. Ginni Kapoor | Intense | Punjabi Song" loading="lazy">
-                    <span class="rank">#1</span>
-                </div>
-                <div class="info">
-                    <div class="title">Trending Nakhra (Official Video) : Amrit Maan ft. Ginni Kapoor | Intense | Punjabi Song</div>
-                    <div class="channel">Bamb Beats</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=X5dg86tXQjU','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/X5dg86tXQjU/hqdefault.jpg" alt="Golden guy gifted me gold 😨 #trending #shorts #catchysmells #itmaaz #perfumer  #youtuber #perfume" loading="lazy">
-                    <span class="rank">#2</span>
-                </div>
-                <div class="info">
-                    <div class="title">Golden guy gifted me gold 😨 #trending #shorts #catchysmells #itmaaz #perfumer  #youtuber #perfume</div>
-                    <div class="channel">IT Maaz</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=ay99J4tUUu0','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/ay99J4tUUu0/hqdefault.jpg" alt="😂😂#shorts #youtubeshorts #trending #viralvideo #viral #comedy" loading="lazy">
-                    <span class="rank">#3</span>
-                </div>
-                <div class="info">
-                    <div class="title">😂😂#shorts #youtubeshorts #trending #viralvideo #viral #comedy</div>
-                    <div class="channel">Rocking fun with Nadeem</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=wD5_xbnyu8A','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/wD5_xbnyu8A/hqdefault.jpg" alt="how he takes revenge #viral #trending #funny #love #viralvideo #shorts" loading="lazy">
-                    <span class="rank">#4</span>
-                </div>
-                <div class="info">
-                    <div class="title">how he takes revenge #viral #trending #funny #love #viralvideo #shorts</div>
-                    <div class="channel">H&T Official</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=JEV210XLDoY','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/JEV210XLDoY/hqdefault.jpg" alt="Challenge Accepted 😎😮‍💨🫠 #trending #shorts #catchysmells #itmaaz #perfumer #youtuber" loading="lazy">
-                    <span class="rank">#5</span>
-                </div>
-                <div class="info">
-                    <div class="title">Challenge Accepted 😎😮‍💨🫠 #trending #shorts #catchysmells #itmaaz #perfumer #youtuber</div>
-                    <div class="channel">IT Maaz</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=EJvtcH1A0Zg','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/EJvtcH1A0Zg/hqdefault.jpg" alt="Meri Please Madad Kardo #youtubeshorts #shortvideo #trending #motivation #summerofshorts" loading="lazy">
-                    <span class="rank">#6</span>
-                </div>
-                <div class="info">
-                    <div class="title">Meri Please Madad Kardo #youtubeshorts #shortvideo #trending #motivation #summerofshorts</div>
-                    <div class="channel">Musa In SHORTS </div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=-xic5bJIuQM','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/-xic5bJIuQM/hqdefault.jpg" alt="power of fathers presence 😭🤣 #explore #funny #funnyvideo #trending #viral #love" loading="lazy">
-                    <span class="rank">#7</span>
-                </div>
-                <div class="info">
-                    <div class="title">power of fathers presence 😭🤣 #explore #funny #funnyvideo #trending #viral #love</div>
-                    <div class="channel">Let's Romantic </div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=OtZXIvKZrcY','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/OtZXIvKZrcY/hqdefault.jpg" alt="నా Family Safe 🫣🫣 #cutebaby #shortsvideo #cute #trending #viral" loading="lazy">
-                    <span class="rank">#8</span>
-                </div>
-                <div class="info">
-                    <div class="title">నా Family Safe 🫣🫣 #cutebaby #shortsvideo #cute #trending #viral</div>
-                    <div class="channel">Crazy Dwani For You</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=PhVQWwjZn54','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/PhVQWwjZn54/hqdefault.jpg" alt="She kissed me 🙈 don't miss the end 🫣 #trending #shorts #catchysmells #itmaaz #perfumer #kissme" loading="lazy">
-                    <span class="rank">#9</span>
-                </div>
-                <div class="info">
-                    <div class="title">She kissed me 🙈 don't miss the end 🫣 #trending #shorts #catchysmells #itmaaz #perfumer #kissme</div>
-                    <div class="channel">IT Maaz</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=O65Bh9e4iPw','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/O65Bh9e4iPw/hqdefault.jpg" alt="Bugatti Trend with my Sister 😂 #shorts #trending #bugatti" loading="lazy">
-                    <span class="rank">#10</span>
-                </div>
-                <div class="info">
-                    <div class="title">Bugatti Trend with my Sister 😂 #shorts #trending #bugatti</div>
-                    <div class="channel">The Savage Siblings</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=jyr6SSI2xAU','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/jyr6SSI2xAU/hqdefault.jpg" alt="Bhen Ke Saath Dhoka 😨 #neetubisht #funny #lakhneet #comedy #youtubeshorts #trending #shorts #viral" loading="lazy">
-                    <span class="rank">#11</span>
-                </div>
-                <div class="info">
-                    <div class="title">Bhen Ke Saath Dhoka 😨 #neetubisht #funny #lakhneet #comedy #youtubeshorts #trending #shorts #viral</div>
-                    <div class="channel">Neetu Bisht</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=vYdgL-lM7PY','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/vYdgL-lM7PY/hqdefault.jpg" alt="Small act of kindness😊#motivation #emotional #shorts #viral #trending #ytshorts" loading="lazy">
-                    <span class="rank">#12</span>
-                </div>
-                <div class="info">
-                    <div class="title">Small act of kindness😊#motivation #emotional #shorts #viral #trending #ytshorts</div>
-                    <div class="channel">Anaya Eshaal Family</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=gUVCU4RWf9g','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/gUVCU4RWf9g/hqdefault.jpg" alt="Power of love part 17#youtubeshorts #viralvideo #trending #foryou #funny #shortvideo #viral" loading="lazy">
-                    <span class="rank">#13</span>
-                </div>
-                <div class="info">
-                    <div class="title">Power of love part 17#youtubeshorts #viralvideo #trending #foryou #funny #shortvideo #viral</div>
-                    <div class="channel">Nabilshorts</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=mfW2QP3uN_k','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/mfW2QP3uN_k/hqdefault.jpg" alt="The.Xuyuanlianmaiguagua#shorts #trendingvideo #funny #trending #shorts #viralvideos, path,#01" loading="lazy">
-                    <span class="rank">#14</span>
-                </div>
-                <div class="info">
-                    <div class="title">The.Xuyuanlianmaiguagua#shorts #trendingvideo #funny #trending #shorts #viralvideos, path,#01</div>
-                    <div class="channel">Bunny Farm Girl🐰🎋</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=nkrGLPOi1RY','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/nkrGLPOi1RY/hqdefault.jpg" alt="My first day at job🤣🤣💓#shorts #funny #trending #@WokTokVibes#tiktok" loading="lazy">
-                    <span class="rank">#15</span>
-                </div>
-                <div class="info">
-                    <div class="title">My first day at job🤣🤣💓#shorts #funny #trending #@WokTokVibes#tiktok</div>
-                    <div class="channel">WokTok Vibes</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=7c3-Gei5j4w','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/7c3-Gei5j4w/hqdefault.jpg" alt="Chaand Baaliyan – Aditya A. | Trending Song | Official Video" loading="lazy">
-                    <span class="rank">#16</span>
-                </div>
-                <div class="info">
-                    <div class="title">Chaand Baaliyan – Aditya A. | Trending Song | Official Video</div>
-                    <div class="channel">Sony Music India</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=vEABpJINDq8','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/vEABpJINDq8/hqdefault.jpg" alt="This trend is funny 😂😭🫃🏻 #explore #edit #challenge #trending #funny #funnyshorts #shorts #ytshorts" loading="lazy">
-                    <span class="rank">#17</span>
-                </div>
-                <div class="info">
-                    <div class="title">This trend is funny 😂😭🫃🏻 #explore #edit #challenge #trending #funny #funnyshorts #shorts #ytshorts</div>
-                    <div class="channel">ringleader</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=X40_0uqYbio','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/X40_0uqYbio/hqdefault.jpg" alt="It's so scrary #trending #viral #funny #shorts" loading="lazy">
-                    <span class="rank">#18</span>
-                </div>
-                <div class="info">
-                    <div class="title">It's so scrary #trending #viral #funny #shorts</div>
-                    <div class="channel">H&T Official</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=RGE1NCewCXk','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/RGE1NCewCXk/hqdefault.jpg" alt="Best Earrings design 👌 #trending #viralvideo #shorts" loading="lazy">
-                    <span class="rank">#19</span>
-                </div>
-                <div class="info">
-                    <div class="title">Best Earrings design 👌 #trending #viralvideo #shorts</div>
-                    <div class="channel">FASHION AND TRENDS</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=QyOU0I0shXc','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/QyOU0I0shXc/hqdefault.jpg" alt="TRENDING TikTok Song!" loading="lazy">
-                    <span class="rank">#20</span>
-                </div>
-                <div class="info">
-                    <div class="title">TRENDING TikTok Song!</div>
-                    <div class="channel">Flighthouse</div>
-                </div>
-            </div></div></div>
-  <div id="us" class="tab-content"><div class="grid">
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=nhhcmLlS44w','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/nhhcmLlS44w/hqdefault.jpg" alt="papa mein kahan baitho #shortvideo #youtubeshorts #trending #emotional #shorts" loading="lazy">
-                    <span class="rank">#1</span>
-                </div>
-                <div class="info">
-                    <div class="title">papa mein kahan baitho #shortvideo #youtubeshorts #trending #emotional #shorts</div>
-                    <div class="channel">Anshika ke Kanhaiya</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=X5dg86tXQjU','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/X5dg86tXQjU/hqdefault.jpg" alt="Golden guy gifted me gold 😨 #trending #shorts #catchysmells #itmaaz #perfumer  #youtuber #perfume" loading="lazy">
-                    <span class="rank">#2</span>
-                </div>
-                <div class="info">
-                    <div class="title">Golden guy gifted me gold 😨 #trending #shorts #catchysmells #itmaaz #perfumer  #youtuber #perfume</div>
-                    <div class="channel">IT Maaz</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=wD5_xbnyu8A','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/wD5_xbnyu8A/hqdefault.jpg" alt="how he takes revenge #viral #trending #funny #love #viralvideo #shorts" loading="lazy">
-                    <span class="rank">#3</span>
-                </div>
-                <div class="info">
-                    <div class="title">how he takes revenge #viral #trending #funny #love #viralvideo #shorts</div>
-                    <div class="channel">H&T Official</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=JEV210XLDoY','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/JEV210XLDoY/hqdefault.jpg" alt="Challenge Accepted 😎😮‍💨🫠 #trending #shorts #catchysmells #itmaaz #perfumer #youtuber" loading="lazy">
-                    <span class="rank">#4</span>
-                </div>
-                <div class="info">
-                    <div class="title">Challenge Accepted 😎😮‍💨🫠 #trending #shorts #catchysmells #itmaaz #perfumer #youtuber</div>
-                    <div class="channel">IT Maaz</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=EJvtcH1A0Zg','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/EJvtcH1A0Zg/hqdefault.jpg" alt="Meri Please Madad Kardo #youtubeshorts #shortvideo #trending #motivation #summerofshorts" loading="lazy">
-                    <span class="rank">#5</span>
-                </div>
-                <div class="info">
-                    <div class="title">Meri Please Madad Kardo #youtubeshorts #shortvideo #trending #motivation #summerofshorts</div>
-                    <div class="channel">Musa In SHORTS </div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=-xic5bJIuQM','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/-xic5bJIuQM/hqdefault.jpg" alt="power of fathers presence 😭🤣 #explore #funny #funnyvideo #trending #viral #love" loading="lazy">
-                    <span class="rank">#6</span>
-                </div>
-                <div class="info">
-                    <div class="title">power of fathers presence 😭🤣 #explore #funny #funnyvideo #trending #viral #love</div>
-                    <div class="channel">Let's Romantic </div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=OtZXIvKZrcY','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/OtZXIvKZrcY/hqdefault.jpg" alt="నా Family Safe 🫣🫣 #cutebaby #shortsvideo #cute #trending #viral" loading="lazy">
-                    <span class="rank">#7</span>
-                </div>
-                <div class="info">
-                    <div class="title">నా Family Safe 🫣🫣 #cutebaby #shortsvideo #cute #trending #viral</div>
-                    <div class="channel">Crazy Dwani For You</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=PhVQWwjZn54','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/PhVQWwjZn54/hqdefault.jpg" alt="She kissed me 🙈 don't miss the end 🫣 #trending #shorts #catchysmells #itmaaz #perfumer #kissme" loading="lazy">
-                    <span class="rank">#8</span>
-                </div>
-                <div class="info">
-                    <div class="title">She kissed me 🙈 don't miss the end 🫣 #trending #shorts #catchysmells #itmaaz #perfumer #kissme</div>
-                    <div class="channel">IT Maaz</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=O65Bh9e4iPw','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/O65Bh9e4iPw/hqdefault.jpg" alt="Bugatti Trend with my Sister 😂 #shorts #trending #bugatti" loading="lazy">
-                    <span class="rank">#9</span>
-                </div>
-                <div class="info">
-                    <div class="title">Bugatti Trend with my Sister 😂 #shorts #trending #bugatti</div>
-                    <div class="channel">The Savage Siblings</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=jyr6SSI2xAU','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/jyr6SSI2xAU/hqdefault.jpg" alt="Bhen Ke Saath Dhoka 😨 #neetubisht #funny #lakhneet #comedy #youtubeshorts #trending #shorts #viral" loading="lazy">
-                    <span class="rank">#10</span>
-                </div>
-                <div class="info">
-                    <div class="title">Bhen Ke Saath Dhoka 😨 #neetubisht #funny #lakhneet #comedy #youtubeshorts #trending #shorts #viral</div>
-                    <div class="channel">Neetu Bisht</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=vYdgL-lM7PY','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/vYdgL-lM7PY/hqdefault.jpg" alt="Small act of kindness😊#motivation #emotional #shorts #viral #trending #ytshorts" loading="lazy">
-                    <span class="rank">#11</span>
-                </div>
-                <div class="info">
-                    <div class="title">Small act of kindness😊#motivation #emotional #shorts #viral #trending #ytshorts</div>
-                    <div class="channel">Anaya Eshaal Family</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=iS2EiSQd72s','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/iS2EiSQd72s/hqdefault.jpg" alt="amaira giri jhule se😂#shorts #trending #viral #thegeetagurjar #youtubeshorts" loading="lazy">
-                    <span class="rank">#12</span>
-                </div>
-                <div class="info">
-                    <div class="title">amaira giri jhule se😂#shorts #trending #viral #thegeetagurjar #youtubeshorts</div>
-                    <div class="channel">The geeta gurjar</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=mfW2QP3uN_k','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/mfW2QP3uN_k/hqdefault.jpg" alt="The.Xuyuanlianmaiguagua#shorts #trendingvideo #funny #trending #shorts #viralvideos, path,#01" loading="lazy">
-                    <span class="rank">#13</span>
-                </div>
-                <div class="info">
-                    <div class="title">The.Xuyuanlianmaiguagua#shorts #trendingvideo #funny #trending #shorts #viralvideos, path,#01</div>
-                    <div class="channel">Bunny Farm Girl🐰🎋</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=nkrGLPOi1RY','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/nkrGLPOi1RY/hqdefault.jpg" alt="My first day at job🤣🤣💓#shorts #funny #trending #@WokTokVibes#tiktok" loading="lazy">
-                    <span class="rank">#14</span>
-                </div>
-                <div class="info">
-                    <div class="title">My first day at job🤣🤣💓#shorts #funny #trending #@WokTokVibes#tiktok</div>
-                    <div class="channel">WokTok Vibes</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=7c3-Gei5j4w','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/7c3-Gei5j4w/hqdefault.jpg" alt="Chaand Baaliyan – Aditya A. | Trending Song | Official Video" loading="lazy">
-                    <span class="rank">#15</span>
-                </div>
-                <div class="info">
-                    <div class="title">Chaand Baaliyan – Aditya A. | Trending Song | Official Video</div>
-                    <div class="channel">Sony Music India</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=vEABpJINDq8','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/vEABpJINDq8/hqdefault.jpg" alt="This trend is funny 😂😭🫃🏻 #explore #edit #challenge #trending #funny #funnyshorts #shorts #ytshorts" loading="lazy">
-                    <span class="rank">#16</span>
-                </div>
-                <div class="info">
-                    <div class="title">This trend is funny 😂😭🫃🏻 #explore #edit #challenge #trending #funny #funnyshorts #shorts #ytshorts</div>
-                    <div class="channel">ringleader</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=X40_0uqYbio','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/X40_0uqYbio/hqdefault.jpg" alt="It's so scrary #trending #viral #funny #shorts" loading="lazy">
-                    <span class="rank">#17</span>
-                </div>
-                <div class="info">
-                    <div class="title">It's so scrary #trending #viral #funny #shorts</div>
-                    <div class="channel">H&T Official</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=RGE1NCewCXk','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/RGE1NCewCXk/hqdefault.jpg" alt="Best Earrings design 👌 #trending #viralvideo #shorts" loading="lazy">
-                    <span class="rank">#18</span>
-                </div>
-                <div class="info">
-                    <div class="title">Best Earrings design 👌 #trending #viralvideo #shorts</div>
-                    <div class="channel">FASHION AND TRENDS</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=tTScKOVvox0','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/tTScKOVvox0/hqdefault.jpg" alt="Schoolgirl shocks judges 🔥😱🥶 #trollface #bgt #fyp  #shorts #trending #edit" loading="lazy">
-                    <span class="rank">#19</span>
-                </div>
-                <div class="info">
-                    <div class="title">Schoolgirl shocks judges 🔥😱🥶 #trollface #bgt #fyp  #shorts #trending #edit</div>
-                    <div class="channel">Moccy Shorts</div>
-                </div>
-            </div>
-            <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=ZrXThw7Fu88','_blank')">
-                <div class="thumbnail">
-                    <img src="https://i.ytimg.com/vi/ZrXThw7Fu88/hqdefault.jpg" alt="EKK KA DOUBLE🤣#ytshorts #shorts #shortsfeed #youtubeshorts #comedy #funny #tmkoc #viral #trending" loading="lazy">
-                    <span class="rank">#20</span>
-                </div>
-                <div class="info">
-                    <div class="title">EKK KA DOUBLE🤣#ytshorts #shorts #shortsfeed #youtubeshorts #comedy #funny #tmkoc #viral #trending</div>
-                    <div class="channel">Chhote & Aandu</div>
-                </div>
-            </div></div></div>
-</div>
-<div class="footer">
-  <p>YouTube Trending Videos Tracker | Execution #34</p>
-  <p>Data fetched via YouTube Data API v3 | Auto-updated daily</p>
-</div>
-<script>
-function showTab(name,e){
-  document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(el=>el.classList.remove('active'));
-  document.getElementById(name).classList.add('active');
-  e.target.classList.add('active');
-}
-</script>
+    <div class="header">
+        <h1>📺 YouTube 熱門影片排行榜</h1>
+        <div class="info">
+            執行次數：#35 | 更新時間：2026-03-04T10:01:41.787773Z
+        </div>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-button active" onclick="switchTab('TW')">🇹🇼 台灣</button>
+        <button class="tab-button" onclick="switchTab('US')">🇺🇸 美國</button>
+    </div>
+    <div id="tab-TW" class="tab-content active">
+        <div class="no-data">❌ 暫無資料</div>
+    </div>
+    <div id="tab-US" class="tab-content ">
+        <div class="no-data">❌ 暫無資料</div>
+    </div>
+
+    <script>
+        function switchTab(region) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById('tab-' + region).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
 </body>
 </html>
