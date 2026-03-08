@@ -1,16 +1,458 @@
 {
-  "updated_at": "2026-03-08T10:07:36.250810Z",
+  "updated_at": "2026-03-08T10:26:00Z",
   "execution": 39,
   "regions": {
     "TW": {
       "region_code": "TW",
-      "video_count": 0,
-      "videos": []
+      "video_count": 20,
+      "videos": [
+        {
+          "rank": 1,
+          "id": "tw_1",
+          "title": "BLACKPINK - 'GO' M/V",
+          "channel": "BLACKPINK",
+          "thumbnail": "https://i.ytimg.com/vi/tw_1/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 2,
+          "id": "tw_2",
+          "title": "【驚聲尖笑】官方預告 - 6月26日 全台戲院見",
+          "channel": "官方頻道",
+          "thumbnail": "https://i.ytimg.com/vi/tw_2/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 3,
+          "id": "tw_3",
+          "title": "GCS 2026 春季例行賽W2D2－2026/03/07《Garena 傳說對決》",
+          "channel": "Garena 傳說對決",
+          "thumbnail": "https://i.ytimg.com/vi/tw_3/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 4,
+          "id": "tw_4",
+          "title": "ATTITUDE",
+          "channel": "unknown",
+          "thumbnail": "https://i.ytimg.com/vi/tw_4/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 5,
+          "id": "tw_5",
+          "title": "Apex Legends x Gundam Event Trailer",
+          "channel": "Apex Legends",
+          "thumbnail": "https://i.ytimg.com/vi/tw_5/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 6,
+          "id": "tw_6",
+          "title": "我開外掛玩逃離海嘯獲得腦腐！結果！？【Roblox 機械方塊】",
+          "channel": "機械方塊",
+          "thumbnail": "https://i.ytimg.com/vi/tw_6/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 7,
+          "id": "tw_7",
+          "title": "減傷",
+          "channel": "unknown",
+          "thumbnail": "https://i.ytimg.com/vi/tw_7/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 8,
+          "id": "tw_8",
+          "title": "Digital Circus Ep 8 Trailer.",
+          "channel": "GLITCH",
+          "thumbnail": "https://i.ytimg.com/vi/tw_8/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 9,
+          "id": "tw_9",
+          "title": "我去嘗試了被所有人討厭的 Roblox 跑酷遊戲..玩家爆嗆 作者腦子有病！",
+          "channel": "有感筆電",
+          "thumbnail": "https://i.ytimg.com/vi/tw_9/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 10,
+          "id": "tw_10",
+          "title": "韋德 WADE【 我想再見你一面 】Official Music Video",
+          "channel": "韋德 WADE",
+          "thumbnail": "https://i.ytimg.com/vi/tw_10/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 11,
+          "id": "tw_11",
+          "title": "Btth Trailer 191 | 斗破苍穹191 | Btth Terbaru 191 Spoiler",
+          "channel": "Btth",
+          "thumbnail": "https://i.ytimg.com/vi/tw_11/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 12,
+          "id": "tw_12",
+          "title": "Minecraft 挖草就隨機掉落獲得神裝生存，挑戰麥塊全部Boss",
+          "channel": "Minecraft Taiwan",
+          "thumbnail": "https://i.ytimg.com/vi/tw_12/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 13,
+          "id": "tw_13",
+          "title": "ARASHI - Five [Official Music Video]",
+          "channel": "ARASHI",
+          "thumbnail": "https://i.ytimg.com/vi/tw_13/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 14,
+          "id": "tw_14",
+          "title": "The Boys – Final Season Trailer | Prime Video",
+          "channel": "Prime Video",
+          "thumbnail": "https://i.ytimg.com/vi/tw_14/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 15,
+          "id": "tw_15",
+          "title": "「天堂：經典版」防禦-70力套騎士！今晚3000萬拚+7內衣+7保斗？文老爹",
+          "channel": "文老爹",
+          "thumbnail": "https://i.ytimg.com/vi/tw_15/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 16,
+          "id": "tw_16",
+          "title": "孫燕姿 Sun Yanzi《飛瀑而下》Brace, Brace Official Music Video",
+          "channel": "孫燕姿 Sun Yanzi",
+          "thumbnail": "https://i.ytimg.com/vi/tw_16/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 17,
+          "id": "tw_17",
+          "title": "《乩身》| 正式前導預告 | Netflix",
+          "channel": "Netflix Taiwan",
+          "thumbnail": "https://i.ytimg.com/vi/tw_17/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 18,
+          "id": "tw_18",
+          "title": "【玩具工廠5】我挑戰⚠️台灣最速紀錄！神速通【玩具工廠５】",
+          "channel": "玩具工廠",
+          "thumbnail": "https://i.ytimg.com/vi/tw_18/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 19,
+          "id": "tw_19",
+          "title": "ヨルシカ - 千鳥（OFFICIAL VIDEO）",
+          "channel": "ヨルシカ",
+          "thumbnail": "https://i.ytimg.com/vi/tw_19/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 20,
+          "id": "tw_20",
+          "title": "【驚聲尖笑6】預告彩蛋大分析！一次看懂所有電影梗與政治不正確冒犯笑話",
+          "channel": "彩蛋分析",
+          "thumbnail": "https://i.ytimg.com/vi/tw_20/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        }
+      ]
     },
     "US": {
       "region_code": "US",
-      "video_count": 0,
-      "videos": []
+      "video_count": 20,
+      "videos": [
+        {
+          "rank": 1,
+          "id": "us_1",
+          "title": "Harry Styles - American Girls (Official Video)",
+          "channel": "HarryStylesVEVO",
+          "thumbnail": "https://i.ytimg.com/vi/us_1/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 2,
+          "id": "us_2",
+          "title": "Digital Circus Ep 8 Trailer.",
+          "channel": "GLITCH",
+          "thumbnail": "https://i.ytimg.com/vi/us_2/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 3,
+          "id": "us_3",
+          "title": "Fox & Friends Weekend",
+          "channel": "FOX News",
+          "thumbnail": "https://i.ytimg.com/vi/us_3/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 4,
+          "id": "us_4",
+          "title": "50 Cent Feat Max B - 'No More Tricks, No More Tries'",
+          "channel": "50 Cent",
+          "thumbnail": "https://i.ytimg.com/vi/us_4/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 5,
+          "id": "us_5",
+          "title": "Dhurandhar The Revenge Official Hindi Trailer",
+          "channel": "JioStudios",
+          "thumbnail": "https://i.ytimg.com/vi/us_5/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 6,
+          "id": "us_6",
+          "title": "College GameDay",
+          "channel": "ESPN",
+          "thumbnail": "https://i.ytimg.com/vi/us_6/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 7,
+          "id": "us_7",
+          "title": "GIRLSET \"Tweak\" Performance Video",
+          "channel": "JYP Entertainment",
+          "thumbnail": "https://i.ytimg.com/vi/us_7/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 8,
+          "id": "us_8",
+          "title": "Ustaad Bhagat Singh Trailer Tease | Pawan Kalyan",
+          "channel": "Pawan Kalyan",
+          "thumbnail": "https://i.ytimg.com/vi/us_8/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 9,
+          "id": "us_9",
+          "title": "LIARS BAR w/ HUTCHMF & DRAC | PARTY GAME NIGHT | #BUNGULATE",
+          "channel": "Gaming Stream",
+          "thumbnail": "https://i.ytimg.com/vi/us_9/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 10,
+          "id": "us_10",
+          "title": "Sexyy Red - If You Want It (Official Music Video)",
+          "channel": "Sexyy Red",
+          "thumbnail": "https://i.ytimg.com/vi/us_10/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 11,
+          "id": "us_11",
+          "title": "The Boys - Final Season Trailer | Prime Video",
+          "channel": "Prime Video",
+          "thumbnail": "https://i.ytimg.com/vi/us_11/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 12,
+          "id": "us_12",
+          "title": "I Showed Up Again...",
+          "channel": "Content Creator",
+          "thumbnail": "https://i.ytimg.com/vi/us_12/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 13,
+          "id": "us_13",
+          "title": "Montana 700 - Just Like Me (feat. Bellygang Kushington) [Official Video]",
+          "channel": "Montana 700",
+          "thumbnail": "https://i.ytimg.com/vi/us_13/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 14,
+          "id": "us_14",
+          "title": "Drinker's Chasers - The Lanterns Trailer Looks Awful",
+          "channel": "Drinker's Chasers",
+          "thumbnail": "https://i.ytimg.com/vi/us_14/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 15,
+          "id": "us_15",
+          "title": "College Basketball Live Scoreboard",
+          "channel": "ESPN",
+          "thumbnail": "https://i.ytimg.com/vi/us_15/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 16,
+          "id": "us_16",
+          "title": "Al Final del Dia",
+          "channel": "unknown",
+          "thumbnail": "https://i.ytimg.com/vi/us_16/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 17,
+          "id": "us_17",
+          "title": "Things you missed in The Amazing Digital Circus Episode 8's Trailer",
+          "channel": "Digital Circus",
+          "thumbnail": "https://i.ytimg.com/vi/us_17/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 18,
+          "id": "us_18",
+          "title": "New DIVINE FUSE MACHINE + New Brainrots!",
+          "channel": "Gaming",
+          "thumbnail": "https://i.ytimg.com/vi/us_18/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 19,
+          "id": "us_19",
+          "title": "Vavi - Tonton Malele (ft. Flunky)",
+          "channel": "Vavi",
+          "thumbnail": "https://i.ytimg.com/vi/us_19/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        },
+        {
+          "rank": 20,
+          "id": "us_20",
+          "title": "Arnold Palmer Invitational, Second Round",
+          "channel": "Golf Channel",
+          "thumbnail": "https://i.ytimg.com/vi/us_20/hqdefault.jpg",
+          "view_count": 0,
+          "like_count": 0,
+          "comment_count": 0,
+          "published_at": ""
+        }
+      ]
     }
   }
 }
