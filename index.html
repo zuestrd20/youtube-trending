@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Trending Videos</title>
+    <title>YouTube Trending Videos - Execution #44</title>
     <style>
         * {
             margin: 0;
@@ -12,82 +12,92 @@
         }
 
         body {
-            font-family: 'Roboto', Arial, sans-serif;
+            font-family: 'Roboto', 'Arial', sans-serif;
             background-color: #0f0f0f;
             color: #f1f1f1;
-            line-height: 1.6;
+            padding: 20px;
         }
 
-        .header {
-            background-color: #212121;
-            padding: 20px;
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
             text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
             border-bottom: 1px solid #3f3f3f;
         }
 
-        .header h1 {
-            font-size: 24px;
-            margin-bottom: 8px;
+        h1 {
+            font-size: 28px;
+            font-weight: 400;
+            margin-bottom: 10px;
+            color: #ffffff;
         }
 
-        .header .meta {
-            color: #aaa;
+        .metadata {
             font-size: 14px;
+            color: #aaaaaa;
+            margin-top: 8px;
+        }
+
+        .note {
+            background-color: #272727;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 13px;
+            color: #aaaaaa;
+            border-left: 3px solid #065fd4;
         }
 
         .tabs {
             display: flex;
-            justify-content: center;
             gap: 10px;
-            padding: 20px;
-            background-color: #0f0f0f;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #3f3f3f;
         }
 
-        .tab-button {
-            background-color: #272727;
-            color: #f1f1f1;
-            border: none;
+        .tab {
             padding: 12px 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #aaaaaa;
             font-size: 14px;
             font-weight: 500;
-            cursor: pointer;
-            border-radius: 8px;
+            border-bottom: 2px solid transparent;
             transition: all 0.2s;
         }
 
-        .tab-button:hover {
-            background-color: #3f3f3f;
+        .tab:hover {
+            color: #f1f1f1;
         }
 
-        .tab-button.active {
-            background-color: #065fd4;
+        .tab.active {
+            color: #ffffff;
+            border-bottom-color: #ffffff;
         }
 
         .tab-content {
             display: none;
-            padding: 20px;
         }
 
         .tab-content.active {
             display: block;
         }
 
-        .region-title {
-            font-size: 20px;
-            margin-bottom: 20px;
-            padding-left: 10px;
-        }
-
-        .video-grid {
+        .videos-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 20px;
-            max-width: 1800px;
-            margin: 0 auto;
+            margin-top: 20px;
         }
 
         .video-card {
-            background-color: #1a1a1a;
+            background-color: #212121;
             border-radius: 12px;
             overflow: hidden;
             transition: transform 0.2s, box-shadow 0.2s;
@@ -96,17 +106,23 @@
 
         .video-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        .video-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
 
         .thumbnail-container {
             position: relative;
             width: 100%;
             padding-top: 56.25%;
-            background-color: #000;
+            background-color: #181818;
         }
 
-        .thumbnail-container img {
+        .thumbnail {
             position: absolute;
             top: 0;
             left: 0;
@@ -120,11 +136,11 @@
             top: 8px;
             left: 8px;
             background-color: rgba(0, 0, 0, 0.8);
-            color: #fff;
+            color: #ffffff;
             padding: 4px 10px;
             border-radius: 4px;
-            font-weight: bold;
             font-size: 14px;
+            font-weight: 700;
         }
 
         .video-info {
@@ -134,8 +150,9 @@
         .video-title {
             font-size: 14px;
             font-weight: 500;
-            margin-bottom: 8px;
             line-height: 1.4;
+            margin-bottom: 8px;
+            color: #f1f1f1;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -143,572 +160,592 @@
         }
 
         .video-channel {
-            color: #aaa;
             font-size: 12px;
+            color: #aaaaaa;
             margin-bottom: 4px;
         }
 
         .video-date {
-            color: #888;
-            font-size: 11px;
+            font-size: 12px;
+            color: #aaaaaa;
         }
 
         @media (max-width: 768px) {
-            .video-grid {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-                gap: 15px;
+            .videos-grid {
+                grid-template-columns: 1fr;
             }
 
-            .header h1 {
-                font-size: 20px;
+            h1 {
+                font-size: 24px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>YouTube Trending Videos</h1>
-        <div class="meta">
-            Execution #43 | Updated: 2026-03-12T10:04:00 UTC
+    <div class="container">
+        <header>
+            <h1>YouTube Trending Videos - Execution #44</h1>
+            <div class="metadata">
+                Updated: 2026-03-13 10:06:00 UTC | Method: YouTube Data API
+            </div>
+        </header>
+
+        <div class="note">
+            <strong>Note:</strong> API returns popular videos by view count (not real-time trending)
         </div>
-    </div>
 
-    <div class="tabs">
-        <button class="tab-button active" onclick="showTab('tw')">Taiwan TW (20 videos)</button>
-        <button class="tab-button" onclick="showTab('us')">United States US (19 videos)</button>
-    </div>
-
-    <div id="tw" class="tab-content active">
-        <h2 class="region-title">Taiwan (TW) - Top 20 Trending</h2>
-        <div class="video-grid">
-            <a href="https://www.youtube.com/watch?v=kJQP7kiw5Fk" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/kJQP7kiw5Fk/hqdefault.jpg" alt="Luis Fonsi - Despacito ft. Daddy Yankee" loading="lazy">
-                        <div class="rank-badge">#1</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Luis Fonsi - Despacito ft. Daddy Yankee</div>
-                        <div class="video-channel">LuisFonsiVEVO</div>
-                        <div class="video-date">Published: 2017-01-13</div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=09R8_2nJtjg" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/09R8_2nJtjg/hqdefault.jpg" alt="Maroon 5 - Sugar (Official Music Video)" loading="lazy">
-                        <div class="rank-badge">#2</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Maroon 5 - Sugar (Official Music Video)</div>
-                        <div class="video-channel">Maroon5VEVO</div>
-                        <div class="video-date">Published: 2015-01-14</div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=k2qgadSvNyU" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/k2qgadSvNyU/hqdefault.jpg" alt="Dua Lipa - New Rules (Official Music Video)" loading="lazy">
-                        <div class="rank-badge">#3</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Dua Lipa - New Rules (Official Music Video)</div>
-                        <div class="video-channel">Dua Lipa</div>
-                        <div class="video-date">Published: 2017-07-07</div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=pXRviuL6vMY" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/pXRviuL6vMY/hqdefault.jpg" alt="twenty one pilots: Stressed Out [OFFICIAL VIDEO]" loading="lazy">
-                        <div class="rank-badge">#4</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">twenty one pilots: Stressed Out [OFFICIAL VIDEO]</div>
-                        <div class="video-channel">Fueled By Ramen</div>
-                        <div class="video-date">Published: 2015-04-28</div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=fLexgOxsZu0" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/fLexgOxsZu0/hqdefault.jpg" alt="Bruno Mars - The Lazy Song (Official Music Video)" loading="lazy">
-                        <div class="rank-badge">#5</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Bruno Mars - The Lazy Song (Official Music Video)</div>
-                        <div class="video-channel">Bruno Mars</div>
-                        <div class="video-date">Published: 2011-04-15</div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=34Na4j8AVgA" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/34Na4j8AVgA/hqdefault.jpg" alt="The Weeknd - Starboy ft. Daft Punk (Official Video) ft. Daft Punk" loading="lazy">
-                        <div class="rank-badge">#6</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">The Weeknd - Starboy ft. Daft Punk (Official Video) ft. Daft Punk</div>
-                        <div class="video-channel">TheWeekndVEVO</div>
-                        <div class="video-date">Published: 2016-09-28</div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=YykjpeuMNEk" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/YykjpeuMNEk/hqdefault.jpg" alt="Coldplay - Hymn For The Weekend (Official Video)" loading="lazy">
-                        <div class="rank-badge">#7</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Coldplay - Hymn For The Weekend (Official Video)</div>
-                        <div class="video-channel">Coldplay</div>
-                        <div class="video-date">Published: 2016-01-29</div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=HJkAI-Dhq50" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/HJkAI-Dhq50/hqdefault.jpg" alt="Yes Yes Bedtime Song | @CoComelon Nursery Rhymes & Kids Songs" loading="lazy">
-                        <div class="rank-badge">#8</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Yes Yes Bedtime Song | @CoComelon Nursery Rhymes & Kids Songs</div>
-                        <div class="video-channel">Cocomelon - Nursery Rhymes</div>
-                        <div class="video-date">Published: 2018-09-18</div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=nfs8NYg7yQM" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/nfs8NYg7yQM/hqdefault.jpg" alt="Charlie Puth - Attention [Official Video]" loading="lazy">
-                        <div class="rank-badge">#9</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Charlie Puth - Attention [Official Video]</div>
-                        <div class="video-channel">Charlie Puth</div>
-                        <div class="video-date">Published: 2017-04-24</div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=kQS6B6x7ubw" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/kQS6B6x7ubw/hqdefault.jpg" alt="MOWGLI HAI JUNGLE KA RAJA ! | जंगल बुक नया एपिसोड | SEASON 3 = Jungle Book" loading="lazy">
-                        <div class="rank-badge">#10</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">MOWGLI HAI JUNGLE KA RAJA ! | जंगल बुक नया एपिसोड | SEASON 3 = Jungle Book</div>
-                        <div class="video-channel">PowerKids TV</div>
-                        <div class="video-date">Published: 2022-03-05</div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=YlvcFJOE-OE" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/YlvcFJOE-OE/hqdefault.jpg" alt="Giving iPhones Instead Of Candy on Halloween" loading="lazy">
-                        <div class="rank-badge">#11</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Giving iPhones Instead Of Candy on Halloween</div>
-                        <div class="video-channel">MrBeast</div>
-                        <div class="video-date">Published: 2022-11-02</div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=kPa7bsKwL-c" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/kPa7bsKwL-c/hqdefault.jpg" alt="Lady Gaga, Bruno Mars - Die With A Smile (Official Music Video)" loading="lazy">
-                        <div class="rank-badge">#12</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Lady Gaga, Bruno Mars - Die With A Smile (Official Music Video)</div>
-                        <div class="video-channel">LadyGagaVEVO</div>
-                        <div class="video-date">Published: 2024-08-16</div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=CnSylwYOu1E" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/CnSylwYOu1E/hqdefault.jpg" alt="Ellie's Ice Cream Adventure: A Lesson in Line Etiquette! #shorts" loading="lazy">
-                        <div class="rank-badge">#13</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Ellie's Ice Cream Adventure: A Lesson in Line Etiquette! #shorts</div>
-                        <div class="video-channel">Toys and Colors</div>
-                        <div class="video-date">Published: 2023-05-05</div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=A_zx9udgRbU" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/A_zx9udgRbU/hqdefault.jpg" alt="Wednesday Addams DIY Barbie Clothes Tutorial #barbiediy #barbieclothes #barbie #wednesdayaddams" loading="lazy">
-                        <div class="rank-badge">#14</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Wednesday Addams DIY Barbie Clothes Tutorial #barbiediy #barbieclothes #barbie #wednesdayaddams</div>
-                        <div class="video-channel">Fun Kids House</div>
-                        <div class="video-date">Published: 2023-03-11</div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=5wJPtYDWEeU" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/5wJPtYDWEeU/hqdefault.jpg" alt="Kreasi mainan PARUH BEBEK dari origami" loading="lazy">
-                        <div class="rank-badge">#15</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Kreasi mainan PARUH BEBEK dari origami</div>
-                        <div class="video-channel">Kreasi Rupa Rupi</div>
-                        <div class="video-date">Published: 2023-06-11</div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=VTW1hqdjxU8" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/VTW1hqdjxU8/hqdefault.jpg" alt="ABC Song! #shorts #abcd #abd #abcsong #abcdsong @graciescorner" loading="lazy">
-                        <div class="rank-badge">#16</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">ABC Song! #shorts #abcd #abd #abcsong #abcdsong @graciescorner</div>
-                        <div class="video-channel">Mr Rice Guy Art</div>
-                        <div class="video-date">Published: 2023-06-07</div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=kTJczUoc26U" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/kTJczUoc26U/hqdefault.jpg" alt="The Kid LAROI, Justin Bieber - STAY (Official Video)" loading="lazy">
-                        <div class="rank-badge">#17</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">The Kid LAROI, Justin Bieber - STAY (Official Video)</div>
-                        <div class="video-channel">TheKidLAROIVEVO</div>
-                        <div class="video-date">Published: 2021-07-09</div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=gGIpbrDe-fU" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/gGIpbrDe-fU/hqdefault.jpg" alt="아기 상어들이 다 같이 태어난 날! #shortsㅣ꼬꼬스토이" loading="lazy">
-                        <div class="rank-badge">#18</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">아기 상어들이 다 같이 태어난 날! #shortsㅣ꼬꼬스토이</div>
-                        <div class="video-channel">꼬꼬스토이 한국어</div>
-                        <div class="video-date">Published: 2023-03-23</div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=TbHQwIV_Nas" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/TbHQwIV_Nas/hqdefault.jpg" alt="YouTube: Hit Pause with a power up break" loading="lazy">
-                        <div class="rank-badge">#19</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">YouTube: Hit Pause with a power up break</div>
-                        <div class="video-channel">Hit Pause</div>
-                        <div class="video-date">Published: 2023-02-07</div>
-                    </div>
-                </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=uPzGruvRmKk" target="_blank" style="text-decoration: none; color: inherit;">
-                <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/uPzGruvRmKk/hqdefault.jpg" alt="Doing tricks on a balance bike?!" loading="lazy">
-                        <div class="rank-badge">#20</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Doing tricks on a balance bike?!</div>
-                        <div class="video-channel">Harley Beckett</div>
-                        <div class="video-date">Published: 2023-06-16</div>
-                    </div>
-                </div>
-            </a>
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('TW')">Taiwan (TW)</button>
+            <button class="tab" onclick="showTab('US')">United States (US)</button>
         </div>
-    </div>
 
-    <div id="us" class="tab-content">
-        <h2 class="region-title">United States (US) - Top 19 Trending</h2>
-        <div class="video-grid">
-            <a href="https://www.youtube.com/watch?v=Od_vZe_8ulk" target="_blank" style="text-decoration: none; color: inherit;">
+        <div id="TW" class="tab-content active">
+            <div class="videos-grid">
                 <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/Od_vZe_8ulk/hqdefault.jpg" alt="Большой против Маленького пранк #shorts от Andi like" loading="lazy">
-                        <div class="rank-badge">#1</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Большой против Маленького пранк #shorts от Andi like</div>
-                        <div class="video-channel">Andi like</div>
-                        <div class="video-date">Published: 2022-04-04</div>
-                    </div>
+                    <a href="https://www.youtube.com/watch?v=kJQP7kiw5Fk" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/kJQP7kiw5Fk/hqdefault.jpg" alt="Luis Fonsi - Despacito ft. Daddy Yankee" loading="lazy">
+                            <div class="rank-badge">#1</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Luis Fonsi - Despacito ft. Daddy Yankee</div>
+                            <div class="video-channel">LuisFonsiVEVO</div>
+                            <div class="video-date">Published: 2017-01-13</div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=kQS6B6x7ubw" target="_blank" style="text-decoration: none; color: inherit;">
                 <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/kQS6B6x7ubw/hqdefault.jpg" alt="MOWGLI HAI JUNGLE KA RAJA ! | जंगल बुक नया एपिसोड | SEASON 3 = Jungle Book" loading="lazy">
-                        <div class="rank-badge">#2</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">MOWGLI HAI JUNGLE KA RAJA ! | जंगल बुक नया एपिसोड | SEASON 3 = Jungle Book</div>
-                        <div class="video-channel">PowerKids TV</div>
-                        <div class="video-date">Published: 2022-03-05</div>
-                    </div>
+                    <a href="https://www.youtube.com/watch?v=09R8_2nJtjg" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/09R8_2nJtjg/hqdefault.jpg" alt="Maroon 5 - Sugar (Official Music Video)" loading="lazy">
+                            <div class="rank-badge">#2</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Maroon 5 - Sugar (Official Music Video)</div>
+                            <div class="video-channel">Maroon5VEVO</div>
+                            <div class="video-date">Published: 2015-01-14</div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=YlvcFJOE-OE" target="_blank" style="text-decoration: none; color: inherit;">
                 <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/YlvcFJOE-OE/hqdefault.jpg" alt="Giving iPhones Instead Of Candy on Halloween" loading="lazy">
-                        <div class="rank-badge">#3</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Giving iPhones Instead Of Candy on Halloween</div>
-                        <div class="video-channel">MrBeast</div>
-                        <div class="video-date">Published: 2022-11-02</div>
-                    </div>
+                    <a href="https://www.youtube.com/watch?v=pXRviuL6vMY" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/pXRviuL6vMY/hqdefault.jpg" alt="twenty one pilots: Stressed Out [OFFICIAL VIDEO]" loading="lazy">
+                            <div class="rank-badge">#3</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">twenty one pilots: Stressed Out [OFFICIAL VIDEO]</div>
+                            <div class="video-channel">Fueled By Ramen</div>
+                            <div class="video-date">Published: 2015-04-28</div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=CnSylwYOu1E" target="_blank" style="text-decoration: none; color: inherit;">
                 <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/CnSylwYOu1E/hqdefault.jpg" alt="Ellie's Ice Cream Adventure: A Lesson in Line Etiquette! #shorts" loading="lazy">
-                        <div class="rank-badge">#4</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Ellie's Ice Cream Adventure: A Lesson in Line Etiquette! #shorts</div>
-                        <div class="video-channel">Toys and Colors</div>
-                        <div class="video-date">Published: 2023-05-05</div>
-                    </div>
+                    <a href="https://www.youtube.com/watch?v=fLexgOxsZu0" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/fLexgOxsZu0/hqdefault.jpg" alt="Bruno Mars - The Lazy Song (Official Music Video)" loading="lazy">
+                            <div class="rank-badge">#4</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Bruno Mars - The Lazy Song (Official Music Video)</div>
+                            <div class="video-channel">Bruno Mars</div>
+                            <div class="video-date">Published: 2011-04-15</div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=A_zx9udgRbU" target="_blank" style="text-decoration: none; color: inherit;">
                 <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/A_zx9udgRbU/hqdefault.jpg" alt="Wednesday Addams DIY Barbie Clothes Tutorial #barbiediy #barbieclothes #barbie #wednesdayaddams" loading="lazy">
-                        <div class="rank-badge">#5</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Wednesday Addams DIY Barbie Clothes Tutorial #barbiediy #barbieclothes #barbie #wednesdayaddams</div>
-                        <div class="video-channel">Fun Kids House</div>
-                        <div class="video-date">Published: 2023-03-11</div>
-                    </div>
+                    <a href="https://www.youtube.com/watch?v=7wtfhZwyrcc" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/7wtfhZwyrcc/hqdefault.jpg" alt="Imagine Dragons - Believer (Official Music Video)" loading="lazy">
+                            <div class="rank-badge">#5</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Imagine Dragons - Believer (Official Music Video)</div>
+                            <div class="video-channel">ImagineDragonsVEVO</div>
+                            <div class="video-date">Published: 2017-03-07</div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=5wJPtYDWEeU" target="_blank" style="text-decoration: none; color: inherit;">
                 <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/5wJPtYDWEeU/hqdefault.jpg" alt="Kreasi mainan PARUH BEBEK dari origami" loading="lazy">
-                        <div class="rank-badge">#6</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Kreasi mainan PARUH BEBEK dari origami</div>
-                        <div class="video-channel">Kreasi Rupa Rupi</div>
-                        <div class="video-date">Published: 2023-06-11</div>
-                    </div>
+                    <a href="https://www.youtube.com/watch?v=2vjPBrBU-TM" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/2vjPBrBU-TM/hqdefault.jpg" alt="Sia - Chandelier (Official Video)" loading="lazy">
+                            <div class="rank-badge">#6</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Sia - Chandelier (Official Video)</div>
+                            <div class="video-channel">SiaVEVO</div>
+                            <div class="video-date">Published: 2014-05-06</div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=VTW1hqdjxU8" target="_blank" style="text-decoration: none; color: inherit;">
                 <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/VTW1hqdjxU8/hqdefault.jpg" alt="ABC Song! #shorts #abcd #abd #abcsong #abcdsong @graciescorner" loading="lazy">
-                        <div class="rank-badge">#7</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">ABC Song! #shorts #abcd #abd #abcsong #abcdsong @graciescorner</div>
-                        <div class="video-channel">Mr Rice Guy Art</div>
-                        <div class="video-date">Published: 2023-06-07</div>
-                    </div>
+                    <a href="https://www.youtube.com/watch?v=ApXoWvfEYVU" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/ApXoWvfEYVU/hqdefault.jpg" alt="Post Malone, Swae Lee - Sunflower (Spider-Man: Into the Spider-Verse)" loading="lazy">
+                            <div class="rank-badge">#7</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Post Malone, Swae Lee - Sunflower (Spider-Man: Into the Spider-Verse)</div>
+                            <div class="video-channel">PostMaloneVEVO</div>
+                            <div class="video-date">Published: 2018-10-18</div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=gGIpbrDe-fU" target="_blank" style="text-decoration: none; color: inherit;">
                 <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/gGIpbrDe-fU/hqdefault.jpg" alt="아기 상어들이 다 같이 태어난 날! #shortsㅣ꼬꼬스토이" loading="lazy">
-                        <div class="rank-badge">#8</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">아기 상어들이 다 같이 태어난 날! #shortsㅣ꼬꼬스토이</div>
-                        <div class="video-channel">꼬꼬스토이 한국어</div>
-                        <div class="video-date">Published: 2023-03-23</div>
-                    </div>
+                    <a href="https://www.youtube.com/watch?v=HJkAI-Dhq50" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/HJkAI-Dhq50/hqdefault.jpg" alt="Yes Yes Bedtime Song | @CoComelon Nursery Rhymes & Kids Songs" loading="lazy">
+                            <div class="rank-badge">#8</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Yes Yes Bedtime Song | @CoComelon Nursery Rhymes & Kids Songs</div>
+                            <div class="video-channel">Cocomelon - Nursery Rhymes</div>
+                            <div class="video-date">Published: 2018-09-18</div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=TbHQwIV_Nas" target="_blank" style="text-decoration: none; color: inherit;">
                 <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/TbHQwIV_Nas/hqdefault.jpg" alt="YouTube: Hit Pause with a power up break" loading="lazy">
-                        <div class="rank-badge">#9</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">YouTube: Hit Pause with a power up break</div>
-                        <div class="video-channel">Hit Pause</div>
-                        <div class="video-date">Published: 2023-02-07</div>
-                    </div>
+                    <a href="https://www.youtube.com/watch?v=kQS6B6x7ubw" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/kQS6B6x7ubw/hqdefault.jpg" alt="MOWGLI HAI JUNGLE KA RAJA ! | Jungle Book Season 3" loading="lazy">
+                            <div class="rank-badge">#9</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">MOWGLI HAI JUNGLE KA RAJA ! | Jungle Book Season 3</div>
+                            <div class="video-channel">PowerKids TV</div>
+                            <div class="video-date">Published: 2022-03-05</div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=tyiSZTP-QQs" target="_blank" style="text-decoration: none; color: inherit;">
                 <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/tyiSZTP-QQs/hqdefault.jpg" alt="По полям по полям Синий трактор едет к нам shorts" loading="lazy">
-                        <div class="rank-badge">#10</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">По полям по полям Синий трактор едет к нам shorts</div>
-                        <div class="video-channel">СИНИЙ ТРАКТОР - Детские песенки и мультики</div>
-                        <div class="video-date">Published: 2022-05-08</div>
-                    </div>
+                    <a href="https://www.youtube.com/watch?v=YlvcFJOE-OE" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/YlvcFJOE-OE/hqdefault.jpg" alt="Giving iPhones Instead Of Candy on Halloween" loading="lazy">
+                            <div class="rank-badge">#10</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Giving iPhones Instead Of Candy on Halloween</div>
+                            <div class="video-channel">MrBeast</div>
+                            <div class="video-date">Published: 2022-11-02</div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=uPzGruvRmKk" target="_blank" style="text-decoration: none; color: inherit;">
                 <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/uPzGruvRmKk/hqdefault.jpg" alt="Doing tricks on a balance bike?!" loading="lazy">
-                        <div class="rank-badge">#11</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Doing tricks on a balance bike?!</div>
-                        <div class="video-channel">Harley Beckett</div>
-                        <div class="video-date">Published: 2023-06-16</div>
-                    </div>
+                    <a href="https://www.youtube.com/watch?v=kPa7bsKwL-c" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/kPa7bsKwL-c/hqdefault.jpg" alt="Lady Gaga, Bruno Mars - Die With A Smile (Official Music Video)" loading="lazy">
+                            <div class="rank-badge">#11</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Lady Gaga, Bruno Mars - Die With A Smile (Official Music Video)</div>
+                            <div class="video-channel">LadyGagaVEVO</div>
+                            <div class="video-date">Published: 2024-08-16</div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=Sux8opG80Lo" target="_blank" style="text-decoration: none; color: inherit;">
                 <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/Sux8opG80Lo/hqdefault.jpg" alt="YouTube: Hit Pause with a musical dance break" loading="lazy">
-                        <div class="rank-badge">#12</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">YouTube: Hit Pause with a musical dance break</div>
-                        <div class="video-channel">Hit Pause</div>
-                        <div class="video-date">Published: 2023-02-07</div>
-                    </div>
+                    <a href="https://www.youtube.com/watch?v=CnSylwYOu1E" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/CnSylwYOu1E/hqdefault.jpg" alt="Ellie's Ice Cream Adventure: A Lesson in Line Etiquette!" loading="lazy">
+                            <div class="rank-badge">#12</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Ellie's Ice Cream Adventure: A Lesson in Line Etiquette!</div>
+                            <div class="video-channel">Toys and Colors</div>
+                            <div class="video-date">Published: 2023-05-05</div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=lNSSkP2WtcY" target="_blank" style="text-decoration: none; color: inherit;">
                 <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/lNSSkP2WtcY/hqdefault.jpg" alt="tebak gambar buah VidsPlus 48 #shorts #fruitcutting #buah #tebakgambar" loading="lazy">
-                        <div class="rank-badge">#13</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">tebak gambar buah VidsPlus 48 #shorts #fruitcutting #buah #tebakgambar</div>
-                        <div class="video-channel">Marwka</div>
-                        <div class="video-date">Published: 2023-03-11</div>
-                    </div>
+                    <a href="https://www.youtube.com/watch?v=qN4ooNx77u0" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/qN4ooNx77u0/hqdefault.jpg" alt="Harry Styles - Sign of the Times (Official Video)" loading="lazy">
+                            <div class="rank-badge">#13</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Harry Styles - Sign of the Times (Official Video)</div>
+                            <div class="video-channel">HarryStylesVEVO</div>
+                            <div class="video-date">Published: 2017-05-08</div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=egK37yP_bAk" target="_blank" style="text-decoration: none; color: inherit;">
                 <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/egK37yP_bAk/hqdefault.jpg" alt="Sharing Snacks! Mighty Little Bheem | Netflix Jr #shorts" loading="lazy">
-                        <div class="rank-badge">#14</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Sharing Snacks! Mighty Little Bheem | Netflix Jr #shorts</div>
-                        <div class="video-channel">Netflix Jr.</div>
-                        <div class="video-date">Published: 2023-01-19</div>
-                    </div>
+                    <a href="https://www.youtube.com/watch?v=dT2owtxkU8k" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/dT2owtxkU8k/hqdefault.jpg" alt="Shawn Mendes - There's Nothing Holdin' Me Back (Official Music Video)" loading="lazy">
+                            <div class="rank-badge">#14</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Shawn Mendes - There's Nothing Holdin' Me Back (Official Music Video)</div>
+                            <div class="video-channel">ShawnMendesVEVO</div>
+                            <div class="video-date">Published: 2017-06-21</div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=8kggT2ej-lo" target="_blank" style="text-decoration: none; color: inherit;">
                 <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/8kggT2ej-lo/hqdefault.jpg" alt="Would You Pet a Cheetah in Africa?" loading="lazy">
-                        <div class="rank-badge">#15</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Would You Pet a Cheetah in Africa?</div>
-                        <div class="video-channel">MrBeast</div>
-                        <div class="video-date">Published: 2023-05-01</div>
-                    </div>
+                    <a href="https://www.youtube.com/watch?v=A_zx9udgRbU" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/A_zx9udgRbU/hqdefault.jpg" alt="Wednesday Addams DIY Barbie Clothes Tutorial" loading="lazy">
+                            <div class="rank-badge">#15</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Wednesday Addams DIY Barbie Clothes Tutorial</div>
+                            <div class="video-channel">Fun Kids House</div>
+                            <div class="video-date">Published: 2023-03-11</div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=Lo7sUWUTHN8" target="_blank" style="text-decoration: none; color: inherit;">
                 <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/Lo7sUWUTHN8/hqdefault.jpg" alt="YouTube: Hit Pause with a face yoga break" loading="lazy">
-                        <div class="rank-badge">#16</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">YouTube: Hit Pause with a face yoga break</div>
-                        <div class="video-channel">Hit Pause</div>
-                        <div class="video-date">Published: 2023-02-07</div>
-                    </div>
+                    <a href="https://www.youtube.com/watch?v=5wJPtYDWEeU" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/5wJPtYDWEeU/hqdefault.jpg" alt="Kreasi mainan PARUH BEBEK dari origami" loading="lazy">
+                            <div class="rank-badge">#16</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Kreasi mainan PARUH BEBEK dari origami</div>
+                            <div class="video-channel">Kreasi Rupa Rupi</div>
+                            <div class="video-date">Published: 2023-06-11</div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=plJUTZtT86Y" target="_blank" style="text-decoration: none; color: inherit;">
                 <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/plJUTZtT86Y/hqdefault.jpg" alt="Assembling toys, Spider-Man fighting #shorts" loading="lazy">
-                        <div class="rank-badge">#17</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Assembling toys, Spider-Man fighting #shorts</div>
-                        <div class="video-channel">9x Toys</div>
-                        <div class="video-date">Published: 2023-01-23</div>
-                    </div>
+                    <a href="https://www.youtube.com/watch?v=ShZ978fBl6Y" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/ShZ978fBl6Y/hqdefault.jpg" alt="Calum Scott - You Are The Reason (Official Video)" loading="lazy">
+                            <div class="rank-badge">#17</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Calum Scott - You Are The Reason (Official Video)</div>
+                            <div class="video-channel">CalumScottVEVO</div>
+                            <div class="video-date">Published: 2018-01-05</div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=BZkDft_-blY" target="_blank" style="text-decoration: none; color: inherit;">
                 <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/BZkDft_-blY/hqdefault.jpg" alt="Man Vs Cartoon Characters (animation meme) #boyanddragon #shorts" loading="lazy">
-                        <div class="rank-badge">#18</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Man Vs Cartoon Characters (animation meme) #boyanddragon #shorts</div>
-                        <div class="video-channel">Boy & Dragon - WildBrain</div>
-                        <div class="video-date">Published: 2023-06-04</div>
-                    </div>
+                    <a href="https://www.youtube.com/watch?v=uohfVBaHkXs" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/uohfVBaHkXs/hqdefault.jpg" alt="He turned out to be an angel - LeoNata family" loading="lazy">
+                            <div class="rank-badge">#18</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">He turned out to be an angel - LeoNata family</div>
+                            <div class="video-channel">LeoNata Family</div>
+                            <div class="video-date">Published: 2022-06-26</div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-            <a href="https://www.youtube.com/watch?v=FD-0KG-h2-c" target="_blank" style="text-decoration: none; color: inherit;">
                 <div class="video-card">
-                    <div class="thumbnail-container">
-                        <img src="https://i.ytimg.com/vi/FD-0KG-h2-c/hqdefault.jpg" alt="Gordon Ramsay Tries Most Expensive Chocolate Bar!" loading="lazy">
-                        <div class="rank-badge">#19</div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Gordon Ramsay Tries Most Expensive Chocolate Bar!</div>
-                        <div class="video-channel">MrBeast</div>
-                        <div class="video-date">Published: 2022-11-19</div>
-                    </div>
+                    <a href="https://www.youtube.com/watch?v=syFZfO_wfMQ" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/syFZfO_wfMQ/hqdefault.jpg" alt="One Direction - Night Changes" loading="lazy">
+                            <div class="rank-badge">#19</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">One Direction - Night Changes</div>
+                            <div class="video-channel">OneDirectionVEVO</div>
+                            <div class="video-date">Published: 2014-11-21</div>
+                        </div>
+                    </a>
                 </div>
-            </a>
+                <div class="video-card">
+                    <a href="https://www.youtube.com/watch?v=kTJczUoc26U" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/kTJczUoc26U/hqdefault.jpg" alt="The Kid LAROI, Justin Bieber - STAY (Official Video)" loading="lazy">
+                            <div class="rank-badge">#20</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">The Kid LAROI, Justin Bieber - STAY (Official Video)</div>
+                            <div class="video-channel">TheKidLAROIVEVO</div>
+                            <div class="video-date">Published: 2021-07-09</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="US" class="tab-content">
+            <div class="videos-grid">
+                <div class="video-card">
+                    <a href="https://www.youtube.com/watch?v=Od_vZe_8ulk" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/Od_vZe_8ulk/hqdefault.jpg" alt="Big vs Small prank - Andi like" loading="lazy">
+                            <div class="rank-badge">#1</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Big vs Small prank - Andi like</div>
+                            <div class="video-channel">Andi like</div>
+                            <div class="video-date">Published: 2022-04-04</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="video-card">
+                    <a href="https://www.youtube.com/watch?v=kQS6B6x7ubw" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/kQS6B6x7ubw/hqdefault.jpg" alt="MOWGLI HAI JUNGLE KA RAJA ! | Jungle Book Season 3" loading="lazy">
+                            <div class="rank-badge">#2</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">MOWGLI HAI JUNGLE KA RAJA ! | Jungle Book Season 3</div>
+                            <div class="video-channel">PowerKids TV</div>
+                            <div class="video-date">Published: 2022-03-05</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="video-card">
+                    <a href="https://www.youtube.com/watch?v=YlvcFJOE-OE" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/YlvcFJOE-OE/hqdefault.jpg" alt="Giving iPhones Instead Of Candy on Halloween" loading="lazy">
+                            <div class="rank-badge">#3</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Giving iPhones Instead Of Candy on Halloween</div>
+                            <div class="video-channel">MrBeast</div>
+                            <div class="video-date">Published: 2022-11-02</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="video-card">
+                    <a href="https://www.youtube.com/watch?v=CnSylwYOu1E" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/CnSylwYOu1E/hqdefault.jpg" alt="Ellie's Ice Cream Adventure: A Lesson in Line Etiquette!" loading="lazy">
+                            <div class="rank-badge">#4</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Ellie's Ice Cream Adventure: A Lesson in Line Etiquette!</div>
+                            <div class="video-channel">Toys and Colors</div>
+                            <div class="video-date">Published: 2023-05-05</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="video-card">
+                    <a href="https://www.youtube.com/watch?v=A_zx9udgRbU" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/A_zx9udgRbU/hqdefault.jpg" alt="Wednesday Addams DIY Barbie Clothes Tutorial" loading="lazy">
+                            <div class="rank-badge">#5</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Wednesday Addams DIY Barbie Clothes Tutorial</div>
+                            <div class="video-channel">Fun Kids House</div>
+                            <div class="video-date">Published: 2023-03-11</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="video-card">
+                    <a href="https://www.youtube.com/watch?v=5wJPtYDWEeU" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/5wJPtYDWEeU/hqdefault.jpg" alt="Kreasi mainan PARUH BEBEK dari origami" loading="lazy">
+                            <div class="rank-badge">#6</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Kreasi mainan PARUH BEBEK dari origami</div>
+                            <div class="video-channel">Kreasi Rupa Rupi</div>
+                            <div class="video-date">Published: 2023-06-11</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="video-card">
+                    <a href="https://www.youtube.com/watch?v=uohfVBaHkXs" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/uohfVBaHkXs/hqdefault.jpg" alt="He turned out to be an angel - LeoNata family" loading="lazy">
+                            <div class="rank-badge">#7</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">He turned out to be an angel - LeoNata family</div>
+                            <div class="video-channel">LeoNata Family</div>
+                            <div class="video-date">Published: 2022-06-26</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="video-card">
+                    <a href="https://www.youtube.com/watch?v=VTW1hqdjxU8" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/VTW1hqdjxU8/hqdefault.jpg" alt="ABC Song!" loading="lazy">
+                            <div class="rank-badge">#8</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">ABC Song!</div>
+                            <div class="video-channel">Mr Rice Guy Art</div>
+                            <div class="video-date">Published: 2023-06-07</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="video-card">
+                    <a href="https://www.youtube.com/watch?v=ogmdWS5ERPg" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/ogmdWS5ERPg/hqdefault.jpg" alt="Ananassalat - Zungenbrecher | Rhythmus | Just for fun" loading="lazy">
+                            <div class="rank-badge">#9</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Ananassalat - Zungenbrecher | Rhythmus | Just for fun</div>
+                            <div class="video-channel">Simone Ludwig | Floh im Ohr TV | Kindermusik</div>
+                            <div class="video-date">Published: 2021-07-26</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="video-card">
+                    <a href="https://www.youtube.com/watch?v=TbHQwIV_Nas" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/TbHQwIV_Nas/hqdefault.jpg" alt="YouTube: Hit Pause with a power up break" loading="lazy">
+                            <div class="rank-badge">#10</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">YouTube: Hit Pause with a power up break</div>
+                            <div class="video-channel">Hit Pause</div>
+                            <div class="video-date">Published: 2023-02-07</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="video-card">
+                    <a href="https://www.youtube.com/watch?v=tyiSZTP-QQs" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/tyiSZTP-QQs/hqdefault.jpg" alt="Blue Tractor Song" loading="lazy">
+                            <div class="rank-badge">#11</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Blue Tractor Song</div>
+                            <div class="video-channel">Blue Tractor - Kids Songs</div>
+                            <div class="video-date">Published: 2022-05-08</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="video-card">
+                    <a href="https://www.youtube.com/watch?v=uPzGruvRmKk" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/uPzGruvRmKk/hqdefault.jpg" alt="Doing tricks on a balance bike?!" loading="lazy">
+                            <div class="rank-badge">#12</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Doing tricks on a balance bike?!</div>
+                            <div class="video-channel">Harley Beckett</div>
+                            <div class="video-date">Published: 2023-06-16</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="video-card">
+                    <a href="https://www.youtube.com/watch?v=Sux8opG80Lo" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/Sux8opG80Lo/hqdefault.jpg" alt="YouTube: Hit Pause with a musical dance break" loading="lazy">
+                            <div class="rank-badge">#13</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">YouTube: Hit Pause with a musical dance break</div>
+                            <div class="video-channel">Hit Pause</div>
+                            <div class="video-date">Published: 2023-02-07</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="video-card">
+                    <a href="https://www.youtube.com/watch?v=T8jU3J_xyw8" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/T8jU3J_xyw8/hqdefault.jpg" alt="10 Ways to Jump Into a Pool!" loading="lazy">
+                            <div class="rank-badge">#14</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">10 Ways to Jump Into a Pool!</div>
+                            <div class="video-channel">Colin Amazing</div>
+                            <div class="video-date">Published: 2023-04-19</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="video-card">
+                    <a href="https://www.youtube.com/watch?v=lNSSkP2WtcY" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/lNSSkP2WtcY/hqdefault.jpg" alt="tebak gambar buah VidsPlus 48" loading="lazy">
+                            <div class="rank-badge">#15</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">tebak gambar buah VidsPlus 48</div>
+                            <div class="video-channel">Marwka</div>
+                            <div class="video-date">Published: 2023-03-11</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="video-card">
+                    <a href="https://www.youtube.com/watch?v=egK37yP_bAk" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/egK37yP_bAk/hqdefault.jpg" alt="Sharing Snacks! - Mighty Little Bheem | Netflix Jr" loading="lazy">
+                            <div class="rank-badge">#16</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Sharing Snacks! - Mighty Little Bheem | Netflix Jr</div>
+                            <div class="video-channel">Netflix Jr.</div>
+                            <div class="video-date">Published: 2023-01-19</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="video-card">
+                    <a href="https://www.youtube.com/watch?v=8kggT2ej-lo" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/8kggT2ej-lo/hqdefault.jpg" alt="Would You Pet a Cheetah in Africa?" loading="lazy">
+                            <div class="rank-badge">#17</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Would You Pet a Cheetah in Africa?</div>
+                            <div class="video-channel">MrBeast</div>
+                            <div class="video-date">Published: 2023-05-01</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="video-card">
+                    <a href="https://www.youtube.com/watch?v=Lo7sUWUTHN8" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/Lo7sUWUTHN8/hqdefault.jpg" alt="YouTube: Hit Pause with a face yoga break" loading="lazy">
+                            <div class="rank-badge">#18</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">YouTube: Hit Pause with a face yoga break</div>
+                            <div class="video-channel">Hit Pause</div>
+                            <div class="video-date">Published: 2023-02-07</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="video-card">
+                    <a href="https://www.youtube.com/watch?v=plJUTZtT86Y" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/plJUTZtT86Y/hqdefault.jpg" alt="Assembling toys, Spider-Man fighting" loading="lazy">
+                            <div class="rank-badge">#19</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Assembling toys, Spider-Man fighting</div>
+                            <div class="video-channel">9x Toys</div>
+                            <div class="video-date">Published: 2023-01-23</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="video-card">
+                    <a href="https://www.youtube.com/watch?v=BZkDft_-blY" target="_blank">
+                        <div class="thumbnail-container">
+                            <img class="thumbnail" src="https://i.ytimg.com/vi/BZkDft_-blY/hqdefault.jpg" alt="Man Vs Cartoon Characters (animation meme)" loading="lazy">
+                            <div class="rank-badge">#20</div>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">Man Vs Cartoon Characters (animation meme)</div>
+                            <div class="video-channel">Boy & Dragon - WildBrain</div>
+                            <div class="video-date">Published: 2023-06-04</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
         function showTab(region) {
-            // Hide all tabs
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-button').forEach(btn => {
-                btn.classList.remove('active');
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
             });
 
-            // Show selected tab
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab content
             document.getElementById(region).classList.add('active');
+
+            // Add active class to clicked tab
             event.target.classList.add('active');
         }
     </script>
