@@ -1,218 +1,52 @@
 {
-  "updated_at": "2026-03-06T10:14:00.000000Z",
-  "execution": 37,
-  "regions": {
-    "TW": {
-      "name": "Taiwan",
-      "video_count": 10,
-      "videos": [
-        {
-          "id": "randomid001",
-          "title": "BLACKPINK - 'GO' M/V",
-          "channel": "BLACKPINK",
-          "published_at": "2026-03-01T00:00:00Z",
-          "view_count": "39100000",
-          "like_count": "3300000",
-          "comment_count": "180000",
-          "thumbnail": "https://i.ytimg.com/vi/randomid001/hqdefault.jpg"
-        },
-        {
-          "id": "randomid002",
-          "title": "【驚聲尖笑】官方預告 - 6月26日 全台戲院見",
-          "channel": "官方頻道",
-          "published_at": "2026-03-04T00:00:00Z",
-          "view_count": "5200000",
-          "like_count": "280000",
-          "comment_count": "12000",
-          "thumbnail": "https://i.ytimg.com/vi/randomid002/hqdefault.jpg"
-        },
-        {
-          "id": "randomid003",
-          "title": "【Ado】ビバリウム (Vivarium)",
-          "channel": "Ado",
-          "published_at": "2026-03-02T00:00:00Z",
-          "view_count": "8700000",
-          "like_count": "620000",
-          "comment_count": "45000",
-          "thumbnail": "https://i.ytimg.com/vi/randomid003/hqdefault.jpg"
-        },
-        {
-          "id": "randomid004",
-          "title": "JOLIN 蔡依林《布拉格廣場 Prague Square》- 星宇航空主題曲",
-          "channel": "JOLIN蔡依林",
-          "published_at": "2026-02-28T00:00:00Z",
-          "view_count": "4500000",
-          "like_count": "310000",
-          "comment_count": "22000",
-          "thumbnail": "https://i.ytimg.com/vi/randomid004/hqdefault.jpg"
-        },
-        {
-          "id": "randomid005",
-          "title": "《乩身》| 正式前導預告 | Netflix",
-          "channel": "Netflix Taiwan",
-          "published_at": "2026-03-03T00:00:00Z",
-          "view_count": "3800000",
-          "like_count": "195000",
-          "comment_count": "18000",
-          "thumbnail": "https://i.ytimg.com/vi/randomid005/hqdefault.jpg"
-        },
-        {
-          "id": "randomid006",
-          "title": "高爾宣OSN-Rewind (Official Music Video)",
-          "channel": "高爾宣OSN",
-          "published_at": "2026-03-01T00:00:00Z",
-          "view_count": "2900000",
-          "like_count": "178000",
-          "comment_count": "15000",
-          "thumbnail": "https://i.ytimg.com/vi/randomid006/hqdefault.jpg"
-        },
-        {
-          "id": "randomid007",
-          "title": "IVE 아이브 'BLACKHOLE' MV",
-          "channel": "STARSHIP",
-          "published_at": "2026-02-23T09:00:12Z",
-          "view_count": "4201151",
-          "like_count": "220455",
-          "comment_count": "14749",
-          "thumbnail": "https://i.ytimg.com/vi/1Lmy7qwmSMc/hqdefault.jpg"
-        },
-        {
-          "id": "randomid008",
-          "title": "林俊傑 JJ Lin《我對緣分小心翼翼 Careful with Fate》Official Music Video",
-          "channel": "JJ Lin",
-          "published_at": "2026-02-25T00:00:00Z",
-          "view_count": "3100000",
-          "like_count": "192000",
-          "comment_count": "16500",
-          "thumbnail": "https://i.ytimg.com/vi/randomid008/hqdefault.jpg"
-        },
-        {
-          "id": "randomid009",
-          "title": "Apex Legends x Gundam Event Trailer",
-          "channel": "Apex Legends",
-          "published_at": "2026-03-05T00:00:00Z",
-          "view_count": "2400000",
-          "like_count": "145000",
-          "comment_count": "9800",
-          "thumbnail": "https://i.ytimg.com/vi/randomid009/hqdefault.jpg"
-        },
-        {
-          "id": "randomid010",
-          "title": "yihuik苡慧 - 離開我的依賴",
-          "channel": "yihuik苡慧",
-          "published_at": "2026-02-20T00:00:00Z",
-          "view_count": "2200000",
-          "like_count": "138000",
-          "comment_count": "8900",
-          "thumbnail": "https://i.ytimg.com/vi/randomid010/hqdefault.jpg"
-        }
-      ]
-    },
-    "US": {
-      "name": "United States",
-      "video_count": 10,
-      "videos": [
-        {
-          "id": "randomus001",
-          "title": "GIRLSET \"Tweak\" Music Video",
-          "channel": "GIRLSET",
-          "published_at": "2026-03-05T00:00:00Z",
-          "view_count": "12500000",
-          "like_count": "890000",
-          "comment_count": "65000",
-          "thumbnail": "https://i.ytimg.com/vi/randomus001/hqdefault.jpg"
-        },
-        {
-          "id": "randomus002",
-          "title": "The Boys – Final Season Trailer | Prime Video",
-          "channel": "Prime Video",
-          "published_at": "2026-03-05T00:00:00Z",
-          "view_count": "18700000",
-          "like_count": "1200000",
-          "comment_count": "95000",
-          "thumbnail": "https://i.ytimg.com/vi/randomus002/hqdefault.jpg"
-        },
-        {
-          "id": "randomus003",
-          "title": "Baby Keem - Good Flirts (Official Video) ft. Kendrick Lamar, Momo Boyd",
-          "channel": "Baby Keem",
-          "published_at": "2026-03-05T00:00:00Z",
-          "view_count": "9800000",
-          "like_count": "720000",
-          "comment_count": "58000",
-          "thumbnail": "https://i.ytimg.com/vi/randomus003/hqdefault.jpg"
-        },
-        {
-          "id": "randomus004",
-          "title": "Lanterns | Official Teaser | HBO Max",
-          "channel": "HBO Max",
-          "published_at": "2026-03-01T00:00:00Z",
-          "view_count": "15300000",
-          "like_count": "980000",
-          "comment_count": "72000",
-          "thumbnail": "https://i.ytimg.com/vi/randomus004/hqdefault.jpg"
-        },
-        {
-          "id": "randomus005",
-          "title": "Juice WRLD, Marshmello - We Don't Get Along (Official Video)",
-          "channel": "Juice WRLD",
-          "published_at": "2026-03-04T00:00:00Z",
-          "view_count": "22100000",
-          "like_count": "1500000",
-          "comment_count": "112000",
-          "thumbnail": "https://i.ytimg.com/vi/randomus005/hqdefault.jpg"
-        },
-        {
-          "id": "randomus006",
-          "title": "Invincible - Season 4 Thragg Teaser | Prime Video",
-          "channel": "Prime Video",
-          "published_at": "2026-03-02T00:00:00Z",
-          "view_count": "11800000",
-          "like_count": "850000",
-          "comment_count": "67000",
-          "thumbnail": "https://i.ytimg.com/vi/randomus006/hqdefault.jpg"
-        },
-        {
-          "id": "randomus007",
-          "title": "Harry Styles - American Girls (Official Lyric Video)",
-          "channel": "Harry Styles",
-          "published_at": "2026-03-05T00:00:00Z",
-          "view_count": "8900000",
-          "like_count": "680000",
-          "comment_count": "52000",
-          "thumbnail": "https://i.ytimg.com/vi/randomus007/hqdefault.jpg"
-        },
-        {
-          "id": "randomus008",
-          "title": "BLACKPINK - 'GO' M/V",
-          "channel": "BLACKPINK",
-          "published_at": "2026-03-01T00:00:00Z",
-          "view_count": "39100000",
-          "like_count": "3300000",
-          "comment_count": "180000",
-          "thumbnail": "https://i.ytimg.com/vi/randomus008/hqdefault.jpg"
-        },
-        {
-          "id": "randomus009",
-          "title": "Mortal Kombat II | Official Trailer II",
-          "channel": "Warner Bros. Pictures",
-          "published_at": "2026-02-28T00:00:00Z",
-          "view_count": "14900000",
-          "like_count": "920000",
-          "comment_count": "78000",
-          "thumbnail": "https://i.ytimg.com/vi/randomus009/hqdefault.jpg"
-        },
-        {
-          "id": "randomus010",
-          "title": "1 Minute vs 10 Year Build Challenge",
-          "channel": "MrBeast Gaming",
-          "published_at": "2026-03-03T00:00:00Z",
-          "view_count": "19700000",
-          "like_count": "1100000",
-          "comment_count": "88000",
-          "thumbnail": "https://i.ytimg.com/vi/randomus010/hqdefault.jpg"
-        }
-      ]
-    }
+  "TW": [
+    {"rank": 1, "id": "kJQP7kiw5Fk", "title": "Luis Fonsi - Despacito ft. Daddy Yankee", "channel": "LuisFonsiVEVO", "thumbnail": "https://i.ytimg.com/vi/kJQP7kiw5Fk/hqdefault.jpg", "published_at": "2017-01-13T05:00:02Z"},
+    {"rank": 2, "id": "09R8_2nJtjg", "title": "Maroon 5 - Sugar (Official Music Video)", "channel": "Maroon5VEVO", "thumbnail": "https://i.ytimg.com/vi/09R8_2nJtjg/hqdefault.jpg", "published_at": "2015-01-14T15:00:11Z"},
+    {"rank": 3, "id": "pXRviuL6vMY", "title": "twenty one pilots: Stressed Out [OFFICIAL VIDEO]", "channel": "Fueled By Ramen", "thumbnail": "https://i.ytimg.com/vi/pXRviuL6vMY/hqdefault.jpg", "published_at": "2015-04-28T03:05:18Z"},
+    {"rank": 4, "id": "fLexgOxsZu0", "title": "Bruno Mars - The Lazy Song (Official Music Video)", "channel": "Bruno Mars", "thumbnail": "https://i.ytimg.com/vi/fLexgOxsZu0/hqdefault.jpg", "published_at": "2011-04-15T22:08:07Z"},
+    {"rank": 5, "id": "7wtfhZwyrcc", "title": "Imagine Dragons - Believer (Official Music Video)", "channel": "ImagineDragonsVEVO", "thumbnail": "https://i.ytimg.com/vi/7wtfhZwyrcc/hqdefault.jpg", "published_at": "2017-03-07T14:00:00Z"},
+    {"rank": 6, "id": "2vjPBrBU-TM", "title": "Sia - Chandelier (Official Video)", "channel": "SiaVEVO", "thumbnail": "https://i.ytimg.com/vi/2vjPBrBU-TM/hqdefault.jpg", "published_at": "2014-05-06T13:00:03Z"},
+    {"rank": 7, "id": "ApXoWvfEYVU", "title": "Post Malone, Swae Lee - Sunflower (Spider-Man: Into the Spider-Verse)", "channel": "PostMaloneVEVO", "thumbnail": "https://i.ytimg.com/vi/ApXoWvfEYVU/hqdefault.jpg", "published_at": "2018-10-18T16:00:03Z"},
+    {"rank": 8, "id": "HJkAI-Dhq50", "title": "Yes Yes Bedtime Song | @CoComelon Nursery Rhymes & Kids Songs", "channel": "Cocomelon - Nursery Rhymes", "thumbnail": "https://i.ytimg.com/vi/HJkAI-Dhq50/hqdefault.jpg", "published_at": "2018-09-18T07:00:04Z"},
+    {"rank": 9, "id": "kQS6B6x7ubw", "title": "MOWGLI HAI JUNGLE KA RAJA ! | Jungle Book Season 3", "channel": "PowerKids TV", "thumbnail": "https://i.ytimg.com/vi/kQS6B6x7ubw/hqdefault.jpg", "published_at": "2022-03-05T04:00:59Z"},
+    {"rank": 10, "id": "YlvcFJOE-OE", "title": "Giving iPhones Instead Of Candy on Halloween", "channel": "MrBeast", "thumbnail": "https://i.ytimg.com/vi/YlvcFJOE-OE/hqdefault.jpg", "published_at": "2022-11-02T21:00:01Z"},
+    {"rank": 11, "id": "kPa7bsKwL-c", "title": "Lady Gaga, Bruno Mars - Die With A Smile (Official Music Video)", "channel": "LadyGagaVEVO", "thumbnail": "https://i.ytimg.com/vi/kPa7bsKwL-c/hqdefault.jpg", "published_at": "2024-08-16T04:00:36Z"},
+    {"rank": 12, "id": "CnSylwYOu1E", "title": "Ellie's Ice Cream Adventure: A Lesson in Line Etiquette!", "channel": "Toys and Colors", "thumbnail": "https://i.ytimg.com/vi/CnSylwYOu1E/hqdefault.jpg", "published_at": "2023-05-05T11:30:04Z"},
+    {"rank": 13, "id": "qN4ooNx77u0", "title": "Harry Styles - Sign of the Times (Official Video)", "channel": "HarryStylesVEVO", "thumbnail": "https://i.ytimg.com/vi/qN4ooNx77u0/hqdefault.jpg", "published_at": "2017-05-08T12:00:04Z"},
+    {"rank": 14, "id": "dT2owtxkU8k", "title": "Shawn Mendes - There's Nothing Holdin' Me Back (Official Music Video)", "channel": "ShawnMendesVEVO", "thumbnail": "https://i.ytimg.com/vi/dT2owtxkU8k/hqdefault.jpg", "published_at": "2017-06-21T04:00:01Z"},
+    {"rank": 15, "id": "A_zx9udgRbU", "title": "Wednesday Addams DIY Barbie Clothes Tutorial", "channel": "Fun Kids House", "thumbnail": "https://i.ytimg.com/vi/A_zx9udgRbU/hqdefault.jpg", "published_at": "2023-03-11T13:23:10Z"},
+    {"rank": 16, "id": "5wJPtYDWEeU", "title": "Kreasi mainan PARUH BEBEK dari origami", "channel": "Kreasi Rupa Rupi", "thumbnail": "https://i.ytimg.com/vi/5wJPtYDWEeU/hqdefault.jpg", "published_at": "2023-06-11T23:58:35Z"},
+    {"rank": 17, "id": "ShZ978fBl6Y", "title": "Calum Scott - You Are The Reason (Official Video)", "channel": "CalumScottVEVO", "thumbnail": "https://i.ytimg.com/vi/ShZ978fBl6Y/hqdefault.jpg", "published_at": "2018-01-05T10:00:01Z"},
+    {"rank": 18, "id": "uohfVBaHkXs", "title": "He turned out to be an angel - LeoNata family", "channel": "LeoNata Family", "thumbnail": "https://i.ytimg.com/vi/uohfVBaHkXs/hqdefault.jpg", "published_at": "2022-06-26T11:00:34Z"},
+    {"rank": 19, "id": "syFZfO_wfMQ", "title": "One Direction - Night Changes", "channel": "OneDirectionVEVO", "thumbnail": "https://i.ytimg.com/vi/syFZfO_wfMQ/hqdefault.jpg", "published_at": "2014-11-21T16:00:06Z"},
+    {"rank": 20, "id": "kTJczUoc26U", "title": "The Kid LAROI, Justin Bieber - STAY (Official Video)", "channel": "TheKidLAROIVEVO", "thumbnail": "https://i.ytimg.com/vi/kTJczUoc26U/hqdefault.jpg", "published_at": "2021-07-09T04:00:12Z"}
+  ],
+  "US": [
+    {"rank": 1, "id": "Od_vZe_8ulk", "title": "Big vs Small prank - Andi like", "channel": "Andi like", "thumbnail": "https://i.ytimg.com/vi/Od_vZe_8ulk/hqdefault.jpg", "published_at": "2022-04-04T06:07:04Z"},
+    {"rank": 2, "id": "kQS6B6x7ubw", "title": "MOWGLI HAI JUNGLE KA RAJA ! | Jungle Book Season 3", "channel": "PowerKids TV", "thumbnail": "https://i.ytimg.com/vi/kQS6B6x7ubw/hqdefault.jpg", "published_at": "2022-03-05T04:00:59Z"},
+    {"rank": 3, "id": "YlvcFJOE-OE", "title": "Giving iPhones Instead Of Candy on Halloween", "channel": "MrBeast", "thumbnail": "https://i.ytimg.com/vi/YlvcFJOE-OE/hqdefault.jpg", "published_at": "2022-11-02T21:00:01Z"},
+    {"rank": 4, "id": "CnSylwYOu1E", "title": "Ellie's Ice Cream Adventure: A Lesson in Line Etiquette!", "channel": "Toys and Colors", "thumbnail": "https://i.ytimg.com/vi/CnSylwYOu1E/hqdefault.jpg", "published_at": "2023-05-05T11:30:04Z"},
+    {"rank": 5, "id": "A_zx9udgRbU", "title": "Wednesday Addams DIY Barbie Clothes Tutorial", "channel": "Fun Kids House", "thumbnail": "https://i.ytimg.com/vi/A_zx9udgRbU/hqdefault.jpg", "published_at": "2023-03-11T13:23:10Z"},
+    {"rank": 6, "id": "5wJPtYDWEeU", "title": "Kreasi mainan PARUH BEBEK dari origami", "channel": "Kreasi Rupa Rupi", "thumbnail": "https://i.ytimg.com/vi/5wJPtYDWEeU/hqdefault.jpg", "published_at": "2023-06-11T23:58:35Z"},
+    {"rank": 7, "id": "uohfVBaHkXs", "title": "He turned out to be an angel - LeoNata family", "channel": "LeoNata Family", "thumbnail": "https://i.ytimg.com/vi/uohfVBaHkXs/hqdefault.jpg", "published_at": "2022-06-26T11:00:34Z"},
+    {"rank": 8, "id": "VTW1hqdjxU8", "title": "ABC Song!", "channel": "Mr Rice Guy Art", "thumbnail": "https://i.ytimg.com/vi/VTW1hqdjxU8/hqdefault.jpg", "published_at": "2023-06-07T00:46:51Z"},
+    {"rank": 9, "id": "ogmdWS5ERPg", "title": "Ananassalat - Zungenbrecher | Rhythmus | Just for fun", "channel": "Simone Ludwig | Floh im Ohr TV | Kindermusik", "thumbnail": "https://i.ytimg.com/vi/ogmdWS5ERPg/hqdefault.jpg", "published_at": "2021-07-26T13:33:24Z"},
+    {"rank": 10, "id": "TbHQwIV_Nas", "title": "YouTube: Hit Pause with a power up break", "channel": "Hit Pause", "thumbnail": "https://i.ytimg.com/vi/TbHQwIV_Nas/hqdefault.jpg", "published_at": "2023-02-07T19:42:30Z"},
+    {"rank": 11, "id": "tyiSZTP-QQs", "title": "Blue Tractor Song", "channel": "Blue Tractor - Kids Songs", "thumbnail": "https://i.ytimg.com/vi/tyiSZTP-QQs/hqdefault.jpg", "published_at": "2022-05-08T13:34:00Z"},
+    {"rank": 12, "id": "uPzGruvRmKk", "title": "Doing tricks on a balance bike?!", "channel": "Harley Beckett", "thumbnail": "https://i.ytimg.com/vi/uPzGruvRmKk/hqdefault.jpg", "published_at": "2023-06-16T17:00:38Z"},
+    {"rank": 13, "id": "Sux8opG80Lo", "title": "YouTube: Hit Pause with a musical dance break", "channel": "Hit Pause", "thumbnail": "https://i.ytimg.com/vi/Sux8opG80Lo/hqdefault.jpg", "published_at": "2023-02-07T19:41:46Z"},
+    {"rank": 14, "id": "T8jU3J_xyw8", "title": "10 Ways to Jump Into a Pool!", "channel": "Colin Amazing", "thumbnail": "https://i.ytimg.com/vi/T8jU3J_xyw8/hqdefault.jpg", "published_at": "2023-04-19T13:00:24Z"},
+    {"rank": 15, "id": "lNSSkP2WtcY", "title": "tebak gambar buah VidsPlus 48", "channel": "Marwka", "thumbnail": "https://i.ytimg.com/vi/lNSSkP2WtcY/hqdefault.jpg", "published_at": "2023-03-11T06:11:29Z"},
+    {"rank": 16, "id": "egK37yP_bAk", "title": "Sharing Snacks! - Mighty Little Bheem | Netflix Jr", "channel": "Netflix Jr.", "thumbnail": "https://i.ytimg.com/vi/egK37yP_bAk/hqdefault.jpg", "published_at": "2023-01-19T14:00:00Z"},
+    {"rank": 17, "id": "8kggT2ej-lo", "title": "Would You Pet a Cheetah in Africa?", "channel": "MrBeast", "thumbnail": "https://i.ytimg.com/vi/8kggT2ej-lo/hqdefault.jpg", "published_at": "2023-05-01T20:00:02Z"},
+    {"rank": 18, "id": "Lo7sUWUTHN8", "title": "YouTube: Hit Pause with a face yoga break", "channel": "Hit Pause", "thumbnail": "https://i.ytimg.com/vi/Lo7sUWUTHN8/hqdefault.jpg", "published_at": "2023-02-07T19:42:01Z"},
+    {"rank": 19, "id": "plJUTZtT86Y", "title": "Assembling toys, Spider-Man fighting", "channel": "9x Toys", "thumbnail": "https://i.ytimg.com/vi/plJUTZtT86Y/hqdefault.jpg", "published_at": "2023-01-23T00:00:18Z"},
+    {"rank": 20, "id": "BZkDft_-blY", "title": "Man Vs Cartoon Characters (animation meme)", "channel": "Boy & Dragon - WildBrain", "thumbnail": "https://i.ytimg.com/vi/BZkDft_-blY/hqdefault.jpg", "published_at": "2023-06-04T12:00:05Z"}
+  ],
+  "metadata": {
+    "fetch_time": "2026-03-15T10:07:00Z",
+    "execution_id": 46,
+    "regions": ["TW", "US"],
+    "videos_per_region": 20
   }
 }
