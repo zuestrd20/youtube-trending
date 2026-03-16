@@ -1,104 +1,332 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Trending Videos - Execution #46</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Roboto', 'Arial', sans-serif; background-color: #0f0f0f; color: #f1f1f1; padding: 20px; }
-        .container { max-width: 1400px; margin: 0 auto; }
-        header { text-align: center; margin-bottom: 30px; padding: 20px 0; border-bottom: 1px solid #3f3f3f; }
-        h1 { font-size: 28px; font-weight: 400; margin-bottom: 10px; color: #ffffff; }
-        .metadata { font-size: 14px; color: #aaaaaa; margin-top: 8px; }
-        .note { background-color: #272727; padding: 12px 16px; border-radius: 8px; margin: 20px 0; font-size: 13px; color: #aaaaaa; border-left: 3px solid #065fd4; }
-        .tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid #3f3f3f; }
-        .tab { padding: 12px 24px; cursor: pointer; background: none; border: none; color: #aaaaaa; font-size: 14px; font-weight: 500; border-bottom: 2px solid transparent; transition: all 0.2s; }
-        .tab:hover { color: #f1f1f1; }
-        .tab.active { color: #ffffff; border-bottom-color: #ffffff; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        .videos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; margin-top: 20px; }
-        .video-card { background-color: #212121; border-radius: 12px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
-        .video-card:hover { transform: translateY(-4px); box-shadow: 0 8px 16px rgba(0,0,0,0.4); }
-        .video-card a { text-decoration: none; color: inherit; display: block; }
-        .thumbnail-container { position: relative; width: 100%; padding-top: 56.25%; background-color: #181818; }
-        .thumbnail { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
-        .rank-badge { position: absolute; top: 8px; left: 8px; background-color: rgba(0,0,0,0.8); color: #ffffff; padding: 4px 10px; border-radius: 4px; font-size: 14px; font-weight: 700; }
-        .video-info { padding: 12px; }
-        .video-title { font-size: 14px; font-weight: 500; line-height: 1.4; margin-bottom: 8px; color: #f1f1f1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .video-channel { font-size: 12px; color: #aaaaaa; margin-bottom: 4px; }
-        .video-date { font-size: 12px; color: #aaaaaa; }
-        @media (max-width: 768px) { .videos-grid { grid-template-columns: 1fr; } h1 { font-size: 24px; } }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube 熱門影片 - 台灣 &amp; 美國</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f0f0f;color:#fff}
+    header{background:linear-gradient(135deg,#ff0000,#cc0000);padding:20px;text-align:center}
+    header h1{font-size:1.8rem;margin-bottom:8px}
+    header p{opacity:.9;font-size:.9rem}
+    .badge{display:inline-block;background:rgba(255,255,255,.2);padding:4px 12px;border-radius:20px;font-size:.8rem;margin-top:8px}
+    .container{max-width:1400px;margin:0 auto;padding:20px}
+    .region-section{margin-bottom:40px}
+    .region-title{font-size:1.4rem;font-weight:700;padding:12px 0;border-bottom:3px solid #ff0000;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+    .videos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+    .video-card{background:#1e1e1e;border-radius:12px;overflow:hidden;transition:transform .2s,box-shadow .2s;position:relative}
+    .video-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(255,0,0,.3)}
+    .video-card a{text-decoration:none;color:inherit;display:block}
+    .rank-badge{position:absolute;top:8px;left:8px;background:#ff0000;color:#fff;font-weight:700;font-size:.85rem;padding:4px 10px;border-radius:20px;z-index:2}
+    .thumb-wrap{position:relative}
+    .thumb-wrap img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+    .duration{position:absolute;bottom:4px;right:6px;background:rgba(0,0,0,.8);color:#fff;font-size:.75rem;padding:2px 6px;border-radius:4px}
+    .video-info{padding:12px}
+    .video-title{font-size:.9rem;font-weight:600;line-height:1.4;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .channel-name{font-size:.8rem;color:#aaa;margin-bottom:8px}
+    .video-stats{display:flex;flex-wrap:wrap;gap:8px;font-size:.75rem;color:#888}
+    footer{text-align:center;padding:20px;color:#666;font-size:.85rem;border-top:1px solid #333}
+    @media(max-width:600px){.videos-grid{grid-template-columns:1fr 1fr;gap:10px}header h1{font-size:1.3rem}}
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>YouTube Trending Videos - Execution #46</h1>
-            <div class="metadata">Updated: 2026-03-15 10:07:00 UTC | Method: YouTube Data API</div>
-        </header>
-        <div class="note"><strong>Note:</strong> API returns popular videos by view count (not real-time trending)</div>
-        <div class="tabs">
-            <button class="tab active" onclick="showTab('TW', event)">Taiwan (TW)</button>
-            <button class="tab" onclick="showTab('US', event)">United States (US)</button>
-        </div>
-        <div id="TW" class="tab-content active">
-            <div class="videos-grid">
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=kJQP7kiw5Fk" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/kJQP7kiw5Fk/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#1</div></div><div class="video-info"><div class="video-title">Luis Fonsi - Despacito ft. Daddy Yankee</div><div class="video-channel">LuisFonsiVEVO</div><div class="video-date">Published: 2017-01-13</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=09R8_2nJtjg" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/09R8_2nJtjg/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#2</div></div><div class="video-info"><div class="video-title">Maroon 5 - Sugar (Official Music Video)</div><div class="video-channel">Maroon5VEVO</div><div class="video-date">Published: 2015-01-14</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=pXRviuL6vMY" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/pXRviuL6vMY/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#3</div></div><div class="video-info"><div class="video-title">twenty one pilots: Stressed Out [OFFICIAL VIDEO]</div><div class="video-channel">Fueled By Ramen</div><div class="video-date">Published: 2015-04-28</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=fLexgOxsZu0" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/fLexgOxsZu0/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#4</div></div><div class="video-info"><div class="video-title">Bruno Mars - The Lazy Song (Official Music Video)</div><div class="video-channel">Bruno Mars</div><div class="video-date">Published: 2011-04-15</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=7wtfhZwyrcc" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/7wtfhZwyrcc/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#5</div></div><div class="video-info"><div class="video-title">Imagine Dragons - Believer (Official Music Video)</div><div class="video-channel">ImagineDragonsVEVO</div><div class="video-date">Published: 2017-03-07</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=2vjPBrBU-TM" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/2vjPBrBU-TM/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#6</div></div><div class="video-info"><div class="video-title">Sia - Chandelier (Official Video)</div><div class="video-channel">SiaVEVO</div><div class="video-date">Published: 2014-05-06</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=ApXoWvfEYVU" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/ApXoWvfEYVU/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#7</div></div><div class="video-info"><div class="video-title">Post Malone, Swae Lee - Sunflower (Spider-Man: Into the Spider-Verse)</div><div class="video-channel">PostMaloneVEVO</div><div class="video-date">Published: 2018-10-18</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=HJkAI-Dhq50" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/HJkAI-Dhq50/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#8</div></div><div class="video-info"><div class="video-title">Yes Yes Bedtime Song | @CoComelon Nursery Rhymes &amp; Kids Songs</div><div class="video-channel">Cocomelon - Nursery Rhymes</div><div class="video-date">Published: 2018-09-18</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=kQS6B6x7ubw" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/kQS6B6x7ubw/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#9</div></div><div class="video-info"><div class="video-title">MOWGLI HAI JUNGLE KA RAJA ! | Jungle Book Season 3</div><div class="video-channel">PowerKids TV</div><div class="video-date">Published: 2022-03-05</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=YlvcFJOE-OE" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/YlvcFJOE-OE/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#10</div></div><div class="video-info"><div class="video-title">Giving iPhones Instead Of Candy on Halloween</div><div class="video-channel">MrBeast</div><div class="video-date">Published: 2022-11-02</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=kPa7bsKwL-c" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/kPa7bsKwL-c/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#11</div></div><div class="video-info"><div class="video-title">Lady Gaga, Bruno Mars - Die With A Smile (Official Music Video)</div><div class="video-channel">LadyGagaVEVO</div><div class="video-date">Published: 2024-08-16</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=CnSylwYOu1E" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/CnSylwYOu1E/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#12</div></div><div class="video-info"><div class="video-title">Ellie's Ice Cream Adventure: A Lesson in Line Etiquette!</div><div class="video-channel">Toys and Colors</div><div class="video-date">Published: 2023-05-05</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=qN4ooNx77u0" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/qN4ooNx77u0/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#13</div></div><div class="video-info"><div class="video-title">Harry Styles - Sign of the Times (Official Video)</div><div class="video-channel">HarryStylesVEVO</div><div class="video-date">Published: 2017-05-08</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=dT2owtxkU8k" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/dT2owtxkU8k/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#14</div></div><div class="video-info"><div class="video-title">Shawn Mendes - There's Nothing Holdin' Me Back (Official Music Video)</div><div class="video-channel">ShawnMendesVEVO</div><div class="video-date">Published: 2017-06-21</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=A_zx9udgRbU" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/A_zx9udgRbU/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#15</div></div><div class="video-info"><div class="video-title">Wednesday Addams DIY Barbie Clothes Tutorial</div><div class="video-channel">Fun Kids House</div><div class="video-date">Published: 2023-03-11</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=5wJPtYDWEeU" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/5wJPtYDWEeU/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#16</div></div><div class="video-info"><div class="video-title">Kreasi mainan PARUH BEBEK dari origami</div><div class="video-channel">Kreasi Rupa Rupi</div><div class="video-date">Published: 2023-06-11</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=ShZ978fBl6Y" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/ShZ978fBl6Y/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#17</div></div><div class="video-info"><div class="video-title">Calum Scott - You Are The Reason (Official Video)</div><div class="video-channel">CalumScottVEVO</div><div class="video-date">Published: 2018-01-05</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=uohfVBaHkXs" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/uohfVBaHkXs/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#18</div></div><div class="video-info"><div class="video-title">He turned out to be an angel - LeoNata family</div><div class="video-channel">LeoNata Family</div><div class="video-date">Published: 2022-06-26</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=syFZfO_wfMQ" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/syFZfO_wfMQ/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#19</div></div><div class="video-info"><div class="video-title">One Direction - Night Changes</div><div class="video-channel">OneDirectionVEVO</div><div class="video-date">Published: 2014-11-21</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=kTJczUoc26U" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/kTJczUoc26U/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#20</div></div><div class="video-info"><div class="video-title">The Kid LAROI, Justin Bieber - STAY (Official Video)</div><div class="video-channel">TheKidLAROIVEVO</div><div class="video-date">Published: 2021-07-09</div></div></a></div>
-            </div>
-        </div>
-        <div id="US" class="tab-content">
-            <div class="videos-grid">
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=Od_vZe_8ulk" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/Od_vZe_8ulk/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#1</div></div><div class="video-info"><div class="video-title">Big vs Small prank - Andi like</div><div class="video-channel">Andi like</div><div class="video-date">Published: 2022-04-04</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=kQS6B6x7ubw" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/kQS6B6x7ubw/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#2</div></div><div class="video-info"><div class="video-title">MOWGLI HAI JUNGLE KA RAJA ! | Jungle Book Season 3</div><div class="video-channel">PowerKids TV</div><div class="video-date">Published: 2022-03-05</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=YlvcFJOE-OE" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/YlvcFJOE-OE/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#3</div></div><div class="video-info"><div class="video-title">Giving iPhones Instead Of Candy on Halloween</div><div class="video-channel">MrBeast</div><div class="video-date">Published: 2022-11-02</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=CnSylwYOu1E" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/CnSylwYOu1E/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#4</div></div><div class="video-info"><div class="video-title">Ellie's Ice Cream Adventure: A Lesson in Line Etiquette!</div><div class="video-channel">Toys and Colors</div><div class="video-date">Published: 2023-05-05</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=A_zx9udgRbU" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/A_zx9udgRbU/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#5</div></div><div class="video-info"><div class="video-title">Wednesday Addams DIY Barbie Clothes Tutorial</div><div class="video-channel">Fun Kids House</div><div class="video-date">Published: 2023-03-11</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=5wJPtYDWEeU" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/5wJPtYDWEeU/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#6</div></div><div class="video-info"><div class="video-title">Kreasi mainan PARUH BEBEK dari origami</div><div class="video-channel">Kreasi Rupa Rupi</div><div class="video-date">Published: 2023-06-11</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=uohfVBaHkXs" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/uohfVBaHkXs/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#7</div></div><div class="video-info"><div class="video-title">He turned out to be an angel - LeoNata family</div><div class="video-channel">LeoNata Family</div><div class="video-date">Published: 2022-06-26</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=VTW1hqdjxU8" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/VTW1hqdjxU8/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#8</div></div><div class="video-info"><div class="video-title">ABC Song!</div><div class="video-channel">Mr Rice Guy Art</div><div class="video-date">Published: 2023-06-07</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=ogmdWS5ERPg" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/ogmdWS5ERPg/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#9</div></div><div class="video-info"><div class="video-title">Ananassalat - Zungenbrecher | Rhythmus | Just for fun</div><div class="video-channel">Simone Ludwig | Floh im Ohr TV | Kindermusik</div><div class="video-date">Published: 2021-07-26</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=TbHQwIV_Nas" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/TbHQwIV_Nas/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#10</div></div><div class="video-info"><div class="video-title">YouTube: Hit Pause with a power up break</div><div class="video-channel">Hit Pause</div><div class="video-date">Published: 2023-02-07</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=tyiSZTP-QQs" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/tyiSZTP-QQs/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#11</div></div><div class="video-info"><div class="video-title">Blue Tractor Song</div><div class="video-channel">Blue Tractor - Kids Songs</div><div class="video-date">Published: 2022-05-08</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=uPzGruvRmKk" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/uPzGruvRmKk/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#12</div></div><div class="video-info"><div class="video-title">Doing tricks on a balance bike?!</div><div class="video-channel">Harley Beckett</div><div class="video-date">Published: 2023-06-16</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=Sux8opG80Lo" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/Sux8opG80Lo/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#13</div></div><div class="video-info"><div class="video-title">YouTube: Hit Pause with a musical dance break</div><div class="video-channel">Hit Pause</div><div class="video-date">Published: 2023-02-07</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=T8jU3J_xyw8" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/T8jU3J_xyw8/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#14</div></div><div class="video-info"><div class="video-title">10 Ways to Jump Into a Pool!</div><div class="video-channel">Colin Amazing</div><div class="video-date">Published: 2023-04-19</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=lNSSkP2WtcY" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/lNSSkP2WtcY/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#15</div></div><div class="video-info"><div class="video-title">tebak gambar buah VidsPlus 48</div><div class="video-channel">Marwka</div><div class="video-date">Published: 2023-03-11</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=egK37yP_bAk" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/egK37yP_bAk/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#16</div></div><div class="video-info"><div class="video-title">Sharing Snacks! - Mighty Little Bheem | Netflix Jr</div><div class="video-channel">Netflix Jr.</div><div class="video-date">Published: 2023-01-19</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=8kggT2ej-lo" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/8kggT2ej-lo/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#17</div></div><div class="video-info"><div class="video-title">Would You Pet a Cheetah in Africa?</div><div class="video-channel">MrBeast</div><div class="video-date">Published: 2023-05-01</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=Lo7sUWUTHN8" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/Lo7sUWUTHN8/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#18</div></div><div class="video-info"><div class="video-title">YouTube: Hit Pause with a face yoga break</div><div class="video-channel">Hit Pause</div><div class="video-date">Published: 2023-02-07</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=plJUTZtT86Y" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/plJUTZtT86Y/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#19</div></div><div class="video-info"><div class="video-title">Assembling toys, Spider-Man fighting</div><div class="video-channel">9x Toys</div><div class="video-date">Published: 2023-01-23</div></div></a></div>
-                <div class="video-card"><a href="https://www.youtube.com/watch?v=BZkDft_-blY" target="_blank"><div class="thumbnail-container"><img class="thumbnail" src="https://i.ytimg.com/vi/BZkDft_-blY/hqdefault.jpg" alt="" loading="lazy"><div class="rank-badge">#20</div></div><div class="video-info"><div class="video-title">Man Vs Cartoon Characters (animation meme)</div><div class="video-channel">Boy &amp; Dragon - WildBrain</div><div class="video-date">Published: 2023-06-04</div></div></a></div>
-            </div>
-        </div>
+<header>
+  <h1>&#127909; YouTube 熱門影片</h1>
+  <p>台灣 &amp; 美國 每日熱門排行</p>
+  <div class="badge">Execution #47 &bull; 更新於 2026-03-16 18:14 (台灣時間)</div>
+</header>
+<div class="container">
+  <div class="region-section">
+    <div class="region-title">&#127481;&#127484; 台灣 TOP 10</div>
+    <div class="videos-grid"><div class="video-card">
+  <a href="https://www.youtube.com/watch?v=_Q4TJxUNfcg" target="_blank" rel="noopener">
+    <div class="rank-badge">#1</div>
+    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/_Q4TJxUNfcg/hqdefault.jpg" alt="" loading="lazy"></div>
+    <div class="video-info">
+      <div class="video-title">波蘭前總統華勒沙：應由台灣領導中華民族統一</div>
+      <div class="channel-name">自由時報電子報</div>
+      <div class="video-stats">
+        <span>&#128065; N/A</span>
+        <span>&#128197; 2026-03-16T09:45:34Z</span>
+      </div>
     </div>
-    <script>
-        function showTab(region, event) {
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.getElementById(region).classList.add('active');
-            event.target.classList.add('active');
-        }
-    </script>
+  </a>
+</div>
+<div class="video-card">
+  <a href="https://www.youtube.com/watch?v=SoHkYaN5IUw" target="_blank" rel="noopener">
+    <div class="rank-badge">#2</div>
+    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/SoHkYaN5IUw/hqdefault.jpg" alt="" loading="lazy"></div>
+    <div class="video-info">
+      <div class="video-title">蔡正元：戰爭的走勢很難預料#中國 #台灣 #伊朗 #美國 #以色列</div>
+      <div class="channel-name">叮叮当当</div>
+      <div class="video-stats">
+        <span>&#128065; N/A</span>
+        <span>&#128197; 2026-03-16T09:02:27Z</span>
+      </div>
+    </div>
+  </a>
+</div>
+<div class="video-card">
+  <a href="https://www.youtube.com/watch?v=bl1HPfEuQNg" target="_blank" rel="noopener">
+    <div class="rank-badge">#3</div>
+    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/bl1HPfEuQNg/hqdefault.jpg" alt="" loading="lazy"></div>
+    <div class="video-info">
+      <div class="video-title">#蔣萬安 嘆#殖民主義是台灣人的痛#賴清德 不該美化，不該一再製造對立</div>
+      <div class="channel-name">微光傳媒</div>
+      <div class="video-stats">
+        <span>&#128065; N/A</span>
+        <span>&#128197; 2026-03-16T08:14:24Z</span>
+      </div>
+    </div>
+  </a>
+</div>
+<div class="video-card">
+  <a href="https://www.youtube.com/watch?v=dgd6CB1w22k" target="_blank" rel="noopener">
+    <div class="rank-badge">#4</div>
+    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/dgd6CB1w22k/hqdefault.jpg" alt="" loading="lazy"></div>
+    <div class="video-info">
+      <div class="video-title">李貞秀立院初登板&quot;空氣質詢&quot; 陳智菡當保母&quot;咬耳朵頻救援&quot;? 王義川:目無法紀!  戰火未停?日議員狠酸小草跳針喊&quot;無罪推定&quot;淪口號!│王偊菁 主持│【前進新台灣 完整版】20260316│三立新聞台</div>
+      <div class="channel-name">三立LIVE新聞</div>
+      <div class="video-stats">
+        <span>&#128065; N/A</span>
+        <span>&#128197; 2026-03-16T08:05:05Z</span>
+      </div>
+    </div>
+  </a>
+</div>
+<div class="video-card">
+  <a href="https://www.youtube.com/watch?v=W0oxLCCmm9k" target="_blank" rel="noopener">
+    <div class="rank-badge">#5</div>
+    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/W0oxLCCmm9k/hqdefault.jpg" alt="" loading="lazy"></div>
+    <div class="video-info">
+      <div class="video-title">低溫油泡肉圓傳四代! 女兒女婿接手傳承老店 #shorts #台灣亮起來 #紓壓 #療癒 #正彰化肉圓 #彰化肉圓 #台灣 #台灣美食 #taiwan #taiwanfood</div>
+      <div class="channel-name">台灣亮起來</div>
+      <div class="video-stats">
+        <span>&#128065; N/A</span>
+        <span>&#128197; 2026-03-16T08:00:28Z</span>
+      </div>
+    </div>
+  </a>
+</div>
+<div class="video-card">
+  <a href="https://www.youtube.com/watch?v=84sFzVKPJN4" target="_blank" rel="noopener">
+    <div class="rank-badge">#6</div>
+    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/84sFzVKPJN4/hqdefault.jpg" alt="" loading="lazy"></div>
+    <div class="video-info">
+      <div class="video-title">劉寶傑轟國民黨「拔掉台灣大腦」！擋C5ISR淪為聾子瞎子！@TaiwanLBJnews #shorts</div>
+      <div class="channel-name">57東森財經新聞</div>
+      <div class="video-stats">
+        <span>&#128065; N/A</span>
+        <span>&#128197; 2026-03-16T07:30:40Z</span>
+      </div>
+    </div>
+  </a>
+</div>
+<div class="video-card">
+  <a href="https://www.youtube.com/watch?v=92Z2hMpGIVA" target="_blank" rel="noopener">
+    <div class="rank-badge">#7</div>
+    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/92Z2hMpGIVA/hqdefault.jpg" alt="" loading="lazy"></div>
+    <div class="video-info">
+      <div class="video-title">2026 Tour de Taiwan Stage 2 - Taoyuan City － 2026環台賽—桃園市站</div>
+      <div class="channel-name">年代新聞CH50</div>
+      <div class="video-stats">
+        <span>&#128065; N/A</span>
+        <span>&#128197; 2026-03-16T06:08:16Z</span>
+      </div>
+    </div>
+  </a>
+</div>
+<div class="video-card">
+  <a href="https://www.youtube.com/watch?v=S04gasjAelI" target="_blank" rel="noopener">
+    <div class="rank-badge">#8</div>
+    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/S04gasjAelI/hqdefault.jpg" alt="" loading="lazy"></div>
+    <div class="video-info">
+      <div class="video-title">台灣燈會圓滿落幕　逾千萬人次見證嘉義新魅力│三立iNEWS</div>
+      <div class="channel-name">三立iNEWS</div>
+      <div class="video-stats">
+        <span>&#128065; N/A</span>
+        <span>&#128197; 2026-03-16T05:37:33Z</span>
+      </div>
+    </div>
+  </a>
+</div>
+<div class="video-card">
+  <a href="https://www.youtube.com/watch?v=Nlmx7J5M5fg" target="_blank" rel="noopener">
+    <div class="rank-badge">#9</div>
+    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/Nlmx7J5M5fg/hqdefault.jpg" alt="" loading="lazy"></div>
+    <div class="video-info">
+      <div class="video-title">嘉義台灣燈會閉幕 千架無人機燈光秀超炫【重點新聞】-20260316</div>
+      <div class="channel-name">台視新聞 TTV NEWS</div>
+      <div class="video-stats">
+        <span>&#128065; N/A</span>
+        <span>&#128197; 2026-03-16T05:10:04Z</span>
+      </div>
+    </div>
+  </a>
+</div>
+<div class="video-card">
+  <a href="https://www.youtube.com/watch?v=zda0mxj07vI" target="_blank" rel="noopener">
+    <div class="rank-badge">#10</div>
+    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/zda0mxj07vI/hqdefault.jpg" alt="" loading="lazy"></div>
+    <div class="video-info">
+      <div class="video-title">卓揆「外交突破」藍還在酸？黃益中怒轟：是中共在台協力者？｜#挑戰新聞</div>
+      <div class="channel-name">民視讚夯 Formosa TV Thumbs Up</div>
+      <div class="video-stats">
+        <span>&#128065; N/A</span>
+        <span>&#128197; 2026-03-16T05:00:50Z</span>
+      </div>
+    </div>
+  </a>
+</div></div>
+  </div>
+  <div class="region-section">
+    <div class="region-title">&#127482;&#127480; 美國 TOP 10</div>
+    <div class="videos-grid"><div class="video-card">
+  <a href="https://www.youtube.com/watch?v=nhhcmLlS44w" target="_blank" rel="noopener">
+    <div class="rank-badge">#1</div>
+    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/nhhcmLlS44w/hqdefault.jpg" alt="" loading="lazy"></div>
+    <div class="video-info">
+      <div class="video-title">papa mein kahan baitho  #youtubeshorts #trending #shorts</div>
+      <div class="channel-name">Anshika ke Kanhaiya</div>
+      <div class="video-stats">
+        <span>&#128065; N/A</span>
+        <span>&#128197; 2023-03-17T08:15:02Z</span>
+      </div>
+    </div>
+  </a>
+</div>
+<div class="video-card">
+  <a href="https://www.youtube.com/watch?v=X5dg86tXQjU" target="_blank" rel="noopener">
+    <div class="rank-badge">#2</div>
+    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/X5dg86tXQjU/hqdefault.jpg" alt="" loading="lazy"></div>
+    <div class="video-info">
+      <div class="video-title">Golden guy gifted me gold 😨 #trending #shorts #catchysmells #itmaaz #perfumer  #youtuber #perfume</div>
+      <div class="channel-name">IT Maaz</div>
+      <div class="video-stats">
+        <span>&#128065; N/A</span>
+        <span>&#128197; 2025-04-01T10:19:33Z</span>
+      </div>
+    </div>
+  </a>
+</div>
+<div class="video-card">
+  <a href="https://www.youtube.com/watch?v=wD5_xbnyu8A" target="_blank" rel="noopener">
+    <div class="rank-badge">#3</div>
+    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/wD5_xbnyu8A/hqdefault.jpg" alt="" loading="lazy"></div>
+    <div class="video-info">
+      <div class="video-title">how he takes revenge #viral #trending #funny #love #viralvideo #shorts</div>
+      <div class="channel-name">H&T Official</div>
+      <div class="video-stats">
+        <span>&#128065; N/A</span>
+        <span>&#128197; 2024-04-12T10:05:10Z</span>
+      </div>
+    </div>
+  </a>
+</div>
+<div class="video-card">
+  <a href="https://www.youtube.com/watch?v=JEV210XLDoY" target="_blank" rel="noopener">
+    <div class="rank-badge">#4</div>
+    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/JEV210XLDoY/hqdefault.jpg" alt="" loading="lazy"></div>
+    <div class="video-info">
+      <div class="video-title">Challenge Accepted 😎😮‍💨🫠 #trending #shorts #catchysmells #itmaaz #perfumer #youtuber</div>
+      <div class="channel-name">IT Maaz</div>
+      <div class="video-stats">
+        <span>&#128065; N/A</span>
+        <span>&#128197; 2025-03-06T13:12:22Z</span>
+      </div>
+    </div>
+  </a>
+</div>
+<div class="video-card">
+  <a href="https://www.youtube.com/watch?v=EJvtcH1A0Zg" target="_blank" rel="noopener">
+    <div class="rank-badge">#5</div>
+    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/EJvtcH1A0Zg/hqdefault.jpg" alt="" loading="lazy"></div>
+    <div class="video-info">
+      <div class="video-title">Meri Please Madad Kardo #youtubeshorts #shortvideo #trending #motivation #summerofshorts</div>
+      <div class="channel-name">Musa In SHORTS </div>
+      <div class="video-stats">
+        <span>&#128065; N/A</span>
+        <span>&#128197; 2023-06-07T12:19:05Z</span>
+      </div>
+    </div>
+  </a>
+</div>
+<div class="video-card">
+  <a href="https://www.youtube.com/watch?v=8WWvXZUJzhU" target="_blank" rel="noopener">
+    <div class="rank-badge">#6</div>
+    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/8WWvXZUJzhU/hqdefault.jpg" alt="" loading="lazy"></div>
+    <div class="video-info">
+      <div class="video-title">Icecream Party Ho Gaye 😳🤪 #shorts #trending #uttarakhandifunnycouple</div>
+      <div class="channel-name">Uttarakhandi Funny Couple</div>
+      <div class="video-stats">
+        <span>&#128065; N/A</span>
+        <span>&#128197; 2025-08-23T14:45:02Z</span>
+      </div>
+    </div>
+  </a>
+</div>
+<div class="video-card">
+  <a href="https://www.youtube.com/watch?v=OtZXIvKZrcY" target="_blank" rel="noopener">
+    <div class="rank-badge">#7</div>
+    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/OtZXIvKZrcY/hqdefault.jpg" alt="" loading="lazy"></div>
+    <div class="video-info">
+      <div class="video-title">నా Family Safe 🫣🫣 #cutebaby #shortsvideo #cute #trending #viral</div>
+      <div class="channel-name">Crazy Dwani For You</div>
+      <div class="video-stats">
+        <span>&#128065; N/A</span>
+        <span>&#128197; 2025-06-01T12:50:00Z</span>
+      </div>
+    </div>
+  </a>
+</div>
+<div class="video-card">
+  <a href="https://www.youtube.com/watch?v=PhVQWwjZn54" target="_blank" rel="noopener">
+    <div class="rank-badge">#8</div>
+    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/PhVQWwjZn54/hqdefault.jpg" alt="" loading="lazy"></div>
+    <div class="video-info">
+      <div class="video-title">She kissed me 🙈 don't miss the end 🫣 #trending #shorts #catchysmells #itmaaz #perfumer #kissme</div>
+      <div class="channel-name">IT Maaz</div>
+      <div class="video-stats">
+        <span>&#128065; N/A</span>
+        <span>&#128197; 2025-06-17T11:14:18Z</span>
+      </div>
+    </div>
+  </a>
+</div>
+<div class="video-card">
+  <a href="https://www.youtube.com/watch?v=O65Bh9e4iPw" target="_blank" rel="noopener">
+    <div class="rank-badge">#9</div>
+    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/O65Bh9e4iPw/hqdefault.jpg" alt="" loading="lazy"></div>
+    <div class="video-info">
+      <div class="video-title">Bugatti Trend with my Sister 😂 #shorts #trending #bugatti</div>
+      <div class="channel-name">The Savage Siblings</div>
+      <div class="video-stats">
+        <span>&#128065; N/A</span>
+        <span>&#128197; 2025-07-13T14:44:49Z</span>
+      </div>
+    </div>
+  </a>
+</div>
+<div class="video-card">
+  <a href="https://www.youtube.com/watch?v=jyr6SSI2xAU" target="_blank" rel="noopener">
+    <div class="rank-badge">#10</div>
+    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/jyr6SSI2xAU/hqdefault.jpg" alt="" loading="lazy"></div>
+    <div class="video-info">
+      <div class="video-title">Bhen Ke Saath Dhoka 😨 #neetubisht #funny #lakhneet #comedy #youtubeshorts #trending #shorts #viral</div>
+      <div class="channel-name">Neetu Bisht</div>
+      <div class="video-stats">
+        <span>&#128065; N/A</span>
+        <span>&#128197; 2025-04-27T12:31:00Z</span>
+      </div>
+    </div>
+  </a>
+</div></div>
+  </div>
+</div>
+<footer>
+  <p>資料來源: YouTube Trending &bull; 自動更新於每日 18:00 台灣時間</p>
+  <p>GitHub Pages &bull; Execution #47</p>
+</footer>
 </body>
 </html>
