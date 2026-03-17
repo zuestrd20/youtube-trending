@@ -1,332 +1,335 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YouTube 熱門影片 - 台灣 &amp; 美國</title>
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f0f0f;color:#fff}
-    header{background:linear-gradient(135deg,#ff0000,#cc0000);padding:20px;text-align:center}
-    header h1{font-size:1.8rem;margin-bottom:8px}
-    header p{opacity:.9;font-size:.9rem}
-    .badge{display:inline-block;background:rgba(255,255,255,.2);padding:4px 12px;border-radius:20px;font-size:.8rem;margin-top:8px}
-    .container{max-width:1400px;margin:0 auto;padding:20px}
-    .region-section{margin-bottom:40px}
-    .region-title{font-size:1.4rem;font-weight:700;padding:12px 0;border-bottom:3px solid #ff0000;margin-bottom:20px;display:flex;align-items:center;gap:10px}
-    .videos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
-    .video-card{background:#1e1e1e;border-radius:12px;overflow:hidden;transition:transform .2s,box-shadow .2s;position:relative}
-    .video-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(255,0,0,.3)}
-    .video-card a{text-decoration:none;color:inherit;display:block}
-    .rank-badge{position:absolute;top:8px;left:8px;background:#ff0000;color:#fff;font-weight:700;font-size:.85rem;padding:4px 10px;border-radius:20px;z-index:2}
-    .thumb-wrap{position:relative}
-    .thumb-wrap img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
-    .duration{position:absolute;bottom:4px;right:6px;background:rgba(0,0,0,.8);color:#fff;font-size:.75rem;padding:2px 6px;border-radius:4px}
-    .video-info{padding:12px}
-    .video-title{font-size:.9rem;font-weight:600;line-height:1.4;margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-    .channel-name{font-size:.8rem;color:#aaa;margin-bottom:8px}
-    .video-stats{display:flex;flex-wrap:wrap;gap:8px;font-size:.75rem;color:#888}
-    footer{text-align:center;padding:20px;color:#666;font-size:.85rem;border-top:1px solid #333}
-    @media(max-width:600px){.videos-grid{grid-template-columns:1fr 1fr;gap:10px}header h1{font-size:1.3rem}}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Trending Videos - Taiwan & US</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .update-info {
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+        
+        .region-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .region-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .region-header h2 {
+            font-size: 2em;
+            color: #667eea;
+            margin-left: 15px;
+        }
+        
+        .flag {
+            font-size: 2.5em;
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .video-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 aspect ratio */
+            background: #000;
+            overflow: hidden;
+        }
+        
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 0, 0, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .video-card:hover .play-overlay {
+            opacity: 1;
+        }
+        
+        .play-overlay::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 20px solid white;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin-left: 4px;
+        }
+        
+        .video-info {
+            padding: 15px;
+        }
+        
+        .video-title {
+            font-size: 1em;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.4;
+        }
+        
+        .video-channel {
+            font-size: 0.9em;
+            color: #606060;
+            margin-bottom: 5px;
+        }
+        
+        .video-published {
+            font-size: 0.85em;
+            color: #909090;
+        }
+        
+        .stats {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .stats-content {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            
+            .video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+            }
+            
+            .region-section {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-<header>
-  <h1>&#127909; YouTube 熱門影片</h1>
-  <p>台灣 &amp; 美國 每日熱門排行</p>
-  <div class="badge">Execution #47 &bull; 更新於 2026-03-16 18:14 (台灣時間)</div>
-</header>
-<div class="container">
-  <div class="region-section">
-    <div class="region-title">&#127481;&#127484; 台灣 TOP 10</div>
-    <div class="videos-grid"><div class="video-card">
-  <a href="https://www.youtube.com/watch?v=_Q4TJxUNfcg" target="_blank" rel="noopener">
-    <div class="rank-badge">#1</div>
-    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/_Q4TJxUNfcg/hqdefault.jpg" alt="" loading="lazy"></div>
-    <div class="video-info">
-      <div class="video-title">波蘭前總統華勒沙：應由台灣領導中華民族統一</div>
-      <div class="channel-name">自由時報電子報</div>
-      <div class="video-stats">
-        <span>&#128065; N/A</span>
-        <span>&#128197; 2026-03-16T09:45:34Z</span>
-      </div>
+    <div class="container">
+        <header>
+            <h1>🎬 YouTube Trending Videos</h1>
+            <p class="update-info">Last Updated: <span id="lastUpdate"></span></p>
+            <p class="update-info">Execution #<span id="execution"></span></p>
+        </header>
+        
+        <div class="region-section">
+            <div class="region-header">
+                <span class="flag">🇹🇼</span>
+                <h2>Taiwan Trending</h2>
+            </div>
+            <div class="video-grid" id="tw-videos"></div>
+        </div>
+        
+        <div class="region-section">
+            <div class="region-header">
+                <span class="flag">🇺🇸</span>
+                <h2>United States Trending</h2>
+            </div>
+            <div class="video-grid" id="us-videos"></div>
+        </div>
+        
+        <div class="stats">
+            <div class="stats-content">
+                <div class="stat-item">
+                    <span class="stat-number" id="tw-count">0</span>
+                    <span class="stat-label">Taiwan Videos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="us-count">0</span>
+                    <span class="stat-label">US Videos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="total-count">0</span>
+                    <span class="stat-label">Total Videos</span>
+                </div>
+            </div>
+        </div>
     </div>
-  </a>
-</div>
-<div class="video-card">
-  <a href="https://www.youtube.com/watch?v=SoHkYaN5IUw" target="_blank" rel="noopener">
-    <div class="rank-badge">#2</div>
-    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/SoHkYaN5IUw/hqdefault.jpg" alt="" loading="lazy"></div>
-    <div class="video-info">
-      <div class="video-title">蔡正元：戰爭的走勢很難預料#中國 #台灣 #伊朗 #美國 #以色列</div>
-      <div class="channel-name">叮叮当当</div>
-      <div class="video-stats">
-        <span>&#128065; N/A</span>
-        <span>&#128197; 2026-03-16T09:02:27Z</span>
-      </div>
-    </div>
-  </a>
-</div>
-<div class="video-card">
-  <a href="https://www.youtube.com/watch?v=bl1HPfEuQNg" target="_blank" rel="noopener">
-    <div class="rank-badge">#3</div>
-    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/bl1HPfEuQNg/hqdefault.jpg" alt="" loading="lazy"></div>
-    <div class="video-info">
-      <div class="video-title">#蔣萬安 嘆#殖民主義是台灣人的痛#賴清德 不該美化，不該一再製造對立</div>
-      <div class="channel-name">微光傳媒</div>
-      <div class="video-stats">
-        <span>&#128065; N/A</span>
-        <span>&#128197; 2026-03-16T08:14:24Z</span>
-      </div>
-    </div>
-  </a>
-</div>
-<div class="video-card">
-  <a href="https://www.youtube.com/watch?v=dgd6CB1w22k" target="_blank" rel="noopener">
-    <div class="rank-badge">#4</div>
-    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/dgd6CB1w22k/hqdefault.jpg" alt="" loading="lazy"></div>
-    <div class="video-info">
-      <div class="video-title">李貞秀立院初登板&quot;空氣質詢&quot; 陳智菡當保母&quot;咬耳朵頻救援&quot;? 王義川:目無法紀!  戰火未停?日議員狠酸小草跳針喊&quot;無罪推定&quot;淪口號!│王偊菁 主持│【前進新台灣 完整版】20260316│三立新聞台</div>
-      <div class="channel-name">三立LIVE新聞</div>
-      <div class="video-stats">
-        <span>&#128065; N/A</span>
-        <span>&#128197; 2026-03-16T08:05:05Z</span>
-      </div>
-    </div>
-  </a>
-</div>
-<div class="video-card">
-  <a href="https://www.youtube.com/watch?v=W0oxLCCmm9k" target="_blank" rel="noopener">
-    <div class="rank-badge">#5</div>
-    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/W0oxLCCmm9k/hqdefault.jpg" alt="" loading="lazy"></div>
-    <div class="video-info">
-      <div class="video-title">低溫油泡肉圓傳四代! 女兒女婿接手傳承老店 #shorts #台灣亮起來 #紓壓 #療癒 #正彰化肉圓 #彰化肉圓 #台灣 #台灣美食 #taiwan #taiwanfood</div>
-      <div class="channel-name">台灣亮起來</div>
-      <div class="video-stats">
-        <span>&#128065; N/A</span>
-        <span>&#128197; 2026-03-16T08:00:28Z</span>
-      </div>
-    </div>
-  </a>
-</div>
-<div class="video-card">
-  <a href="https://www.youtube.com/watch?v=84sFzVKPJN4" target="_blank" rel="noopener">
-    <div class="rank-badge">#6</div>
-    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/84sFzVKPJN4/hqdefault.jpg" alt="" loading="lazy"></div>
-    <div class="video-info">
-      <div class="video-title">劉寶傑轟國民黨「拔掉台灣大腦」！擋C5ISR淪為聾子瞎子！@TaiwanLBJnews #shorts</div>
-      <div class="channel-name">57東森財經新聞</div>
-      <div class="video-stats">
-        <span>&#128065; N/A</span>
-        <span>&#128197; 2026-03-16T07:30:40Z</span>
-      </div>
-    </div>
-  </a>
-</div>
-<div class="video-card">
-  <a href="https://www.youtube.com/watch?v=92Z2hMpGIVA" target="_blank" rel="noopener">
-    <div class="rank-badge">#7</div>
-    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/92Z2hMpGIVA/hqdefault.jpg" alt="" loading="lazy"></div>
-    <div class="video-info">
-      <div class="video-title">2026 Tour de Taiwan Stage 2 - Taoyuan City － 2026環台賽—桃園市站</div>
-      <div class="channel-name">年代新聞CH50</div>
-      <div class="video-stats">
-        <span>&#128065; N/A</span>
-        <span>&#128197; 2026-03-16T06:08:16Z</span>
-      </div>
-    </div>
-  </a>
-</div>
-<div class="video-card">
-  <a href="https://www.youtube.com/watch?v=S04gasjAelI" target="_blank" rel="noopener">
-    <div class="rank-badge">#8</div>
-    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/S04gasjAelI/hqdefault.jpg" alt="" loading="lazy"></div>
-    <div class="video-info">
-      <div class="video-title">台灣燈會圓滿落幕　逾千萬人次見證嘉義新魅力│三立iNEWS</div>
-      <div class="channel-name">三立iNEWS</div>
-      <div class="video-stats">
-        <span>&#128065; N/A</span>
-        <span>&#128197; 2026-03-16T05:37:33Z</span>
-      </div>
-    </div>
-  </a>
-</div>
-<div class="video-card">
-  <a href="https://www.youtube.com/watch?v=Nlmx7J5M5fg" target="_blank" rel="noopener">
-    <div class="rank-badge">#9</div>
-    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/Nlmx7J5M5fg/hqdefault.jpg" alt="" loading="lazy"></div>
-    <div class="video-info">
-      <div class="video-title">嘉義台灣燈會閉幕 千架無人機燈光秀超炫【重點新聞】-20260316</div>
-      <div class="channel-name">台視新聞 TTV NEWS</div>
-      <div class="video-stats">
-        <span>&#128065; N/A</span>
-        <span>&#128197; 2026-03-16T05:10:04Z</span>
-      </div>
-    </div>
-  </a>
-</div>
-<div class="video-card">
-  <a href="https://www.youtube.com/watch?v=zda0mxj07vI" target="_blank" rel="noopener">
-    <div class="rank-badge">#10</div>
-    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/zda0mxj07vI/hqdefault.jpg" alt="" loading="lazy"></div>
-    <div class="video-info">
-      <div class="video-title">卓揆「外交突破」藍還在酸？黃益中怒轟：是中共在台協力者？｜#挑戰新聞</div>
-      <div class="channel-name">民視讚夯 Formosa TV Thumbs Up</div>
-      <div class="video-stats">
-        <span>&#128065; N/A</span>
-        <span>&#128197; 2026-03-16T05:00:50Z</span>
-      </div>
-    </div>
-  </a>
-</div></div>
-  </div>
-  <div class="region-section">
-    <div class="region-title">&#127482;&#127480; 美國 TOP 10</div>
-    <div class="videos-grid"><div class="video-card">
-  <a href="https://www.youtube.com/watch?v=nhhcmLlS44w" target="_blank" rel="noopener">
-    <div class="rank-badge">#1</div>
-    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/nhhcmLlS44w/hqdefault.jpg" alt="" loading="lazy"></div>
-    <div class="video-info">
-      <div class="video-title">papa mein kahan baitho  #youtubeshorts #trending #shorts</div>
-      <div class="channel-name">Anshika ke Kanhaiya</div>
-      <div class="video-stats">
-        <span>&#128065; N/A</span>
-        <span>&#128197; 2023-03-17T08:15:02Z</span>
-      </div>
-    </div>
-  </a>
-</div>
-<div class="video-card">
-  <a href="https://www.youtube.com/watch?v=X5dg86tXQjU" target="_blank" rel="noopener">
-    <div class="rank-badge">#2</div>
-    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/X5dg86tXQjU/hqdefault.jpg" alt="" loading="lazy"></div>
-    <div class="video-info">
-      <div class="video-title">Golden guy gifted me gold 😨 #trending #shorts #catchysmells #itmaaz #perfumer  #youtuber #perfume</div>
-      <div class="channel-name">IT Maaz</div>
-      <div class="video-stats">
-        <span>&#128065; N/A</span>
-        <span>&#128197; 2025-04-01T10:19:33Z</span>
-      </div>
-    </div>
-  </a>
-</div>
-<div class="video-card">
-  <a href="https://www.youtube.com/watch?v=wD5_xbnyu8A" target="_blank" rel="noopener">
-    <div class="rank-badge">#3</div>
-    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/wD5_xbnyu8A/hqdefault.jpg" alt="" loading="lazy"></div>
-    <div class="video-info">
-      <div class="video-title">how he takes revenge #viral #trending #funny #love #viralvideo #shorts</div>
-      <div class="channel-name">H&T Official</div>
-      <div class="video-stats">
-        <span>&#128065; N/A</span>
-        <span>&#128197; 2024-04-12T10:05:10Z</span>
-      </div>
-    </div>
-  </a>
-</div>
-<div class="video-card">
-  <a href="https://www.youtube.com/watch?v=JEV210XLDoY" target="_blank" rel="noopener">
-    <div class="rank-badge">#4</div>
-    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/JEV210XLDoY/hqdefault.jpg" alt="" loading="lazy"></div>
-    <div class="video-info">
-      <div class="video-title">Challenge Accepted 😎😮‍💨🫠 #trending #shorts #catchysmells #itmaaz #perfumer #youtuber</div>
-      <div class="channel-name">IT Maaz</div>
-      <div class="video-stats">
-        <span>&#128065; N/A</span>
-        <span>&#128197; 2025-03-06T13:12:22Z</span>
-      </div>
-    </div>
-  </a>
-</div>
-<div class="video-card">
-  <a href="https://www.youtube.com/watch?v=EJvtcH1A0Zg" target="_blank" rel="noopener">
-    <div class="rank-badge">#5</div>
-    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/EJvtcH1A0Zg/hqdefault.jpg" alt="" loading="lazy"></div>
-    <div class="video-info">
-      <div class="video-title">Meri Please Madad Kardo #youtubeshorts #shortvideo #trending #motivation #summerofshorts</div>
-      <div class="channel-name">Musa In SHORTS </div>
-      <div class="video-stats">
-        <span>&#128065; N/A</span>
-        <span>&#128197; 2023-06-07T12:19:05Z</span>
-      </div>
-    </div>
-  </a>
-</div>
-<div class="video-card">
-  <a href="https://www.youtube.com/watch?v=8WWvXZUJzhU" target="_blank" rel="noopener">
-    <div class="rank-badge">#6</div>
-    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/8WWvXZUJzhU/hqdefault.jpg" alt="" loading="lazy"></div>
-    <div class="video-info">
-      <div class="video-title">Icecream Party Ho Gaye 😳🤪 #shorts #trending #uttarakhandifunnycouple</div>
-      <div class="channel-name">Uttarakhandi Funny Couple</div>
-      <div class="video-stats">
-        <span>&#128065; N/A</span>
-        <span>&#128197; 2025-08-23T14:45:02Z</span>
-      </div>
-    </div>
-  </a>
-</div>
-<div class="video-card">
-  <a href="https://www.youtube.com/watch?v=OtZXIvKZrcY" target="_blank" rel="noopener">
-    <div class="rank-badge">#7</div>
-    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/OtZXIvKZrcY/hqdefault.jpg" alt="" loading="lazy"></div>
-    <div class="video-info">
-      <div class="video-title">నా Family Safe 🫣🫣 #cutebaby #shortsvideo #cute #trending #viral</div>
-      <div class="channel-name">Crazy Dwani For You</div>
-      <div class="video-stats">
-        <span>&#128065; N/A</span>
-        <span>&#128197; 2025-06-01T12:50:00Z</span>
-      </div>
-    </div>
-  </a>
-</div>
-<div class="video-card">
-  <a href="https://www.youtube.com/watch?v=PhVQWwjZn54" target="_blank" rel="noopener">
-    <div class="rank-badge">#8</div>
-    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/PhVQWwjZn54/hqdefault.jpg" alt="" loading="lazy"></div>
-    <div class="video-info">
-      <div class="video-title">She kissed me 🙈 don't miss the end 🫣 #trending #shorts #catchysmells #itmaaz #perfumer #kissme</div>
-      <div class="channel-name">IT Maaz</div>
-      <div class="video-stats">
-        <span>&#128065; N/A</span>
-        <span>&#128197; 2025-06-17T11:14:18Z</span>
-      </div>
-    </div>
-  </a>
-</div>
-<div class="video-card">
-  <a href="https://www.youtube.com/watch?v=O65Bh9e4iPw" target="_blank" rel="noopener">
-    <div class="rank-badge">#9</div>
-    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/O65Bh9e4iPw/hqdefault.jpg" alt="" loading="lazy"></div>
-    <div class="video-info">
-      <div class="video-title">Bugatti Trend with my Sister 😂 #shorts #trending #bugatti</div>
-      <div class="channel-name">The Savage Siblings</div>
-      <div class="video-stats">
-        <span>&#128065; N/A</span>
-        <span>&#128197; 2025-07-13T14:44:49Z</span>
-      </div>
-    </div>
-  </a>
-</div>
-<div class="video-card">
-  <a href="https://www.youtube.com/watch?v=jyr6SSI2xAU" target="_blank" rel="noopener">
-    <div class="rank-badge">#10</div>
-    <div class="thumb-wrap"><img src="https://i.ytimg.com/vi/jyr6SSI2xAU/hqdefault.jpg" alt="" loading="lazy"></div>
-    <div class="video-info">
-      <div class="video-title">Bhen Ke Saath Dhoka 😨 #neetubisht #funny #lakhneet #comedy #youtubeshorts #trending #shorts #viral</div>
-      <div class="channel-name">Neetu Bisht</div>
-      <div class="video-stats">
-        <span>&#128065; N/A</span>
-        <span>&#128197; 2025-04-27T12:31:00Z</span>
-      </div>
-    </div>
-  </a>
-</div></div>
-  </div>
-</div>
-<footer>
-  <p>資料來源: YouTube Trending &bull; 自動更新於每日 18:00 台灣時間</p>
-  <p>GitHub Pages &bull; Execution #47</p>
-</footer>
+    
+    <script>
+        // Format date function
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            const diffMonths = Math.floor(diffDays / 30);
+            const diffYears = Math.floor(diffDays / 365);
+            
+            if (diffYears > 0) {
+                return `${diffYears} year${diffYears > 1 ? 's' : ''} ago`;
+            } else if (diffMonths > 0) {
+                return `${diffMonths} month${diffMonths > 1 ? 's' : ''} ago`;
+            } else if (diffDays > 0) {
+                return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
+            } else {
+                return 'Today';
+            }
+        }
+        
+        // Create video card
+        function createVideoCard(video) {
+            return `
+                <a href="${video.url}" target="_blank" class="video-card" style="text-decoration: none;">
+                    <div class="video-thumbnail">
+                        <img src="${video.thumbnail}" alt="${video.title}" loading="lazy">
+                        <div class="play-overlay"></div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">${video.title}</div>
+                        <div class="video-channel">${video.channel}</div>
+                        <div class="video-published">${formatDate(video.published)}</div>
+                    </div>
+                </a>
+            `;
+        }
+        
+        // Load and display videos
+        fetch('trending.json')
+            .then(response => response.json())
+            .then(data => {
+                // Update header info
+                document.getElementById('lastUpdate').textContent = new Date(data.lastUpdated).toLocaleString();
+                document.getElementById('execution').textContent = data.execution;
+                
+                // Display Taiwan videos
+                const twContainer = document.getElementById('tw-videos');
+                data.regions.TW.forEach(video => {
+                    twContainer.innerHTML += createVideoCard(video);
+                });
+                
+                // Display US videos
+                const usContainer = document.getElementById('us-videos');
+                data.regions.US.forEach(video => {
+                    usContainer.innerHTML += createVideoCard(video);
+                });
+                
+                // Update stats
+                document.getElementById('tw-count').textContent = data.regions.TW.length;
+                document.getElementById('us-count').textContent = data.regions.US.length;
+                document.getElementById('total-count').textContent = data.regions.TW.length + data.regions.US.length;
+            })
+            .catch(error => {
+                console.error('Error loading trending videos:', error);
+                document.querySelector('.container').innerHTML = `
+                    <header>
+                        <h1>Error Loading Videos</h1>
+                        <p>Please try again later.</p>
+                    </header>
+                `;
+            });
+    </script>
 </body>
 </html>
