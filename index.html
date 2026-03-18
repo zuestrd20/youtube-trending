@@ -112,7 +112,7 @@
             transform: translate(-50%, -50%);
             width: 60px;
             height: 60px;
-            background: rgba(255, 0, 0, 0.8);
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -125,14 +125,13 @@
             opacity: 1;
         }
         
-        .play-overlay::after {
-            content: '';
+        .play-icon {
             width: 0;
             height: 0;
-            border-left: 20px solid white;
             border-top: 12px solid transparent;
             border-bottom: 12px solid transparent;
-            margin-left: 4px;
+            border-left: 20px solid #667eea;
+            margin-left: 5px;
         }
         
         .video-info {
@@ -140,58 +139,33 @@
         }
         
         .video-title {
-            font-size: 1em;
+            font-size: 1.1em;
             font-weight: 600;
-            color: #1a1a1a;
+            color: #333;
             margin-bottom: 8px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            line-height: 1.4;
         }
         
         .video-channel {
             font-size: 0.9em;
-            color: #606060;
+            color: #666;
             margin-bottom: 5px;
         }
         
-        .video-published {
-            font-size: 0.85em;
-            color: #909090;
-        }
-        
-        .stats {
-            text-align: center;
-            color: white;
-            padding: 20px;
-            margin-top: 20px;
-        }
-        
-        .stats-content {
+        .video-stats {
             display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 0.8em;
+            color: #999;
         }
         
-        .stat-item {
-            background: rgba(255,255,255,0.1);
-            padding: 15px 30px;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .stat-number {
-            font-size: 2em;
-            font-weight: bold;
-            display: block;
-        }
-        
-        .stat-label {
-            font-size: 0.9em;
-            opacity: 0.9;
+        .video-stats-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
         
         @media (max-width: 768px) {
@@ -199,17 +173,6 @@
                 font-size: 2em;
             }
             
-            .video-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                gap: 15px;
-            }
-            
-            .region-section {
-                padding: 20px;
-            }
-        }
-        
-        @media (max-width: 480px) {
             .video-grid {
                 grid-template-columns: 1fr;
             }
@@ -219,117 +182,87 @@
 <body>
     <div class="container">
         <header>
-            <h1>🎬 YouTube Trending Videos</h1>
-            <p class="update-info">Last Updated: <span id="lastUpdate"></span></p>
-            <p class="update-info">Execution #<span id="execution"></span></p>
+            <h1>🌎 YouTube Trending Videos</h1>
+            <div class="update-info">
+                Last Updated: March 18, 2026 | Execution #49
+            </div>
         </header>
         
         <div class="region-section">
             <div class="region-header">
                 <span class="flag">🇹🇼</span>
-                <h2>Taiwan Trending</h2>
+                <h2>Taiwan</h2>
             </div>
-            <div class="video-grid" id="tw-videos"></div>
+            <div class="video-grid" id="tw-grid">
+                <!-- Tw videos will be loaded here -->
+            </div>
         </div>
         
         <div class="region-section">
             <div class="region-header">
                 <span class="flag">🇺🇸</span>
-                <h2>United States Trending</h2>
+                <h2>United States</h2>
             </div>
-            <div class="video-grid" id="us-videos"></div>
-        </div>
-        
-        <div class="stats">
-            <div class="stats-content">
-                <div class="stat-item">
-                    <span class="stat-number" id="tw-count">0</span>
-                    <span class="stat-label">Taiwan Videos</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" id="us-count">0</span>
-                    <span class="stat-label">US Videos</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" id="total-count">0</span>
-                    <span class="stat-label">Total Videos</span>
-                </div>
+            <div class="video-grid" id="us-grid">
+                <!-- US videos will be loaded here -->
             </div>
         </div>
     </div>
-    
+
     <script>
-        // Format date function
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            const now = new Date();
-            const diffTime = Math.abs(now - date);
-            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-            const diffMonths = Math.floor(diffDays / 30);
-            const diffYears = Math.floor(diffDays / 365);
-            
-            if (diffYears > 0) {
-                return `${diffYears} year${diffYears > 1 ? 's' : ''} ago`;
-            } else if (diffMonths > 0) {
-                return `${diffMonths} month${diffMonths > 1 ? 's' : ''} ago`;
-            } else if (diffDays > 0) {
-                return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
-            } else {
-                return 'Today';
+        async function loadTrendingVideos() {
+            try {
+                const response = await fetch('trending.json');
+                const data = await response.json();
+                
+                if (data.regions.TW) {
+                    renderVideos(data.regions.TW, 'tw-grid');
+                }
+                
+                if (data.regions.US) {
+                    renderVideos(data.regions.US, 'us-grid');
+                }
+            } catch (error) {
+                console.error('Error loading trending videos:', error);
             }
         }
         
-        // Create video card
-        function createVideoCard(video) {
-            return `
-                <a href="${video.url}" target="_blank" class="video-card" style="text-decoration: none;">
+        function renderVideos(videos, containerId) {
+            const container = document.getElementById(containerId);
+            
+            videos.forEach(video => {
+                const videoCard = document.createElement('div');
+                videoCard.className = 'video-card';
+                videoCard.onclick = () => window.open(video.url, '_blank');
+                
+                videoCard.innerHTML = `
                     <div class="video-thumbnail">
-                        <img src="${video.thumbnail}" alt="${video.title}" loading="lazy">
-                        <div class="play-overlay"></div>
+                        <img src="${video.thumbnail}" alt="${video.title}">
+                        <div class="play-overlay">
+                            <div class="play-icon"></div>
+                        </div>
                     </div>
                     <div class="video-info">
-                        <div class="video-title">${video.title}</div>
+                        <h3 class="video-title">${video.title}</h3>
                         <div class="video-channel">${video.channel}</div>
-                        <div class="video-published">${formatDate(video.published)}</div>
+                        <div class="video-stats">
+                            ${video.viewCount > 0 ? `<div class="video-stats-item">⏰ ${formatCount(video.viewCount)} views</div>` : ''}
+                            ${video.likeCount > 0 ? `<div class="video-stats-item">❤ ${formatCount(video.likeCount)}</div>` : ''}
+                        </div>
                     </div>
-                </a>
-            `;
+                `;
+                
+                container.appendChild(videoCard);
+            });
         }
         
-        // Load and display videos
-        fetch('trending.json')
-            .then(response => response.json())
-            .then(data => {
-                // Update header info
-                document.getElementById('lastUpdate').textContent = new Date(data.lastUpdated).toLocaleString();
-                document.getElementById('execution').textContent = data.execution;
-                
-                // Display Taiwan videos
-                const twContainer = document.getElementById('tw-videos');
-                data.regions.TW.forEach(video => {
-                    twContainer.innerHTML += createVideoCard(video);
-                });
-                
-                // Display US videos
-                const usContainer = document.getElementById('us-videos');
-                data.regions.US.forEach(video => {
-                    usContainer.innerHTML += createVideoCard(video);
-                });
-                
-                // Update stats
-                document.getElementById('tw-count').textContent = data.regions.TW.length;
-                document.getElementById('us-count').textContent = data.regions.US.length;
-                document.getElementById('total-count').textContent = data.regions.TW.length + data.regions.US.length;
-            })
-            .catch(error => {
-                console.error('Error loading trending videos:', error);
-                document.querySelector('.container').innerHTML = `
-                    <header>
-                        <h1>Error Loading Videos</h1>
-                        <p>Please try again later.</p>
-                    </header>
-                `;
-            });
+        function formatCount(num) {
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+            return num.toString();
+        }
+        
+        loadTrendingVideos();
     </script>
 </body>
 </html>
