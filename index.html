@@ -3,178 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Trending Videos - Taiwan & US</title>
+    <title>YouTube Trending Videos - Execution #50</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
-            padding: 20px;
             min-height: 100vh;
+            padding: 20px;
         }
-        
         .container {
             max-width: 1400px;
             margin: 0 auto;
         }
-        
         header {
             text-align: center;
             color: white;
-            padding: 40px 20px;
             margin-bottom: 40px;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
-        
-        header h1 {
-            font-size: 3em;
+        h1 {
+            font-size: 2.5em;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
-        
-        .update-info {
+        .update-time {
             font-size: 1.1em;
             opacity: 0.9;
             margin-top: 10px;
         }
-        
-        .region-section {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        .execution-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            margin-top: 15px;
         }
-        
-        .region-header {
+        .tabs {
             display: flex;
-            align-items: center;
+            gap: 15px;
             margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #667eea;
+            justify-content: center;
         }
-        
-        .region-header h2 {
-            font-size: 2em;
-            color: #667eea;
-            margin-left: 15px;
+        .tab-button {
+            padding: 15px 40px;
+            background: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-        
-        .flag {
-            font-size: 2.5em;
+        .tab-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
-        
+        .tab-button.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 25px;
+            margin-top: 20px;
         }
-        
         .video-card {
-            background: #f8f9fa;
-            border-radius: 12px;
+            background: white;
+            border-radius: 15px;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
             cursor: pointer;
         }
-        
         .video-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
-        
         .video-thumbnail {
-            position: relative;
             width: 100%;
-            padding-top: 56.25%; /* 16:9 aspect ratio */
-            background: #000;
-            overflow: hidden;
-        }
-        
-        .video-thumbnail img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            height: 200px;
             object-fit: cover;
+            background: #f0f0f0;
         }
-        
-        .play-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .video-card:hover .play-overlay {
-            opacity: 1;
-        }
-        
-        .play-icon {
-            width: 0;
-            height: 0;
-            border-top: 12px solid transparent;
-            border-bottom: 12px solid transparent;
-            border-left: 20px solid #667eea;
-            margin-left: 5px;
-        }
-        
         .video-info {
-            padding: 15px;
+            padding: 20px;
         }
-        
         .video-title {
             font-size: 1.1em;
             font-weight: 600;
             color: #333;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            line-height: 1.4;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-        
         .video-channel {
-            font-size: 0.9em;
             color: #666;
+            font-size: 0.95em;
+            margin-bottom: 8px;
+        }
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #eee;
+        }
+        .video-date {
+            color: #999;
+            font-size: 0.85em;
+        }
+        .video-id {
+            background: #f0f0f0;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            color: #666;
+            font-family: monospace;
+        }
+        .region-header {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .region-title {
+            font-size: 1.8em;
+            color: #333;
             margin-bottom: 5px;
         }
-        
-        .video-stats {
-            display: flex;
-            gap: 15px;
-            font-size: 0.8em;
-            color: #999;
+        .video-count {
+            color: #666;
+            font-size: 1.1em;
         }
-        
-        .video-stats-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 50px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
         }
-        
         @media (max-width: 768px) {
-            header h1 {
-                font-size: 2em;
-            }
-            
             .video-grid {
                 grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            .tabs {
+                flex-direction: column;
+            }
+            .tab-button {
+                width: 100%;
             }
         }
     </style>
@@ -182,87 +186,440 @@
 <body>
     <div class="container">
         <header>
-            <h1>🌎 YouTube Trending Videos</h1>
-            <div class="update-info">
-                Last Updated: March 18, 2026 | Execution #49
-            </div>
+            <h1>🎥 YouTube Trending Videos</h1>
+            <div class="update-time">Last Updated: 2026-03-19 10:14 UTC</div>
+            <div class="execution-badge">Execution #50</div>
         </header>
-        
-        <div class="region-section">
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab('tw')">🇹🇼 Taiwan</button>
+            <button class="tab-button" onclick="showTab('us')">🇺🇸 United States</button>
+        </div>
+
+        <div id="tw-tab" class="tab-content active">
             <div class="region-header">
-                <span class="flag">🇹🇼</span>
-                <h2>Taiwan</h2>
+                <div class="region-title">Taiwan Trending Videos</div>
+                <div class="video-count">19 videos</div>
             </div>
-            <div class="video-grid" id="tw-grid">
-                <!-- Tw videos will be loaded here -->
+            <div class="video-grid">
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=LbwZCALNfb8', '_blank')">
+                    <img src="https://i.ytimg.com/vi/LbwZCALNfb8/hqdefault.jpg" alt="ALZATE & DARÍO GÓMEZ - Copita de Licor (Video Oficial)" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">ALZATE & DARÍO GÓMEZ - Copita de Licor (Video Oficial)</div>
+                        <div class="video-channel">📺 Alzatemusica</div>
+                        <div class="video-meta">
+                            <span class="video-date">2018-11-30</span>
+                            <span class="video-id">LbwZCALNfb8</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=qZJzHnSHJg4', '_blank')">
+                    <img src="https://i.ytimg.com/vi/qZJzHnSHJg4/hqdefault.jpg" alt="ALZATE X YEISON JIMÉNEZ - MI VENGANZA | VIDEO OFICIAL" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">ALZATE X YEISON JIMÉNEZ - MI VENGANZA | VIDEO OFICIAL</div>
+                        <div class="video-channel">📺 Alzatemusica</div>
+                        <div class="video-meta">
+                            <span class="video-date">2020-11-27</span>
+                            <span class="video-id">qZJzHnSHJg4</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=Hp7hW1NrEMU', '_blank')">
+                    <img src="https://i.ytimg.com/vi/Hp7hW1NrEMU/hqdefault.jpg" alt="Funny Electric Bamboo Man. Funny Bamboo Man DIY. Top Video Bamboo Man #18" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">Funny Electric Bamboo Man. Funny Bamboo Man DIY. Top Video Bamboo Man #18</div>
+                        <div class="video-channel">📺 Meaningful Cartoons 183</div>
+                        <div class="video-meta">
+                            <span class="video-date">2023-04-27</span>
+                            <span class="video-id">Hp7hW1NrEMU</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=7CY5QXOcwKY', '_blank')">
+                    <img src="https://i.ytimg.com/vi/7CY5QXOcwKY/hqdefault.jpg" alt="Top video" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">Top video</div>
+                        <div class="video-channel">📺 GenBalloon</div>
+                        <div class="video-meta">
+                            <span class="video-date">2023-03-15</span>
+                            <span class="video-id">7CY5QXOcwKY</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=gGZIMD-q6sc', '_blank')">
+                    <img src="https://i.ytimg.com/vi/gGZIMD-q6sc/hqdefault.jpg" alt="Bella Poarch | This ain't build a…pop! My first ever Funko Pop is out now" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">Bella Poarch | This ain't build a…pop! My first ever Funko Pop is out now</div>
+                        <div class="video-channel">📺 Bella Poarch Shorts</div>
+                        <div class="video-meta">
+                            <span class="video-date">2022-09-27</span>
+                            <span class="video-id">gGZIMD-q6sc</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=29RynFdnJ8w', '_blank')">
+                    <img src="https://i.ytimg.com/vi/29RynFdnJ8w/hqdefault.jpg" alt="El Precio De Tu Error - Luis Alfonso | En Vivo" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">El Precio De Tu Error - Luis Alfonso | En Vivo</div>
+                        <div class="video-channel">📺 Luis Alfonso</div>
+                        <div class="video-meta">
+                            <span class="video-date">2021-06-19</span>
+                            <span class="video-id">29RynFdnJ8w</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=nmcdLOjGVzw', '_blank')">
+                    <img src="https://i.ytimg.com/vi/nmcdLOjGVzw/hqdefault.jpg" alt="MIKA - Popular Song ft. Ariana Grande" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">MIKA - Popular Song ft. Ariana Grande</div>
+                        <div class="video-channel">📺 MIKAVEVO</div>
+                        <div class="video-meta">
+                            <span class="video-date">2013-04-29</span>
+                            <span class="video-id">nmcdLOjGVzw</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=eP91AvnEOjE', '_blank')">
+                    <img src="https://i.ytimg.com/vi/eP91AvnEOjE/hqdefault.jpg" alt="YA ME CANSE - ALZATE - (VIDEO OFICIAL)" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">YA ME CANSE - ALZATE - (VIDEO OFICIAL)</div>
+                        <div class="video-channel">📺 Alzatemusica</div>
+                        <div class="video-meta">
+                            <span class="video-date">2015-05-07</span>
+                            <span class="video-id">eP91AvnEOjE</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=Qz9SjKjxvcY', '_blank')">
+                    <img src="https://i.ytimg.com/vi/Qz9SjKjxvcY/hqdefault.jpg" alt="Top 10 Popular Kids Songs + More Nursery Rhymes & Kids Songs - CoComelon" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">Top 10 Popular Kids Songs + More Nursery Rhymes & Kids Songs - CoComelon</div>
+                        <div class="video-channel">📺 Cocomelon - Nursery Rhymes</div>
+                        <div class="video-meta">
+                            <span class="video-date">2017-08-18</span>
+                            <span class="video-id">Qz9SjKjxvcY</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=jakpo7tj7Qw', '_blank')">
+                    <img src="https://i.ytimg.com/vi/jakpo7tj7Qw/hqdefault.jpg" alt="Falling In Reverse - Popular Monster" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">Falling In Reverse - Popular Monster</div>
+                        <div class="video-channel">📺 Epitaph Records</div>
+                        <div class="video-meta">
+                            <span class="video-date">2019-11-20</span>
+                            <span class="video-id">jakpo7tj7Qw</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=0p4aTiui2LU', '_blank')">
+                    <img src="https://i.ytimg.com/vi/0p4aTiui2LU/hqdefault.jpg" alt="Porqué la envidia (Yeison Jiménez) - Vídeo Oficial - Música Popular" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">Porqué la envidia (Yeison Jiménez) - Vídeo Oficial - Música Popular</div>
+                        <div class="video-channel">📺 Yeison Jimenez</div>
+                        <div class="video-meta">
+                            <span class="video-date">2014-02-06</span>
+                            <span class="video-id">0p4aTiui2LU</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=8A_GsMOcWeE', '_blank')">
+                    <img src="https://i.ytimg.com/vi/8A_GsMOcWeE/hqdefault.jpg" alt="World's Largest Cake Pop (ft. Lynja)" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">World's Largest Cake Pop (ft. Lynja)</div>
+                        <div class="video-channel">📺 Nick DiGiovanni</div>
+                        <div class="video-meta">
+                            <span class="video-date">2021-12-23</span>
+                            <span class="video-id">8A_GsMOcWeE</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=VGKqJhVeTcI', '_blank')">
+                    <img src="https://i.ytimg.com/vi/VGKqJhVeTcI/hqdefault.jpg" alt="Marbelle - Adicta Al Dolor | Video Oficial" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">Marbelle - Adicta Al Dolor | Video Oficial</div>
+                        <div class="video-channel">📺 MARBELLE</div>
+                        <div class="video-meta">
+                            <span class="video-date">2020-01-24</span>
+                            <span class="video-id">VGKqJhVeTcI</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=Gtb55L6EXLQ', '_blank')">
+                    <img src="https://i.ytimg.com/vi/Gtb55L6EXLQ/hqdefault.jpg" alt="Trucos Geniales Para Ser Popular en la Escuela || Momentos divertidos con amigos para siempre" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">Trucos Geniales Para Ser Popular en la Escuela || Momentos divertidos con amigos para siempre</div>
+                        <div class="video-channel">📺 AMIGOS FOREVER</div>
+                        <div class="video-meta">
+                            <span class="video-date">2021-02-20</span>
+                            <span class="video-id">Gtb55L6EXLQ</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=fg9Ve1wUBpc', '_blank')">
+                    <img src="https://i.ytimg.com/vi/fg9Ve1wUBpc/hqdefault.jpg" alt="Mi Palabra Contra La De Ellos (En Vivo) - Luis Alfonso | Video Oficial" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">Mi Palabra Contra La De Ellos (En Vivo) - Luis Alfonso | Video Oficial</div>
+                        <div class="video-channel">📺 Luis Alfonso</div>
+                        <div class="video-meta">
+                            <span class="video-date">2023-07-27</span>
+                            <span class="video-id">fg9Ve1wUBpc</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=FDMgufO6kQ0', '_blank')">
+                    <img src="https://i.ytimg.com/vi/FDMgufO6kQ0/hqdefault.jpg" alt="TOP 30 Popular Songs for Kids | +Compilation | Bebefinn Nursery Rhymes for Kids" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">TOP 30 Popular Songs for Kids | +Compilation | Bebefinn Nursery Rhymes for Kids</div>
+                        <div class="video-channel">📺 Bebefinn - Nursery Rhymes & Kids Songs</div>
+                        <div class="video-meta">
+                            <span class="video-date">2022-11-11</span>
+                            <span class="video-id">FDMgufO6kQ0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=N-Pmyvm5IcE', '_blank')">
+                    <img src="https://i.ytimg.com/vi/N-Pmyvm5IcE/hqdefault.jpg" alt="No Me Haces Falta (En Vivo) - Luis Alfonso | Video Oficial" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">No Me Haces Falta (En Vivo) - Luis Alfonso | Video Oficial</div>
+                        <div class="video-channel">📺 Luis Alfonso</div>
+                        <div class="video-meta">
+                            <span class="video-date">2022-08-18</span>
+                            <span class="video-id">N-Pmyvm5IcE</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=vt0i6nuqNEo', '_blank')">
+                    <img src="https://i.ytimg.com/vi/vt0i6nuqNEo/hqdefault.jpg" alt="The Weeknd, Madonna, Playboi Carti - Popular (Official Music Video)" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">The Weeknd, Madonna, Playboi Carti - Popular (Official Music Video)</div>
+                        <div class="video-channel">📺 TheWeekndVEVO</div>
+                        <div class="video-meta">
+                            <span class="video-date">2024-02-22</span>
+                            <span class="video-id">vt0i6nuqNEo</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=VJ-DRbDXepE', '_blank')">
+                    <img src="https://i.ytimg.com/vi/VJ-DRbDXepE/hqdefault.jpg" alt="La Cantina (Remix) - Hernan Gómez x Luis Alfonso x Pipe Bueno | Video Oficial" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">La Cantina (Remix) - Hernan Gómez x Luis Alfonso x Pipe Bueno | Video Oficial</div>
+                        <div class="video-channel">📺 Luis Alfonso</div>
+                        <div class="video-meta">
+                            <span class="video-date">2023-09-07</span>
+                            <span class="video-id">VJ-DRbDXepE</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        
-        <div class="region-section">
+
+        <div id="us-tab" class="tab-content">
             <div class="region-header">
-                <span class="flag">🇺🇸</span>
-                <h2>United States</h2>
+                <div class="region-title">United States Trending Videos</div>
+                <div class="video-count">16 videos</div>
             </div>
-            <div class="video-grid" id="us-grid">
-                <!-- US videos will be loaded here -->
+            <div class="video-grid">
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=HiDGfFOzfnk', '_blank')">
+                    <img src="https://i.ytimg.com/vi/HiDGfFOzfnk/hqdefault.jpg" alt="He's bully-proof #funny #viral #family #fypシ #shorts" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">He's bully-proof #funny #viral #family #fypシ #shorts</div>
+                        <div class="video-channel">📺 The Gabriels</div>
+                        <div class="video-meta">
+                            <span class="video-date">2023-06-24</span>
+                            <span class="video-id">HiDGfFOzfnk</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=wD5_xbnyu8A', '_blank')">
+                    <img src="https://i.ytimg.com/vi/wD5_xbnyu8A/hqdefault.jpg" alt="how he takes revenge #viral #trending #funny #love #viralvideo #shorts" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">how he takes revenge #viral #trending #funny #love #viralvideo #shorts</div>
+                        <div class="video-channel">📺 H&T Official</div>
+                        <div class="video-meta">
+                            <span class="video-date">2024-04-12</span>
+                            <span class="video-id">wD5_xbnyu8A</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=t1MnvH6GPJ4', '_blank')">
+                    <img src="https://i.ytimg.com/vi/t1MnvH6GPJ4/hqdefault.jpg" alt="Ssc Exam Preparation Viral _ video Ankita Bhattacharya #short #viral" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">Ssc Exam Preparation Viral _ video Ankita Bhattacharya #short #viral</div>
+                        <div class="video-channel">📺 Jhankar Studio</div>
+                        <div class="video-meta">
+                            <span class="video-date">2024-05-19</span>
+                            <span class="video-id">t1MnvH6GPJ4</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=sJQThN5tUDY', '_blank')">
+                    <img src="https://i.ytimg.com/vi/sJQThN5tUDY/hqdefault.jpg" alt="Power of pavva | The most viral comedy by Maabeta #ytshorts #shorts" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">Power of pavva | The most viral comedy by Maabeta #ytshorts #shorts</div>
+                        <div class="video-channel">📺 up wala aryan</div>
+                        <div class="video-meta">
+                            <span class="video-date">2025-03-30</span>
+                            <span class="video-id">sJQThN5tUDY</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=_L6fIGWLSJ4', '_blank')">
+                    <img src="https://i.ytimg.com/vi/_L6fIGWLSJ4/hqdefault.jpg" alt="Best video of the day (unfriendly friend ) #foryou #viralvideo #shortvideo #youtubeshorts #viral" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">Best video of the day (unfriendly friend ) #foryou #viralvideo #shortvideo #youtubeshorts #viral</div>
+                        <div class="video-channel">📺 Makanaki Tv </div>
+                        <div class="video-meta">
+                            <span class="video-date">2025-08-07</span>
+                            <span class="video-id">_L6fIGWLSJ4</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=hx265ujsLVU', '_blank')">
+                    <img src="https://i.ytimg.com/vi/hx265ujsLVU/hqdefault.jpg" alt="#viral #shorts" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">#viral #shorts</div>
+                        <div class="video-channel">📺 H&T Official</div>
+                        <div class="video-meta">
+                            <span class="video-date">2024-04-16</span>
+                            <span class="video-id">hx265ujsLVU</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=dgn-aenjHp8', '_blank')">
+                    <img src="https://i.ytimg.com/vi/dgn-aenjHp8/hqdefault.jpg" alt="Tom Holland React Viral Videos Part 22 #tomholland #funny #trytolaugh #reaction" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">Tom Holland React Viral Videos Part 22 #tomholland #funny #trytolaugh #reaction</div>
+                        <div class="video-channel">📺 Mahadi ALP</div>
+                        <div class="video-meta">
+                            <span class="video-date">2026-02-11</span>
+                            <span class="video-id">dgn-aenjHp8</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=QsgzyXa6o6o', '_blank')">
+                    <img src="https://i.ytimg.com/vi/QsgzyXa6o6o/hqdefault.jpg" alt="How Viral Videos Are Made" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">How Viral Videos Are Made</div>
+                        <div class="video-channel">📺 Alan's Universe</div>
+                        <div class="video-meta">
+                            <span class="video-date">2022-04-29</span>
+                            <span class="video-id">QsgzyXa6o6o</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=F7gi1J3Tcnk', '_blank')">
+                    <img src="https://i.ytimg.com/vi/F7gi1J3Tcnk/hqdefault.jpg" alt="Musician is great #shorts #viral #comedy" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">Musician is great #shorts #viral #comedy</div>
+                        <div class="video-channel">📺 SG Funny Family</div>
+                        <div class="video-meta">
+                            <span class="video-date">2025-05-27</span>
+                            <span class="video-id">F7gi1J3Tcnk</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=jyr6SSI2xAU', '_blank')">
+                    <img src="https://i.ytimg.com/vi/jyr6SSI2xAU/hqdefault.jpg" alt="Bhen Ke Saath Dhoka #neetubisht #funny #lakhneet #comedy #youtubeshorts #trending #shorts #viral" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">Bhen Ke Saath Dhoka #neetubisht #funny #lakhneet #comedy #youtubeshorts #trending #shorts #viral</div>
+                        <div class="video-channel">📺 Neetu Bisht</div>
+                        <div class="video-meta">
+                            <span class="video-date">2025-04-27</span>
+                            <span class="video-id">jyr6SSI2xAU</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=iS2EiSQd72s', '_blank')">
+                    <img src="https://i.ytimg.com/vi/iS2EiSQd72s/hqdefault.jpg" alt="amaira giri jhule se #shorts #trending #viral #thegeetagurjar #youtubeshorts" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">amaira giri jhule se #shorts #trending #viral #thegeetagurjar #youtubeshorts</div>
+                        <div class="video-channel">📺 The geeta gurjar</div>
+                        <div class="video-meta">
+                            <span class="video-date">2022-11-13</span>
+                            <span class="video-id">iS2EiSQd72s</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=UpCIC7FXGdQ', '_blank')">
+                    <img src="https://i.ytimg.com/vi/UpCIC7FXGdQ/hqdefault.jpg" alt="VIRAL Potato Recipe | #shorts #potato #potatowedges  #viral #trending #viralfood" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">VIRAL Potato Recipe | #shorts #potato #potatowedges  #viral #trending #viralfood</div>
+                        <div class="video-channel">📺 Chef Prateek's Kitchen</div>
+                        <div class="video-meta">
+                            <span class="video-date">2022-08-09</span>
+                            <span class="video-id">UpCIC7FXGdQ</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=hJdrD_XEdXA', '_blank')">
+                    <img src="https://i.ytimg.com/vi/hJdrD_XEdXA/hqdefault.jpg" alt="Tom Holland Reacts To Viral Videos part 22 #tomholland #funny #reaction #memes #tiktokeffects" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">Tom Holland Reacts To Viral Videos part 22 #tomholland #funny #reaction #memes #tiktokeffects</div>
+                        <div class="video-channel">📺 Tom React</div>
+                        <div class="video-meta">
+                            <span class="video-date">2025-09-10</span>
+                            <span class="video-id">hJdrD_XEdXA</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=X40_0uqYbio', '_blank')">
+                    <img src="https://i.ytimg.com/vi/X40_0uqYbio/hqdefault.jpg" alt="It's so scrary #trending #viral #funny #shorts" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">It's so scrary #trending #viral #funny #shorts</div>
+                        <div class="video-channel">📺 H&T Official</div>
+                        <div class="video-meta">
+                            <span class="video-date">2024-05-06</span>
+                            <span class="video-id">X40_0uqYbio</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=PhKNQGGQ4lg', '_blank')">
+                    <img src="https://i.ytimg.com/vi/PhKNQGGQ4lg/hqdefault.jpg" alt="Ye Itna VIRAL Kyu Ho Gaya?? #shorts #viral #bread #breadrecipe" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">Ye Itna VIRAL Kyu Ho Gaya?? #shorts #viral #bread #breadrecipe</div>
+                        <div class="video-channel">📺 Chef Prateek's Kitchen</div>
+                        <div class="video-meta">
+                            <span class="video-date">2022-07-17</span>
+                            <span class="video-id">PhKNQGGQ4lg</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-card" onclick="window.open('https://www.youtube.com/watch?v=6pWFxeRTJnw', '_blank')">
+                    <img src="https://i.ytimg.com/vi/6pWFxeRTJnw/hqdefault.jpg" alt="Lagu viral part 2 ini juga bikin candu #shorts" class="video-thumbnail" loading="lazy">
+                    <div class="video-info">
+                        <div class="video-title">Lagu viral part 2 ini juga bikin candu #shorts</div>
+                        <div class="video-channel">📺 JOVANKA MUKBANG</div>
+                        <div class="video-meta">
+                            <span class="video-date">2025-09-14</span>
+                            <span class="video-id">6pWFxeRTJnw</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <footer>
+            <p>Data source: YouTube Data API v3</p>
+            <p>Auto-updated via GitHub Actions</p>
+            <p style="margin-top: 10px; opacity: 0.8;">Execution #50 | 2026-03-19 10:14 UTC</p>
+        </footer>
     </div>
 
     <script>
-        async function loadTrendingVideos() {
-            try {
-                const response = await fetch('trending.json');
-                const data = await response.json();
-                
-                if (data.regions.TW) {
-                    renderVideos(data.regions.TW, 'tw-grid');
-                }
-                
-                if (data.regions.US) {
-                    renderVideos(data.regions.US, 'us-grid');
-                }
-            } catch (error) {
-                console.error('Error loading trending videos:', error);
-            }
-        }
-        
-        function renderVideos(videos, containerId) {
-            const container = document.getElementById(containerId);
-            
-            videos.forEach(video => {
-                const videoCard = document.createElement('div');
-                videoCard.className = 'video-card';
-                videoCard.onclick = () => window.open(video.url, '_blank');
-                
-                videoCard.innerHTML = `
-                    <div class="video-thumbnail">
-                        <img src="${video.thumbnail}" alt="${video.title}">
-                        <div class="play-overlay">
-                            <div class="play-icon"></div>
-                        </div>
-                    </div>
-                    <div class="video-info">
-                        <h3 class="video-title">${video.title}</h3>
-                        <div class="video-channel">${video.channel}</div>
-                        <div class="video-stats">
-                            ${video.viewCount > 0 ? `<div class="video-stats-item">⏰ ${formatCount(video.viewCount)} views</div>` : ''}
-                            ${video.likeCount > 0 ? `<div class="video-stats-item">❤ ${formatCount(video.likeCount)}</div>` : ''}
-                        </div>
-                    </div>
-                `;
-                
-                container.appendChild(videoCard);
+        function showTab(region) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
             });
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(region + '-tab').classList.add('active');
+            event.target.classList.add('active');
         }
-        
-        function formatCount(num) {
-            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
-            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
-            return num.toString();
-        }
-        
-        loadTrendingVideos();
     </script>
 </body>
 </html>
